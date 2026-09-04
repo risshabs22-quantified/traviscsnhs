@@ -3,8 +3,10 @@ import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { SectionChip } from "@/components/ui/chip";
+import { Tile, type Tone } from "@/components/ui/tile";
 import { JoinBand } from "@/components/sections/join-band";
-import { ExternalIcon } from "@/components/ui/icons";
+import { CalendarIcon } from "@/components/ui/icons";
 import { competitions, schedule } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -13,6 +15,9 @@ export const metadata: Metadata = {
     "USACO, UIL Computer Science, the Congressional App Challenge, and our own Club Code Jam. What each one is and when it runs.",
   alternates: { canonical: "/events" },
 };
+
+/** Tones cycled across each competition's detail panels. */
+const ROW_TONES: Tone[] = ["ink", "crimson", "orange", "sand"];
 
 export default function EventsPage() {
   return (
@@ -26,37 +31,32 @@ export default function EventsPage() {
       {/* The year, by term. Windows rather than invented dates. */}
       <Section>
         <Reveal>
-          <p className="eyebrow">The year</p>
+          <SectionChip icon={<CalendarIcon className="h-[18px] w-[18px]" />}>
+            The year
+          </SectionChip>
         </Reveal>
         <Reveal index={1}>
-          <h2 className="display mt-6 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
+          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
             What happens, and roughly when.
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-2">
+        <div className="mt-12 grid gap-4 lg:grid-cols-2">
           {schedule.map((term, t) => (
             <Reveal key={term.term} index={t}>
-              <div className="card h-full overflow-hidden rounded-[26px]">
-                <div className="flex items-center justify-between border-b border-clay px-8 py-6">
-                  <h3 className="text-xl font-bold tracking-[-0.02em]">{term.term}</h3>
-                  <span className="tag text-ink-soft">
-                    {String(t + 1).padStart(2, "0")} / 02
-                  </span>
-                </div>
-                <ul className="divide-y divide-clay">
+              <div
+                className={`h-full rounded-[22px] px-7 py-10 sm:px-10 sm:py-12 ${
+                  t === 0 ? "bg-sand" : "bg-paper"
+                }`}
+              >
+                <h3 className="text-[1.75rem] font-bold tracking-[-0.03em]">{term.term}</h3>
+                <ul className="mt-10 space-y-8">
                   {term.items.map((item) => (
-                    <li
-                      key={item.name}
-                      className="flex flex-col gap-1 px-8 py-6 transition-colors duration-300 hover:bg-sand sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
-                    >
-                      <div>
-                        <p className="font-semibold">{item.name}</p>
-                        <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
-                      </div>
-                      <span className="shrink-0 tag text-crimson sm:text-right">
-                        {item.when}
-                      </span>
+                    <li key={item.name}>
+                      <p className="text-[1.15rem] font-semibold">{item.name}</p>
+                      <p className="mt-1.5 text-[0.9375rem] text-ink-soft">
+                        {item.when}. {item.note}
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -66,74 +66,50 @@ export default function EventsPage() {
         </div>
 
         <Reveal>
-          <p className="mt-8 text-sm text-ink-soft">
+          <p className="mt-10 text-base text-ink-soft">
             Exact meeting days and contest dates go out on Instagram and Remind first.
           </p>
         </Reveal>
         {/* TODO: confirm with officers — replace the windows above with dated entries. */}
       </Section>
 
-      {/* One anchored block per competition. */}
-      {competitions.map((comp, i) => (
-        <Section
-          key={comp.slug}
-          id={comp.slug}
-          className="scroll-mt-32 pt-0 sm:pt-0 lg:pt-0"
-        >
-          <div className="border-t border-clay pt-16 sm:pt-20">
-            <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-              <div>
-                <Reveal>
-                  <div className="flex items-center gap-4">
-                    <span className="tag text-crimson">
-                      {comp.index}
-                    </span>
-                    <span className="rounded-full bg-sand px-3 py-1 tag text-ink-soft">
-                      {comp.format}
-                    </span>
-                  </div>
-                </Reveal>
-                <Reveal index={1}>
-                  <h2 className="display mt-6 text-[clamp(2rem,5.4vw,3.4rem)]">
-                    {comp.name}
-                  </h2>
-                </Reveal>
-                {comp.body.map((para, p) => (
-                  <Reveal key={para} index={p + 2}>
-                    <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft text-pretty">
-                      {para}
-                    </p>
-                  </Reveal>
-                ))}
-                {comp.href && (
-                  <Reveal index={5}>
-                    <div className="mt-9">
-                      <Button href={comp.href} external variant="secondary">
-                        Official site
-                        <ExternalIcon className="h-4 w-4 opacity-70" />
-                      </Button>
-                    </div>
-                  </Reveal>
-                )}
-              </div>
+      {/* One block per competition: a big statement, then its details as
+          flat panels rather than a hairline label/value table. */}
+      {competitions.map((comp) => (
+        <Section key={comp.slug} id={comp.slug} className="scroll-mt-32 pt-0 sm:pt-0 lg:pt-0">
+          <div className="max-w-4xl">
+            <Reveal>
+              <SectionChip>{comp.format}</SectionChip>
+            </Reveal>
+            <Reveal index={1}>
+              <h2 className="display mt-8 text-[clamp(2.2rem,6vw,4rem)]">{comp.name}</h2>
+            </Reveal>
+            {comp.body.map((para, p) => (
+              <Reveal key={para} index={p + 2}>
+                <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl">
+                  {para}
+                </p>
+              </Reveal>
+            ))}
+            {comp.href && (
+              <Reveal index={5}>
+                <div className="mt-10">
+                  <Button href={comp.href} external variant="secondary">
+                    Official site
+                  </Button>
+                </div>
+              </Reveal>
+            )}
+          </div>
 
-              <div className={i % 2 === 1 ? "lg:order-first" : undefined}>
-                <ul className="divide-y divide-clay border-y border-clay">
-                  {comp.rows.map((row, r) => (
-                    <Reveal key={row.label} index={r} as="li">
-                      <div className="flex flex-col gap-1.5 py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
-                        <span className="text-lg font-bold tracking-[-0.02em] sm:text-xl">
-                          {row.label}
-                        </span>
-                        <span className="text-[0.9375rem] text-ink-soft sm:max-w-[62%] sm:text-right">
-                          {row.value}
-                        </span>
-                      </div>
-                    </Reveal>
-                  ))}
-                </ul>
-              </div>
-            </div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {comp.rows.map((row, r) => (
+              <Reveal key={row.label} index={r}>
+                <Tile tone={ROW_TONES[r % ROW_TONES.length]} title={row.label} tall={false}>
+                  <p className="text-base leading-relaxed opacity-85">{row.value}</p>
+                </Tile>
+              </Reveal>
+            ))}
           </div>
         </Section>
       ))}

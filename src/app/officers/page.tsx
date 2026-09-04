@@ -24,7 +24,7 @@ export default function OfficersPage() {
       />
 
       <Section>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {officers.map((officer, i) => (
             <Reveal key={officer.name} index={i}>
               <OfficerCard officer={officer} priority={i < 4} />
@@ -33,20 +33,20 @@ export default function OfficersPage() {
         </div>
 
         {/* TODO: confirm with officers — the deck had no photo for the Vice President. */}
-        <Reveal>
-          <div className="card mt-16 flex flex-col gap-6 rounded-[26px] p-9 sm:flex-row sm:items-center sm:justify-between">
-            <div className="max-w-xl">
-              <h2 className="text-2xl font-bold tracking-[-0.025em]">
-                Questions before you join?
-              </h2>
-              <p className="mt-3 leading-relaxed text-ink-soft text-pretty">
-                Find any officer at a meeting, or message us on Instagram. If dues are a
-                problem, talk to an officer privately and we will work it out.
-              </p>
-            </div>
-            <div className="flex shrink-0 flex-wrap gap-3">
-              <Button href="/contact">Contact us</Button>
-              <Button href={links.instagram} external variant="secondary">
+        <Reveal y={30}>
+          <div className="mt-24 rounded-[22px] bg-ink px-7 py-16 sm:px-14 sm:py-20">
+            <h2 className="display max-w-3xl text-[clamp(1.9rem,5vw,3.2rem)] text-page">
+              Questions before you join?
+            </h2>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-cream-soft text-pretty">
+              Find any officer at a meeting, or message us on Instagram. If dues are a
+              problem, talk to an officer privately and we will work it out.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button href="/contact" size="lg" variant="onDark">
+                Contact us
+              </Button>
+              <Button href={links.instagram} external size="lg" variant="onDarkGhost">
                 {links.instagramHandle}
               </Button>
             </div>

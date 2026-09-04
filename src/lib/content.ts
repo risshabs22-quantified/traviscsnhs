@@ -59,16 +59,19 @@ export const whatWeAre = {
     {
       key: "build",
       label: "Build",
+      tone: "orange",
       body: "Work on projects and enter competitions with other students who like coding.",
     },
     {
       key: "teach",
       label: "Teach",
+      tone: "ink",
       body: "Tutor classmates in CS classes and help run our events.",
     },
     {
       key: "belong",
       label: "Belong",
+      tone: "sand",
       body: "No prerequisite classes. Beginners and experienced coders are both welcome.",
     },
   ],
@@ -103,6 +106,10 @@ export type Competition = {
   /** Two-column detail rows shown on the events page. */
   rows: { label: string; value: string }[];
   timing: string;
+  /** Tile fill on the home page. */
+  tone: "ink" | "crimson" | "orange" | "ember" | "sand" | "paper";
+  /** The single figure that defines this competition, straight from the deck. */
+  figure: { value: string; caption: string };
 };
 
 export const competitions: Competition[] = [
@@ -125,6 +132,8 @@ export const competitions: Competition[] = [
       { label: "Platinum", value: "Olympiad track" },
     ],
     timing: "Four contest windows across the year",
+    tone: "crimson",
+    figure: { value: "4", caption: "contest windows a year. Solo, three problems, four hours." },
   },
   {
     slug: "uil",
@@ -142,6 +151,8 @@ export const competitions: Competition[] = [
       { label: "District to state", value: "Advance as a team or as an individual medalist" },
     ],
     timing: "Spring meet season, district first",
+    tone: "ink",
+    figure: { value: "3–4", caption: "students per team. Java only, district to state." },
   },
   {
     slug: "app-challenge",
@@ -159,6 +170,8 @@ export const competitions: Competition[] = [
       { label: "Nov", value: "Submission deadline" },
     ],
     timing: "Submissions close in November",
+    tone: "orange",
+    figure: { value: "Nov", caption: "submissions close. Teams of one to four, any platform." },
   },
   {
     slug: "code-jam",
@@ -176,6 +189,8 @@ export const competitions: Competition[] = [
       { label: "Prizes", value: "Snacks and shirt design credit." },
     ],
     timing: "Once in the fall, once in the spring",
+    tone: "sand",
+    figure: { value: "2", caption: "divisions, beginner and open. Written by the officers." },
   },
 ];
 

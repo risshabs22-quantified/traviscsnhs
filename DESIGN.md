@@ -58,8 +58,9 @@ Straight from Phantom's structure:
 
 - **Page**: one flat tint, full bleed, nothing layered on it.
 - **Hero**: a large rounded card inset from the page edges, filled with one flat dark colour, the type centred inside it. Eyebrow, headline, one pill button. No paragraph, no secondary link, no clutter.
-- **Sections below**: generous vertical padding, big left-aligned headline, an optional "see more" link pushed to the right of it.
-- **Rhythm**: full-width statement → 3-card row → 2-column split → 4-card row → officer grid → data strip → closing band.
+- **Sections below**: a pill chip label, then a big left-aligned headline, with an optional "see more" link pushed to the right.
+- **Tiles, not cards.** Every block below the fold is a large flat panel: one saturated fill, a short headline at the top, a big figure at the bottom, no border and no body paragraph. The pattern this replaced — a row of small bordered boxes each holding an icon, a title and two lines of copy, or a hairline table of label-left/value-right rows — is the single strongest visual tell of a generated site, and it was all over the old version.
+- **Competitions scroll.** Three tiles fit, the fourth peeks off the right edge. The peek is the affordance.
 - **Closing band**: a rounded card filled flat crimson.
 - **Footer**: four low-contrast columns with a lot of space.
 

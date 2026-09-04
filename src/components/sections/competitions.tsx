@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/section";
 import { Reveal, RevealText } from "@/components/ui/reveal";
-import { Button } from "@/components/ui/button";
-import { ArrowIcon } from "@/components/ui/icons";
+import { SectionChip } from "@/components/ui/chip";
+import { Tile, TileFigure, TileRow, TileSlide } from "@/components/ui/tile";
+import { TrophyIcon } from "@/components/ui/icons";
 import { competitions } from "@/lib/content";
 
 export function Competitions() {
@@ -11,56 +12,35 @@ export function Competitions() {
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div className="max-w-2xl">
           <Reveal>
-            <p className="eyebrow">What members do</p>
+            <SectionChip icon={<TrophyIcon className="h-[18px] w-[18px]" />}>
+              Competitions
+            </SectionChip>
           </Reveal>
-          <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
+          <h2 className="display mt-8 text-[clamp(2.2rem,6vw,4.2rem)]">
             <RevealText
               text="Four competitions this year: solo, team, and in house."
               delay={0.05}
             />
           </h2>
         </div>
-        <Reveal index={2}>
-          <Button href="/events" variant="quiet" className="pb-2">
-            All four in detail
-          </Button>
-        </Reveal>
       </div>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-        {competitions.map((comp, i) => (
-          <Reveal key={comp.slug} index={i}>
+      {/* A snap row rather than a grid: three fit, the fourth peeks, which is
+          what tells you it scrolls. */}
+      <TileRow>
+        {competitions.map((comp) => (
+          <TileSlide key={comp.slug}>
             <Link
               href={`/events#${comp.slug}`}
-             
-              className="group card relative flex h-full flex-col overflow-hidden rounded-[26px] p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-orange hover:"
+              className="block transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5"
             >
-              <span
-                aria-hidden
-                className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-orange transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
-              />
-              <div className="flex items-center justify-between">
-                <span className="tag text-crimson">
-                  {comp.index}
-                </span>
-                <span className="rounded-full bg-sand px-3 py-1 tag text-ink-soft">
-                  {comp.format}
-                </span>
-              </div>
-              <h3 className="mt-8 text-[1.4rem] leading-tight font-bold tracking-[-0.025em] text-balance">
-                {comp.name}
-              </h3>
-              <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
-                {comp.short}
-              </p>
-              <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-crimson">
-                Details
-                <ArrowIcon className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
-              </span>
+              <Tile tone={comp.tone} title={comp.name}>
+                <TileFigure value={comp.figure.value} caption={comp.figure.caption} />
+              </Tile>
             </Link>
-          </Reveal>
+          </TileSlide>
         ))}
-      </div>
+      </TileRow>
     </Section>
   );
 }

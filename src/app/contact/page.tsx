@@ -3,14 +3,10 @@ import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { SectionChip } from "@/components/ui/chip";
+import { Tile, type Tone } from "@/components/ui/tile";
 import { JoinBand } from "@/components/sections/join-band";
-import {
-  CardIcon,
-  ChatIcon,
-  ExternalIcon,
-  InstagramIcon,
-  MailIcon,
-} from "@/components/ui/icons";
+import { ChatIcon } from "@/components/ui/icons";
 import { links, socials } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -20,9 +16,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const channels = [
+const channels: {
+  tone: Tone;
+  label: string;
+  value: string;
+  body: string;
+  href: string;
+  cta: string;
+}[] = [
   {
-    icon: InstagramIcon,
+    tone: "crimson",
     label: "Instagram",
     value: links.instagramHandle,
     body: "Announcements, competition sign ups, and meeting reminders go out here first.",
@@ -30,7 +33,7 @@ const channels = [
     cta: "Open Instagram",
   },
   {
-    icon: ChatIcon,
+    tone: "ink",
     label: "Remind",
     value: links.remindHandle,
     body: "Text reminders for meetings and contest deadlines. Join the class from the Remind app.",
@@ -38,7 +41,7 @@ const channels = [
     cta: "How to join Remind",
   },
   {
-    icon: MailIcon,
+    tone: "orange",
     label: "Email",
     value: links.email,
     body: "For anything that needs a longer answer than a DM.",
@@ -50,87 +53,76 @@ const channels = [
 export default function ContactPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Contact"
-        title="Find us in the group chat."
-        lead={socials.body}
-      />
+      <PageHeader eyebrow="Contact" title="Find us in the group chat." lead={socials.body} />
 
       <Section>
-        <div className="grid gap-5 md:grid-cols-3">
-          {channels.map((channel, i) => {
-            const Icon = channel.icon;
-            const external = !channel.href.startsWith("mailto:");
-            return (
-              <Reveal key={channel.label} index={i}>
-                <article className="group card relative flex h-full flex-col overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson transition-colors duration-300 group-hover:bg-crimson group-hover:text-page">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <p className="mt-8 tag text-ink-soft">
-                    {channel.label}
-                  </p>
-                  <p className="mt-2 text-xl font-bold tracking-[-0.025em] break-words">
-                    {channel.value}
-                  </p>
-                  <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
-                    {channel.body}
-                  </p>
-                  <div className="mt-8">
-                    <Button href={channel.href} external={external} variant="secondary">
-                      {channel.cta}
-                      {external && <ExternalIcon className="h-4 w-4 opacity-70" />}
-                    </Button>
-                  </div>
-                </article>
-              </Reveal>
-            );
-          })}
+        <Reveal>
+          <SectionChip icon={<ChatIcon className="h-[18px] w-[18px]" />}>Socials</SectionChip>
+        </Reveal>
+
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {channels.map((channel, i) => (
+            <Reveal key={channel.label} index={i}>
+              <Tile tone={channel.tone} title={channel.body}>
+                <p className="text-[clamp(1.6rem,3.6vw,2.1rem)] leading-tight font-bold tracking-[-0.035em] break-words">
+                  {channel.value}
+                </p>
+                <p className="mt-3 text-[0.9375rem] font-medium opacity-80">{channel.label}</p>
+              </Tile>
+            </Reveal>
+          ))}
         </div>
 
-        {/* TODO: confirm with officers — chapter email, sponsor name, meeting room and day. */}
         <Reveal>
-          <div className="mt-16 grid gap-5 lg:grid-cols-2">
-            <div className="card rounded-[26px] p-9">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson">
-                <CardIcon className="h-5 w-5" />
-              </span>
-              <h2 className="mt-7 text-2xl font-bold tracking-[-0.025em]">
-                Paying dues
-              </h2>
-              <p className="mt-4 leading-relaxed text-ink-soft text-pretty">
+          <div className="mt-10 flex flex-wrap gap-3">
+            {channels.map((channel) => (
+              <Button
+                key={channel.label}
+                href={channel.href}
+                external={!channel.href.startsWith("mailto:")}
+                variant="secondary"
+              >
+                {channel.cta}
+              </Button>
+            ))}
+          </div>
+        </Reveal>
+      </Section>
+
+      {/* TODO: confirm with officers — chapter email, sponsor name, meeting room and day. */}
+      <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
+          <Reveal>
+            <div>
+              <h2 className="display text-[clamp(1.9rem,4.6vw,2.8rem)]">Paying dues</h2>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft text-pretty">
                 Dues are $20 a year and go through the Fort Bend ISD RevTrak store, under
-                Travis High School → Computer Science NHS. Officers do not take cash.
+                Travis High School, then Computer Science NHS. Officers do not take cash.
               </p>
-              <div className="mt-8">
-                <Button href={links.dues} external>
+              <div className="mt-9">
+                <Button href={links.dues} external size="lg">
                   Pay on RevTrak
-                  <ExternalIcon className="h-4 w-4 opacity-70" />
                 </Button>
               </div>
             </div>
+          </Reveal>
 
-            <div className="rounded-[26px] bg-sand p-9">
-              <h2 className="text-2xl font-bold tracking-[-0.025em]">
-                Where we meet
-              </h2>
-              <p className="mt-4 leading-relaxed text-ink-soft text-pretty">
+          <Reveal index={1}>
+            <div>
+              <h2 className="display text-[clamp(1.9rem,4.6vw,2.8rem)]">Where we meet</h2>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft text-pretty">
                 Meetings run in the computer lab at Travis High School during the school
                 year. Days and times are posted on Instagram and Remind before each
                 meeting.
               </p>
-              <p className="mt-6 tag text-ink-soft">
-                Travis High School / Fort Bend ISD
-              </p>
-              <div className="mt-8">
-                <Button href={links.fbisd} external variant="secondary">
+              <div className="mt-9">
+                <Button href={links.fbisd} external size="lg" variant="secondary">
                   Fort Bend ISD
-                  <ExternalIcon className="h-4 w-4 opacity-70" />
                 </Button>
               </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </Section>
 
       <JoinBand />

@@ -1,23 +1,17 @@
 import { Section } from "@/components/ui/section";
 import { Reveal, RevealText } from "@/components/ui/reveal";
-import { TerminalIcon, UsersIcon, TrophyIcon } from "@/components/ui/icons";
+import { SectionChip } from "@/components/ui/chip";
+import { Tile, type Tone } from "@/components/ui/tile";
 import { whatWeAre } from "@/lib/content";
-
-const icons = {
-  build: TerminalIcon,
-  teach: UsersIcon,
-  belong: TrophyIcon,
-} as const;
 
 export function WhatWeAre() {
   return (
     <Section id="what-we-are">
-      {/* Full-width statement. The headline does the work. */}
       <div className="max-w-5xl">
         <Reveal>
-          <p className="eyebrow">{whatWeAre.eyebrow}</p>
+          <SectionChip>{whatWeAre.eyebrow}</SectionChip>
         </Reveal>
-        <h2 className="display mt-6 text-[clamp(2.3rem,6.4vw,4.6rem)]">
+        <h2 className="display mt-8 text-[clamp(2.3rem,6.4vw,4.6rem)]">
           <RevealText text={whatWeAre.title} delay={0.05} />
         </h2>
         <Reveal index={2}>
@@ -27,31 +21,18 @@ export function WhatWeAre() {
         </Reveal>
       </div>
 
-      {/* Three pillars, straight from the deck. */}
-      <div className="mt-16 grid gap-5 sm:mt-20 md:grid-cols-3">
-        {whatWeAre.pillars.map((pillar, i) => {
-          const Icon = icons[pillar.key as keyof typeof icons];
-          return (
-            <Reveal key={pillar.key} index={i}>
-              <article className="group card relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson transition-colors duration-300 group-hover:bg-crimson group-hover:text-page">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className="tag text-ink-soft">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3 className="mt-8 text-2xl font-bold tracking-[-0.02em]">
-                  {pillar.label}
-                </h3>
-                <p className="mt-3 leading-relaxed text-ink-soft text-pretty">
-                  {pillar.body}
-                </p>
-              </article>
-            </Reveal>
-          );
-        })}
+      {/* Three big flat panels. Headline at the top, the word itself as the
+          visual at the bottom — no icon, no border, no body copy. */}
+      <div className="mt-14 grid gap-4 md:grid-cols-3">
+        {whatWeAre.pillars.map((pillar, i) => (
+          <Reveal key={pillar.key} index={i}>
+            <Tile tone={pillar.tone as Tone} title={pillar.body}>
+              <p className="text-[clamp(3rem,7vw,4.25rem)] leading-[0.85] font-bold tracking-[-0.045em]">
+                {pillar.label}
+              </p>
+            </Tile>
+          </Reveal>
+        ))}
       </div>
     </Section>
   );
