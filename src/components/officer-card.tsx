@@ -13,7 +13,7 @@ export function OfficerCard({
 }) {
   return (
     <article className={className}>
-      <div className="relative aspect-[4/5] overflow-hidden bg-sand">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-sand">
         {officer.photo ? (
           <Image
             src={officer.photo}

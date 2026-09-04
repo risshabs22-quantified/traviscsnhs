@@ -48,7 +48,7 @@ export function PromoCarousel() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 flex items-end">
-        <div className="pointer-events-auto m-3 w-full max-w-lg bg-ink p-5 sm:m-6 sm:p-8 lg:m-8">
+        <div className="pointer-events-auto m-3 w-full max-w-lg rounded-xl bg-ink p-5 sm:m-6 sm:p-8 lg:m-8">
           <p className="badge-dark badge">{slide.kicker}</p>
           <h1 className="display mt-3 text-[clamp(1.6rem,4.2vw,2.8rem)] text-page">
             {slide.title}

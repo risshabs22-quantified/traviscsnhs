@@ -38,7 +38,7 @@ export default async function ContestPage({ params }: { params: Promise<Params> 
       </Button>
 
       <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
-        <div className="relative mx-auto aspect-square w-full max-w-[32rem] bg-sand">
+        <div className="relative mx-auto aspect-square w-full max-w-[32rem] overflow-hidden rounded-xl bg-sand">
           <Image
             src={comp.image}
             alt={comp.imageAlt}
