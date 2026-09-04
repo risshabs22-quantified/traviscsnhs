@@ -4,18 +4,22 @@ import { SectionIntro } from "@/components/section-intro";
 import { Spotlight } from "@/components/spotlight";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { dues, links, requirements } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Membership",
-  description:
-    "How to join Travis CSNHS: no prerequisites, three meetings a semester, one competition, and $20 dues paid through the Fort Bend ISD RevTrak store.",
-  alternates: { canonical: "/membership" },
-};
+export const metadata: Metadata = pageMetadata("/membership");
 
 export default function MembershipPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/membership")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Membership", path: "/membership" },
+        ])}
+      />
       <PageHeader
         kicker="Membership"
         title="No prerequisites. Any grade. Any background."

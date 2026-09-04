@@ -3,18 +3,22 @@ import { PageHeader } from "@/components/page-header";
 import { SectionIntro } from "@/components/section-intro";
 import { ContestList } from "@/components/contest-list";
 import { Section } from "@/components/ui/section";
+import { JsonLd } from "@/components/json-ld";
 import { schedule } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Events",
-  description:
-    "USACO, UIL Computer Science, the Congressional App Challenge, and our own Club Code Jam. What each one is and when it runs.",
-  alternates: { canonical: "/events" },
-};
+export const metadata: Metadata = pageMetadata("/events");
 
 export default function EventsPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/events")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Events", path: "/events" },
+        ])}
+      />
       <PageHeader
         kicker="Events"
         title="Four competitions. Solo, team, and in house."

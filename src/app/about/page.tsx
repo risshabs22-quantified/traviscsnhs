@@ -3,18 +3,22 @@ import { PageHeader } from "@/components/page-header";
 import { SectionIntro } from "@/components/section-intro";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { competitions, requirements, site, whatWeAre, whyJoin } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "What the Computer Science National Honor Society is, what our Travis High School chapter does through the year, and who it is for.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMetadata("/about");
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/about")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
       <PageHeader
         kicker="About"
         title="A chapter that meets to code, compete, and tutor."

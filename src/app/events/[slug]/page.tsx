@@ -3,7 +3,9 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/section";
+import { JsonLd } from "@/components/json-ld";
 import { competitions, getCompetition, links } from "@/lib/content";
+import { breadcrumbJsonLd, contestJsonLd, contestMetadata } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -18,12 +20,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const comp = getCompetition(slug);
-  if (!comp) return { title: "Contest" };
-  return {
-    title: comp.name,
-    description: comp.short,
-    alternates: { canonical: `/events/${comp.slug}` },
-  };
+  if (!comp) {
+    return { title: "Contest", robots: { index: false, follow: true } };
+  }
+  return contestMetadata(comp);
 }
 
 export default async function ContestPage({ params }: { params: Promise<Params> }) {
@@ -33,6 +33,14 @@ export default async function ContestPage({ params }: { params: Promise<Params> 
 
   return (
     <Container className="pt-10 pb-16 sm:pt-12 sm:pb-24">
+      <JsonLd data={contestJsonLd(comp)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Events", path: "/events" },
+          { name: comp.name, path: `/events/${comp.slug}` },
+        ])}
+      />
       <Button href="/events" variant="quiet">
         All contests
       </Button>
