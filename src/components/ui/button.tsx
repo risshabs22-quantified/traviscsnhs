@@ -7,25 +7,22 @@ type Size = "md" | "lg";
 
 const base =
   "group relative inline-flex items-center justify-center gap-2 rounded-full font-semibold " +
-  "transition-[transform,box-shadow,background-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] " +
-  "active:translate-y-px active:scale-[0.985] whitespace-nowrap";
+  "transition-[transform,background-color,color,border-color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] " +
+  "active:translate-y-px whitespace-nowrap";
 
+/**
+ * Every variant is two flat colours swapping on hover. No gradient, no
+ * shadow, no sheen. Orange never sits under text: cream on #E8752A is 3.0:1,
+ * so anything readable uses crimson or darker. See DESIGN.md.
+ */
 const variants: Record<Variant, string> = {
-  // Burnt red carries cream text at 7.7:1. The orange only shows up as a
-  // hover bloom so it never has to hold small text.
-  primary:
-    "bg-crimson text-cream shadow-[var(--shadow-pill)] hover:bg-rust hover:shadow-[var(--shadow-lift)] hover:-translate-y-0.5",
-  secondary:
-    "bg-sand/90 text-ink border border-clay/70 shadow-[var(--shadow-soft)] hover:bg-sand hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]",
+  primary: "bg-crimson text-paper hover:bg-rust",
+  secondary: "bg-sand text-ink border border-clay hover:bg-clay",
   quiet:
     "text-crimson hover:text-rust underline decoration-clay decoration-2 underline-offset-[6px] hover:decoration-orange",
-  // For the red CTA band. Kept as variants rather than className overrides —
-  // two competing `bg-*` utilities resolve by stylesheet order, not by the
-  // order they appear in the class attribute, so an override can silently lose.
-  onDark:
-    "bg-cream text-crimson shadow-[var(--shadow-pill)] hover:bg-paper hover:text-rust hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]",
-  onDarkGhost:
-    "border border-cream/40 text-cream hover:border-cream/75 hover:bg-cream/10 hover:-translate-y-0.5",
+  // For the flat dark stage and the crimson band.
+  onDark: "bg-page text-ink hover:bg-sand",
+  onDarkGhost: "border border-cream-soft text-page hover:bg-ink-mid",
 };
 
 const sizes: Record<Size, string> = {
@@ -58,32 +55,17 @@ export function Button({
     className,
   );
 
-  const inner = (
-    <>
-      {/* A slow sheen that sweeps once on hover. Purely decorative. */}
-      {variant !== "quiet" && (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
-        >
-          <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-20deg] bg-cream/25 opacity-0 transition-opacity duration-200 group-hover:animate-[sheen_0.9s_ease-out] group-hover:opacity-100" />
-        </span>
-      )}
-      <span className="relative flex items-center gap-2">{children}</span>
-    </>
-  );
-
   if (external) {
     return (
       <a href={href} target="_blank" rel="noreferrer noopener" className={classes}>
-        {inner}
+        {children}
       </a>
     );
   }
 
   return (
     <Link href={href} className={classes} {...rest}>
-      {inner}
+      {children}
     </Link>
   );
 }

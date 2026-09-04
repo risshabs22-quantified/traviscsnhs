@@ -22,8 +22,7 @@ export default function GlobalError({
           alignItems: "center",
           justifyContent: "center",
           padding: "24px",
-          background:
-            "radial-gradient(60rem 40rem at 80% -10%, rgba(242,160,61,0.3), transparent 62%), #FBF6EE",
+          background: "#FBF2E8",
           color: "#2A1710",
           fontFamily:
             "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",

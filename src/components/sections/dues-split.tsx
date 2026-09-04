@@ -19,7 +19,7 @@ export function DuesSplit({ heading = "Dues & membership" }: { heading?: string 
             </p>
           </Reveal>
           <Reveal index={2}>
-            <p className="mt-6 font-mono text-xs tracking-[0.2em] text-ink-soft uppercase">
+            <p className="mt-6 tag text-ink-soft">
               {dues.cadence}
             </p>
           </Reveal>
@@ -41,12 +41,12 @@ export function DuesSplit({ heading = "Dues & membership" }: { heading?: string 
         </div>
 
         <div className="lg:pt-6">
-          <ul className="divide-y divide-clay/60 border-y border-clay/60">
+          <ul className="divide-y divide-clay border-y border-clay">
             {dues.includes.map((row, i) => (
               <Reveal key={row.label} index={i} as="li">
                 <div className="flex items-baseline justify-between gap-6 py-6">
                   <span className="text-lg font-semibold sm:text-xl">{row.label}</span>
-                  <span className="font-mono text-xs tracking-[0.14em] text-ink-soft uppercase">
+                  <span className="tag text-ink-soft">
                     {row.value}
                   </span>
                 </div>
@@ -54,7 +54,7 @@ export function DuesSplit({ heading = "Dues & membership" }: { heading?: string 
             ))}
           </ul>
           <Reveal index={3}>
-            <p className="mt-7 rounded-[20px] bg-sand/60 p-6 text-[0.9375rem] leading-relaxed text-ink text-pretty">
+            <p className="mt-7 rounded-[20px] bg-sand p-6 text-[0.9375rem] leading-relaxed text-ink text-pretty">
               {dues.note}
             </p>
           </Reveal>

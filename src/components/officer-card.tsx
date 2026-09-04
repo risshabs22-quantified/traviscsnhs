@@ -13,9 +13,9 @@ export function OfficerCard({
 }) {
   return (
     <article
-      data-glow
+     
       className={cn(
-        "group card-surface relative overflow-hidden rounded-[26px] p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]",
+        "group card relative overflow-hidden rounded-[26px] p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:",
         className,
       )}
     >
@@ -33,19 +33,15 @@ export function OfficerCard({
         ) : (
           // The deck had no photo for this officer, so nothing goes here.
           // An empty frame is honest; initials or a stock avatar would not be.
-          <div className="h-full w-full bg-[linear-gradient(150deg,#F4DCC0,#E9C6A0)]" />
+          <div className="h-full w-full bg-clay" />
         )}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(42,23,16,0.32),transparent_46%)] opacity-70"
-        />
       </div>
 
       <div className="px-3 pt-5 pb-3">
-        <p className="font-mono text-[0.625rem] tracking-[0.2em] text-crimson uppercase">
+        <p className="tag text-crimson">
           {officer.role}
         </p>
-        <h3 className="mt-2 text-lg font-extrabold tracking-[-0.02em] text-balance">
+        <h3 className="mt-2 text-lg font-bold tracking-[-0.02em] text-balance">
           {officer.name}
         </h3>
       </div>

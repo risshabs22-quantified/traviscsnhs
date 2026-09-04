@@ -18,7 +18,7 @@ export function Bar({
 export function StageSkeleton({ lines = 3 }: { lines?: number }) {
   return (
     <div className="px-3 pt-24 sm:px-6 sm:pt-32 lg:pt-36">
-      <div className="relative overflow-hidden rounded-[28px] border border-clay/60 bg-[linear-gradient(150deg,#FFFCF6_0%,#FAEFDF_46%,#F3D9BC_100%)] px-6 py-20 sm:rounded-[38px] sm:px-12 sm:py-24 lg:px-16 lg:py-28">
+      <div className="overflow-hidden rounded-[24px] bg-sand px-6 py-20 sm:rounded-[32px] sm:px-12 sm:py-24 lg:px-16">
         <Bar className="h-3 w-40 rounded-full" />
         <div className="mt-9 space-y-4">
           {Array.from({ length: lines }).map((_, i) => (
@@ -72,7 +72,7 @@ export function CardGridSkeleton({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="card-surface rounded-[26px] p-8"
+          className="card rounded-[26px] p-8"
           style={{ opacity: 1 - i * 0.06 }}
         >
           {aspect ? (
@@ -94,7 +94,7 @@ export function CardGridSkeleton({
 
 export function RowsSkeleton({ count = 4 }: { count?: number }) {
   return (
-    <ul className="mt-14 divide-y divide-clay/60 border-y border-clay/60">
+    <ul className="mt-14 divide-y divide-clay border-y border-clay">
       {Array.from({ length: count }).map((_, i) => (
         <li key={i} className="flex items-center justify-between gap-8 py-7">
           <Bar className="h-5 rounded-lg" w="42%" />

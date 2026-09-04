@@ -17,9 +17,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "76px 84px",
-          background:
-            "linear-gradient(150deg, #FFFCF6 0%, #FAEFDF 42%, #F1D3B2 78%, #E9B888 100%)",
-          color: "#2A1710",
+          background: "#241611",
+          color: "#FBF2E8",
           fontFamily: "sans-serif",
         }}
       >
@@ -31,7 +30,7 @@ export default function OpenGraphImage() {
             fontSize: 26,
             letterSpacing: 6,
             textTransform: "uppercase",
-            color: "#8E2C1B",
+            color: "#F2A03D",
           }}
         >
           <span>Travis HS CSNHS</span>
@@ -55,7 +54,7 @@ export default function OpenGraphImage() {
               display: "flex",
               marginTop: 34,
               fontSize: 34,
-              color: "#6B5142",
+              color: "#C9B3A1",
               maxWidth: 900,
             }}
           >
@@ -69,7 +68,7 @@ export default function OpenGraphImage() {
             alignItems: "center",
             gap: 22,
             fontSize: 26,
-            color: "#6B5142",
+            color: "#C9B3A1",
           }}
         >
           <div
@@ -82,7 +81,7 @@ export default function OpenGraphImage() {
             }}
           />
           <span>traviscsnhs.com</span>
-          <span style={{ color: "#C7B29C" }}>/</span>
+          <span style={{ color: "#6B5142" }}>/</span>
           <span>$20 a year · no prerequisites</span>
         </div>
       </div>

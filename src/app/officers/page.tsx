@@ -34,9 +34,9 @@ export default function OfficersPage() {
 
         {/* TODO: confirm with officers — the deck had no photo for the Vice President. */}
         <Reveal>
-          <div className="card-surface mt-16 flex flex-col gap-6 rounded-[26px] p-9 sm:flex-row sm:items-center sm:justify-between">
+          <div className="card mt-16 flex flex-col gap-6 rounded-[26px] p-9 sm:flex-row sm:items-center sm:justify-between">
             <div className="max-w-xl">
-              <h2 className="text-2xl font-extrabold tracking-[-0.025em]">
+              <h2 className="text-2xl font-bold tracking-[-0.025em]">
                 Questions before you join?
               </h2>
               <p className="mt-3 leading-relaxed text-ink-soft text-pretty">

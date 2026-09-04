@@ -25,7 +25,7 @@ export default function Error({
       body="This page hit an error while it was rendering. Try it again, and if it keeps happening let an officer know on Instagram."
       detail={
         error.digest ? (
-          <p className="font-mono text-[0.6875rem] tracking-[0.14em] text-ink-soft uppercase">
+          <p className="tag text-ink-soft">
             Reference {error.digest}
           </p>
         ) : null
@@ -34,7 +34,7 @@ export default function Error({
       <button
         type="button"
         onClick={reset}
-        className="group inline-flex h-14 items-center justify-center gap-2 rounded-full bg-crimson px-8 text-base font-semibold text-cream shadow-[var(--shadow-pill)] transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-rust hover:shadow-[var(--shadow-lift)] active:translate-y-px sm:text-lg"
+        className="inline-flex h-14 items-center justify-center rounded-full bg-crimson px-8 text-base font-semibold text-page transition-colors duration-200 hover:bg-rust active:translate-y-px sm:text-lg"
       >
         Try again
       </button>

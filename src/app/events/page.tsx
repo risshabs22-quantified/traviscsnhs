@@ -37,24 +37,24 @@ export default function EventsPage() {
         <div className="mt-14 grid gap-5 lg:grid-cols-2">
           {schedule.map((term, t) => (
             <Reveal key={term.term} index={t}>
-              <div className="card-surface h-full overflow-hidden rounded-[26px]">
-                <div className="flex items-center justify-between border-b border-clay/60 px-8 py-6">
-                  <h3 className="text-xl font-extrabold tracking-[-0.02em]">{term.term}</h3>
-                  <span className="font-mono text-[0.625rem] tracking-[0.2em] text-ink-soft uppercase">
+              <div className="card h-full overflow-hidden rounded-[26px]">
+                <div className="flex items-center justify-between border-b border-clay px-8 py-6">
+                  <h3 className="text-xl font-bold tracking-[-0.02em]">{term.term}</h3>
+                  <span className="tag text-ink-soft">
                     {String(t + 1).padStart(2, "0")} / 02
                   </span>
                 </div>
-                <ul className="divide-y divide-clay/50">
+                <ul className="divide-y divide-clay">
                   {term.items.map((item) => (
                     <li
                       key={item.name}
-                      className="flex flex-col gap-1 px-8 py-6 transition-colors duration-300 hover:bg-sand/40 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+                      className="flex flex-col gap-1 px-8 py-6 transition-colors duration-300 hover:bg-sand sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
                     >
                       <div>
                         <p className="font-semibold">{item.name}</p>
                         <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
                       </div>
-                      <span className="shrink-0 font-mono text-[0.6875rem] tracking-[0.1em] text-crimson sm:text-right">
+                      <span className="shrink-0 tag text-crimson sm:text-right">
                         {item.when}
                       </span>
                     </li>
@@ -80,15 +80,15 @@ export default function EventsPage() {
           id={comp.slug}
           className="scroll-mt-32 pt-0 sm:pt-0 lg:pt-0"
         >
-          <div className="border-t border-clay/60 pt-16 sm:pt-20">
+          <div className="border-t border-clay pt-16 sm:pt-20">
             <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
               <div>
                 <Reveal>
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[0.6875rem] tracking-[0.2em] text-crimson">
+                    <span className="tag text-crimson">
                       {comp.index}
                     </span>
-                    <span className="rounded-full bg-sand/80 px-3 py-1 font-mono text-[0.625rem] tracking-[0.14em] text-ink-soft uppercase">
+                    <span className="rounded-full bg-sand px-3 py-1 tag text-ink-soft">
                       {comp.format}
                     </span>
                   </div>
@@ -118,14 +118,14 @@ export default function EventsPage() {
               </div>
 
               <div className={i % 2 === 1 ? "lg:order-first" : undefined}>
-                <ul className="divide-y divide-clay/60 border-y border-clay/60">
+                <ul className="divide-y divide-clay border-y border-clay">
                   {comp.rows.map((row, r) => (
                     <Reveal key={row.label} index={r} as="li">
                       <div className="flex flex-col gap-1.5 py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
                         <span className="text-lg font-bold tracking-[-0.02em] sm:text-xl">
                           {row.label}
                         </span>
-                        <span className="font-mono text-[0.8125rem] text-ink-soft sm:max-w-[62%] sm:text-right">
+                        <span className="text-[0.9375rem] text-ink-soft sm:max-w-[62%] sm:text-right">
                           {row.value}
                         </span>
                       </div>

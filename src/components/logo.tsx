@@ -53,10 +53,10 @@ export function Logo({
     >
       <LogoMark className="h-8 w-8 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-3 group-hover:scale-105" />
       <span className="flex flex-col leading-none">
-        <span className="text-[0.95rem] font-extrabold tracking-[-0.02em] text-ink">
+        <span className="text-[0.95rem] font-bold tracking-[-0.02em] text-ink">
           Travis CSNHS
         </span>
-        <span className="mt-1 font-mono text-[0.5625rem] tracking-[0.2em] text-ink-soft uppercase">
+        <span className="mt-1 tag text-ink-soft">
           Travis High School
         </span>
       </span>

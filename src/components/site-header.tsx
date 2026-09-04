@@ -42,7 +42,7 @@ export function SiteHeader() {
     <>
       <a
         href="#main"
-        className="sr-only rounded-full bg-crimson px-5 py-3 text-cream focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70]"
+        className="sr-only rounded-full bg-crimson px-5 py-3 text-page focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70]"
       >
         Skip to content
       </a>
@@ -51,14 +51,12 @@ export function SiteHeader() {
         <div className="mx-auto flex w-full max-w-[80rem] items-center justify-between gap-4 px-4 sm:px-7">
           <Logo />
 
-          {/* Center capsule. Frosts and lifts once the page moves. */}
+          {/* Center capsule. Swaps one flat fill for another on scroll. */}
           <nav
             aria-label="Primary"
             className={cn(
-              "pointer-events-auto absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full p-1.5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] lg:flex",
-              scrolled
-                ? "border border-clay/70 bg-paper/80 shadow-[var(--shadow-pill)] backdrop-blur-xl"
-                : "border border-clay/45 bg-sand/55 shadow-[var(--shadow-soft)] backdrop-blur-md",
+              "pointer-events-auto absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full p-1.5 transition-colors duration-300 lg:flex",
+              scrolled ? "bg-paper" : "bg-sand",
             )}
           >
             {nav.map((item) => {
@@ -70,7 +68,7 @@ export function SiteHeader() {
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-[0.875rem] font-semibold transition-colors duration-200",
-                    active ? "text-cream" : "text-ink-soft hover:text-ink",
+                    active ? "text-page" : "text-ink-soft hover:text-ink",
                   )}
                 >
                   {active && (
@@ -96,7 +94,7 @@ export function SiteHeader() {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={`Travis CSNHS on Instagram, ${links.instagramHandle}`}
-              className="hidden h-11 w-11 items-center justify-center rounded-full border border-clay/60 bg-paper/75 text-ink shadow-[var(--shadow-soft)] backdrop-blur-md transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-paper hover:text-crimson hover:shadow-[var(--shadow-lift)] sm:inline-flex"
+              className="hidden h-11 w-11 items-center justify-center rounded-full bg-sand text-ink transition-colors duration-200 hover:bg-clay sm:inline-flex"
             >
               <InstagramIcon className="h-[18px] w-[18px]" />
             </a>
@@ -114,7 +112,7 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-clay/60 bg-paper/80 shadow-[var(--shadow-soft)] backdrop-blur-md transition-colors hover:bg-paper lg:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-sand transition-colors hover:bg-clay lg:hidden"
             >
               <span className="relative block h-3.5 w-[18px]">
                 <span
@@ -125,7 +123,7 @@ export function SiteHeader() {
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[6px] h-[2px] w-full rounded-full bg-ink transition-all duration-200",
+                    "absolute top-[6px] left-0 h-[2px] w-full rounded-full bg-ink transition-all duration-200",
                     open && "scale-x-0 opacity-0",
                   )}
                 />
@@ -155,13 +153,13 @@ export function SiteHeader() {
               type="button"
               aria-label="Close menu"
               onClick={() => setOpen(false)}
-              className="absolute inset-0 h-full w-full bg-ink/25 backdrop-blur-sm"
+              className="absolute inset-0 h-full w-full bg-ink/30"
             />
             <motion.div
-              className="absolute inset-x-3 top-[4.75rem] rounded-[30px] border border-clay/70 bg-paper/95 p-4 shadow-[var(--shadow-lift)] backdrop-blur-xl"
-              initial={reduced ? false : { y: -14, opacity: 0, scale: 0.985 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={reduced ? { opacity: 0 } : { y: -10, opacity: 0, scale: 0.99 }}
+              className="absolute inset-x-3 top-[4.75rem] rounded-[24px] bg-paper p-4"
+              initial={reduced ? false : { y: -14, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={reduced ? { opacity: 0 } : { y: -10, opacity: 0 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
               <nav aria-label="Mobile" className="flex flex-col">
@@ -178,18 +176,18 @@ export function SiteHeader() {
                         "flex items-center justify-between rounded-2xl px-4 py-3.5 text-lg font-bold tracking-[-0.02em] transition-colors",
                         pathname === item.href
                           ? "bg-sand text-crimson"
-                          : "text-ink hover:bg-sand/60",
+                          : "text-ink hover:bg-sand",
                       )}
                     >
                       {item.label}
-                      <span className="font-mono text-[0.6875rem] text-ink-soft">
+                      <span className="tag text-ink-soft">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </Link>
                   </motion.div>
                 ))}
               </nav>
-              <div className="mt-3 flex flex-col gap-2 border-t border-clay/60 pt-4">
+              <div className="mt-3 flex flex-col gap-2 border-t border-clay pt-4">
                 <Button href={links.dues} external size="lg" className="w-full">
                   Pay dues on RevTrak
                 </Button>

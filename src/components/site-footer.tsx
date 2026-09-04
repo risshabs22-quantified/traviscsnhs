@@ -40,15 +40,15 @@ const columns: { title: string; items: Item[] }[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-8 border-t border-clay/60 bg-paper/50 pt-20 pb-12 backdrop-blur-sm">
+    <footer className="mt-8 border-t border-clay bg-paper pt-20 pb-12">
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1.25fr_2.75fr]">
           <div>
             <div className="flex items-center gap-3">
               <LogoMark className="h-10 w-10" />
               <div className="leading-tight">
-                <p className="text-base font-extrabold tracking-[-0.02em]">{site.name}</p>
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-ink-soft uppercase">
+                <p className="text-base font-bold tracking-[-0.02em]">{site.name}</p>
+                <p className="tag text-ink-soft">
                   {site.chapter}
                 </p>
               </div>
@@ -62,7 +62,7 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             {columns.map((col) => (
               <nav key={col.title} aria-label={col.title}>
-                <h2 className="font-mono text-[0.625rem] tracking-[0.2em] text-ink-soft uppercase">
+                <h2 className="tag text-ink-soft">
                   {col.title}
                 </h2>
                 <ul className="mt-5 space-y-3">
@@ -94,11 +94,11 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-clay/60 pt-7 text-[0.8125rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-clay pt-7 text-[0.8125rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. Built and run by students.
           </p>
-          <p className="font-mono text-[0.6875rem] tracking-[0.14em] uppercase">
+          <p className="tag">
             {site.domain} / {site.year}
           </p>
         </div>
