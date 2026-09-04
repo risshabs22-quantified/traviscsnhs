@@ -2,14 +2,6 @@ import Image from "next/image";
 import type { Officer } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("");
-}
-
 export function OfficerCard({
   officer,
   priority,
@@ -21,6 +13,7 @@ export function OfficerCard({
 }) {
   return (
     <article
+      data-glow
       className={cn(
         "group card-surface relative overflow-hidden rounded-[26px] p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]",
         className,
@@ -38,15 +31,9 @@ export function OfficerCard({
             style={{ objectPosition: officer.focus ?? "50% 25%" }}
           />
         ) : (
-          // No photo in the deck for this officer — a monogram beats a stock avatar.
-          <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(150deg,#F4DCC0,#E8B98C)]">
-            <span
-              aria-hidden
-              className="font-mono text-4xl font-bold tracking-tight text-crimson/70"
-            >
-              {initials(officer.name)}
-            </span>
-          </div>
+          // The deck had no photo for this officer, so nothing goes here.
+          // An empty frame is honest; initials or a stock avatar would not be.
+          <div className="h-full w-full bg-[linear-gradient(150deg,#F4DCC0,#E9C6A0)]" />
         )}
         <span
           aria-hidden

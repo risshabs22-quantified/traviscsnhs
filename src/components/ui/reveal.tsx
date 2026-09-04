@@ -6,8 +6,8 @@ type Props = {
   index?: number;
   /** Extra delay in seconds, on top of the stagger. */
   delay?: number;
-  /** Travel distance in px. */
-  y?: number;
+  /** Travel distance. A number is px; a string is used as-is. */
+  y?: number | string;
   as?: ElementType;
   className?: string;
 };
@@ -30,12 +30,59 @@ export function Reveal({
 }: Props) {
   const style = {
     "--reveal-delay": `${delay + Math.min(index, 6) * 0.06}s`,
-    "--reveal-y": `${y}px`,
+    "--reveal-y": typeof y === "number" ? `${y}px` : y,
   } as CSSProperties;
 
   return (
     <Tag data-reveal className={className} style={style}>
       {children}
     </Tag>
+  );
+}
+
+/**
+ * Headline reveal, one word at a time, each rising from behind a clipped edge.
+ * Same progressive-enhancement contract as Reveal: with no script running the
+ * words are simply words.
+ *
+ * Splitting on spaces keeps normal wrapping and `text-wrap: balance` working,
+ * because every word is still its own inline box with real spaces between.
+ */
+export function RevealText({
+  text,
+  className,
+  delay = 0,
+  step = 0.045,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  /** Seconds between words. */
+  step?: number;
+}) {
+  const words = text.split(" ");
+
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <span key={`${word}-${i}`}>
+          <span className="inline-block overflow-hidden pb-[0.09em] align-bottom">
+            <span
+              data-reveal="mask"
+              className="inline-block"
+              style={
+                {
+                  "--reveal-delay": `${delay + i * step}s`,
+                  "--reveal-y": "110%",
+                } as CSSProperties
+              }
+            >
+              {word}
+            </span>
+          </span>
+          {i < words.length - 1 ? " " : null}
+        </span>
+      ))}
+    </span>
   );
 }

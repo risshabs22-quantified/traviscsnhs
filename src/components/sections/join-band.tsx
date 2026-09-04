@@ -1,5 +1,5 @@
 import { Container } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { ArrowIcon } from "@/components/ui/icons";
 import { dues, links, requirements } from "@/lib/content";
@@ -27,7 +27,10 @@ export function JoinBand() {
               Join CSNHS
             </p>
             <h2 className="display mx-auto mt-7 max-w-3xl text-[clamp(2.4rem,7vw,4.8rem)] text-cream">
-              {dues.amount} a year. No prerequisites. Any grade.
+              <RevealText
+                text={`${dues.amount} a year. No prerequisites. Any grade.`}
+                delay={0.08}
+              />
             </h2>
             <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-cream/85 text-pretty">
               Dues cover the national membership fee, your club t-shirt, and every

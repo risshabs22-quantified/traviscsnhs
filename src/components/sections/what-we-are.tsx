@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { TerminalIcon, UsersIcon, TrophyIcon } from "@/components/ui/icons";
 import { whatWeAre } from "@/lib/content";
 
@@ -17,11 +17,9 @@ export function WhatWeAre() {
         <Reveal>
           <p className="eyebrow">{whatWeAre.eyebrow}</p>
         </Reveal>
-        <Reveal index={1}>
-          <h2 className="display mt-6 text-[clamp(2.3rem,6.4vw,4.6rem)]">
-            {whatWeAre.title}
-          </h2>
-        </Reveal>
+        <h2 className="display mt-6 text-[clamp(2.3rem,6.4vw,4.6rem)]">
+          <RevealText text={whatWeAre.title} delay={0.05} />
+        </h2>
         <Reveal index={2}>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl">
             {whatWeAre.body}
@@ -35,7 +33,7 @@ export function WhatWeAre() {
           const Icon = icons[pillar.key as keyof typeof icons];
           return (
             <Reveal key={pillar.key} index={i}>
-              <article className="group card-surface relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
+              <article data-glow className="group card-surface relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
                 <span
                   aria-hidden
                   className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.4),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"

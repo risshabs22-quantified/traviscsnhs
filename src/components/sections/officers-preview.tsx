@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { OfficerCard } from "@/components/officer-card";
 import { officers } from "@/lib/content";
@@ -14,11 +14,9 @@ export function OfficersPreview() {
           <Reveal>
             <p className="eyebrow">Meet the officers</p>
           </Reveal>
-          <Reveal index={1}>
-            <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
-              Students run this chapter.
-            </h2>
-          </Reveal>
+          <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
+            <RevealText text="Students run this chapter." delay={0.05} />
+          </h2>
           <Reveal index={2}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft text-pretty">
               Officers write the Code Jam problems, run practice sessions, and answer
