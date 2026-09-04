@@ -3,7 +3,6 @@ import { PageHeader } from "@/components/page-header";
 import { SectionIntro } from "@/components/section-intro";
 import { ContestList } from "@/components/contest-list";
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
 import { schedule } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -34,19 +33,19 @@ export default function EventsPage() {
           title="What happens, and roughly when."
           body="Exact meeting days and contest dates go out on Instagram and Remind first."
         />
-        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20">
-          {schedule.map((term, t) => (
-            <Reveal key={term.term} index={t}>
-              <h3 className="display text-[2rem] sm:text-[2.6rem]">{term.term}</h3>
-              <ul className="mt-8 space-y-6">
+        <div className="mt-10 grid gap-12 lg:grid-cols-2 lg:gap-16">
+          {schedule.map((term) => (
+            <div key={term.term}>
+              <h3 className="text-2xl font-semibold">{term.term}</h3>
+              <ul className="mt-6 space-y-5">
                 {term.items.map((item) => (
                   <li key={item.name}>
-                    <p className="text-[1.15rem] font-semibold">{item.name}</p>
+                    <p className="font-semibold">{item.name}</p>
                     <p className="mt-1 text-[0.95rem] text-ink-soft">{item.when}</p>
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </div>
           ))}
         </div>
       </Section>

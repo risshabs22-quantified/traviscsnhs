@@ -3,7 +3,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
 import { competitions, getCompetition, links } from "@/lib/content";
 
 type Params = { slug: string };
@@ -33,65 +32,51 @@ export default async function ContestPage({ params }: { params: Promise<Params> 
   if (!comp) notFound();
 
   return (
-    <Container className="pt-10 pb-20 sm:pt-14 sm:pb-28">
-      <Reveal>
-        <Button href="/events" variant="quiet">
-          All contests
-        </Button>
-      </Reveal>
+    <Container className="pt-10 pb-16 sm:pt-12 sm:pb-24">
+      <Button href="/events" variant="quiet">
+        All contests
+      </Button>
 
-      <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-        <Reveal>
-          <div className="relative mx-auto aspect-square w-full max-w-[36rem] overflow-hidden rounded-[28px] bg-sand sm:rounded-[40px]">
-            <Image
-              src={comp.image}
-              alt={comp.imageAlt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 40vw, 90vw"
-              className="object-contain p-4 sm:p-8"
-            />
-          </div>
-        </Reveal>
+      <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
+        <div className="relative mx-auto aspect-square w-full max-w-[32rem] bg-sand">
+          <Image
+            src={comp.image}
+            alt={comp.imageAlt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="object-contain p-4 sm:p-8"
+          />
+        </div>
 
         <div>
-          <Reveal>
-            <p className="badge">{comp.format}</p>
-          </Reveal>
-          <Reveal index={1}>
-            <h1 className="display mt-4 text-[clamp(2.4rem,6.5vw,4.6rem)]">{comp.name}</h1>
-          </Reveal>
-          {comp.body.map((para, i) => (
-            <Reveal key={para} index={i + 2}>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft text-pretty">
-                {para}
-              </p>
-            </Reveal>
+          <p className="badge">{comp.format}</p>
+          <h1 className="display mt-3 text-[clamp(2rem,5vw,3.4rem)]">{comp.name}</h1>
+          {comp.body.map((para) => (
+            <p key={para} className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft text-pretty sm:text-lg">
+              {para}
+            </p>
           ))}
-          <Reveal index={5}>
-            <p className="mt-5 text-base font-medium">{comp.timing}</p>
-          </Reveal>
-          <Reveal index={6}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {comp.href && (
-                <Button href={comp.href} external size="lg">
-                  Official site
-                </Button>
-              )}
-              <Button href={links.dues} external size="lg" variant="secondary">
-                Pay dues
+          <p className="mt-4 text-base font-medium">{comp.timing}</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            {comp.href && (
+              <Button href={comp.href} external size="lg">
+                Official site
               </Button>
-            </div>
-          </Reveal>
+            )}
+            <Button href={links.dues} external size="lg" variant="secondary">
+              Pay dues
+            </Button>
+          </div>
         </div>
       </div>
 
-      <dl className="mt-16 grid gap-8 border-t border-clay pt-12 sm:grid-cols-2 lg:grid-cols-4">
-        {comp.rows.map((row, i) => (
-          <Reveal key={row.label} index={i}>
+      <dl className="mt-14 grid gap-6 border-t border-clay pt-10 sm:grid-cols-2 lg:grid-cols-4">
+        {comp.rows.map((row) => (
+          <div key={row.label}>
             <dt className="text-sm font-semibold text-crimson">{row.label}</dt>
-            <dd className="mt-2 text-lg leading-snug">{row.value}</dd>
-          </Reveal>
+            <dd className="mt-1 text-base leading-snug">{row.value}</dd>
+          </div>
         ))}
       </dl>
     </Container>

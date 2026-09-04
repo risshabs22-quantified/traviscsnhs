@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { RouteProgress } from "@/components/route-progress";
-import { RevealObserver } from "@/components/reveal-observer";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -77,13 +75,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${mono.variable}`}>
       <body>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
-          }}
-        />
-        <RouteProgress />
-        <RevealObserver />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

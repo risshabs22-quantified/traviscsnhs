@@ -12,8 +12,8 @@ export function OfficerCard({
   className?: string;
 }) {
   return (
-    <article className={cn("group", className)}>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-sand sm:rounded-[28px]">
+    <article className={className}>
+      <div className="relative aspect-[4/5] overflow-hidden bg-sand">
         {officer.photo ? (
           <Image
             src={officer.photo}
@@ -21,17 +21,17 @@ export function OfficerCard({
             fill
             sizes="(min-width: 1280px) 22vw, (min-width: 768px) 30vw, 50vw"
             priority={priority}
-            className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+            className="object-cover"
             style={{ objectPosition: officer.focus ?? "50% 25%" }}
           />
         ) : (
           <div className="h-full w-full bg-clay" />
         )}
       </div>
-      <p className="mt-4 text-[1.05rem] font-semibold tracking-[-0.02em] sm:text-[1.15rem]">
+      <p className={cn("mt-3 text-base font-semibold tracking-[-0.015em] sm:text-[1.05rem]")}>
         {officer.name}
       </p>
-      <p className="mt-1 text-[0.9rem] text-ink-soft">{officer.role}</p>
+      <p className="mt-0.5 text-[0.9rem] text-ink-soft">{officer.role}</p>
     </article>
   );
 }

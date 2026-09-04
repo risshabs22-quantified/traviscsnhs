@@ -25,7 +25,7 @@ export default function NotFound() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full bg-sand px-4 py-2 text-sm font-semibold text-ink-soft transition-colors hover:bg-clay hover:text-ink"
+              className="rounded-full bg-sand px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-clay hover:text-ink"
             >
               {item.label}
             </Link>

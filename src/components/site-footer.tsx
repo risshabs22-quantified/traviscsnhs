@@ -65,14 +65,14 @@ export function SiteFooter() {
                           href={item.href}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="text-[0.9375rem] text-ink-soft transition-colors hover:text-crimson"
+                          className="text-[0.9375rem] text-ink-soft hover:text-crimson"
                         >
                           {item.label}
                         </a>
                       ) : (
                         <Link
                           href={item.href}
-                          className="text-[0.9375rem] text-ink-soft transition-colors hover:text-crimson"
+                          className="text-[0.9375rem] text-ink-soft hover:text-crimson"
                         >
                           {item.label}
                         </Link>
