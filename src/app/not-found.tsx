@@ -6,7 +6,7 @@ import { nav } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Page not found",
-  description: "That page does not exist. Here is the rest of the site.",
+  description: "That page does not exist. Here is the rest of the Travis CSNHS site.",
   robots: { index: false, follow: true },
 };
 

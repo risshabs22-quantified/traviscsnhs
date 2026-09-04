@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { PromoCarousel } from "@/components/promo-carousel";
 import { SectionIntro } from "@/components/section-intro";
 import { Spotlight } from "@/components/spotlight";
@@ -5,11 +6,16 @@ import { ContestList } from "@/components/contest-list";
 import { OfficerCard } from "@/components/officer-card";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { dues, links, officers, site } from "@/lib/content";
+import { pageMetadata, webPageJsonLd } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata("/");
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/")} />
       <PromoCarousel />
 
       <Section>

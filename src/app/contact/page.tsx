@@ -3,14 +3,11 @@ import { PageHeader } from "@/components/page-header";
 import { SectionIntro } from "@/components/section-intro";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { links, socials } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Reach Travis CSNHS on Instagram @traviscsnhs or Remind @csnhs2026. Dues are paid through the Fort Bend ISD RevTrak store.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = pageMetadata("/contact");
 
 const channels = [
   {
@@ -40,6 +37,13 @@ const channels = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/contact")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
       <PageHeader kicker="Contact" title="Find us in the group chat." lead={socials.body} />
 
       <Section>

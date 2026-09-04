@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { JsonLd } from "@/components/json-ld";
 import { site } from "@/lib/content";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -27,46 +29,45 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "education",
   keywords: [
     "Travis CSNHS",
     "Computer Science National Honor Society",
     "Travis High School",
+    "William B. Travis High School",
     "Fort Bend ISD",
+    "Richmond TX",
     "USACO",
     "UIL Computer Science",
     "Congressional App Challenge",
+    "Club Code Jam",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: site.url,
     siteName: site.name,
+    locale: "en_US",
     title: `${site.name} | ${site.longName}`,
     description: site.description,
-    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} | ${site.longName}`,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {
   themeColor: "#FBF2E8",
   colorScheme: "light",
-};
-
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  name: `${site.chapter} ${site.longName}`,
-  alternateName: site.name,
-  url: site.url,
-  description: site.description,
-  parentOrganization: { "@type": "HighSchool", name: site.chapter },
 };
 
 export default function RootLayout({
@@ -78,10 +79,8 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
       </body>
     </html>
   );

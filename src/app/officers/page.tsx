@@ -3,18 +3,22 @@ import { PageHeader } from "@/components/page-header";
 import { OfficerCard } from "@/components/officer-card";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/json-ld";
 import { links, officers } from "@/lib/content";
+import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Officers",
-  description:
-    "The student officers running the Travis High School Computer Science National Honor Society chapter for 2026-27.",
-  alternates: { canonical: "/officers" },
-};
+export const metadata: Metadata = pageMetadata("/officers");
 
 export default function OfficersPage() {
   return (
     <>
+      <JsonLd data={webPageJsonLd("/officers")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Officers", path: "/officers" },
+        ])}
+      />
       <PageHeader
         kicker="Meet the officers"
         title="The students running the chapter."
