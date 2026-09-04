@@ -26,7 +26,7 @@ Node 20 or newer.
 | --- | --- |
 | Framework | Next.js 15, App Router, TypeScript |
 | Styling | Tailwind CSS v4, tokens defined in `src/app/globals.css`. Flat colour only: no gradients, shadows, or blur anywhere. |
-| Motion | CSS for reveals and the loader bar. Framer Motion for the menu drawer. |
+| Motion | None on route changes. The home carousel is the only moving piece. |
 | Fonts | Plus Jakarta Sans and JetBrains Mono, self hosted through `next/font` |
 | Data | None. Every page is a static file. |
 
@@ -73,7 +73,7 @@ Catalog and lab photos live in `public/media/`.
 /contact             Instagram, Remind, email, where we meet
 ```
 
-Plus `not-found.tsx` (404), `error.tsx` (a page that failed to render), `global-error.tsx` (the whole site failed), and a `loading.tsx` skeleton for every route.
+Plus `not-found.tsx` (404), `error.tsx` (a page that failed to render), and `global-error.tsx` (the whole site failed).
 
 ## Deploying (Vercel)
 

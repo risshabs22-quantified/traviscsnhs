@@ -49,7 +49,7 @@ export function Logo({
       <LogoMark className="h-8 w-8" />
       <span
         className={cn(
-          "font-extrabold tracking-[-0.04em] text-ink",
+          "font-semibold tracking-[-0.02em] text-ink",
           compact ? "hidden text-lg sm:inline" : "text-[1.35rem] leading-none",
         )}
       >

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/page-header";
 import { SectionIntro } from "@/components/section-intro";
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { links, socials } from "@/lib/content";
 
@@ -45,49 +44,49 @@ export default function ContactPage() {
 
       <Section>
         <div className="grid gap-10 md:grid-cols-3">
-          {channels.map((channel, i) => (
-            <Reveal key={channel.label} index={i}>
+          {channels.map((channel) => (
+            <div key={channel.label}>
               <p className="text-sm font-semibold text-crimson">{channel.label}</p>
-              <p className="mt-3 break-words text-[1.7rem] leading-tight font-extrabold tracking-[-0.03em] sm:text-[2rem]">
+              <p className="mt-2 break-words text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
                 {channel.value}
               </p>
-              <p className="mt-3 text-base leading-relaxed text-ink-soft">{channel.body}</p>
-              <div className="mt-6">
+              <p className="mt-2 text-base leading-relaxed text-ink-soft">{channel.body}</p>
+              <div className="mt-5">
                 <Button href={channel.href} external={!channel.mail} variant="secondary">
                   {channel.cta}
                 </Button>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
       </Section>
 
       <Section className="pt-0 sm:pt-0 lg:pt-0">
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-24">
-          <Reveal>
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div>
             <SectionIntro
               size="md"
               title="Paying dues"
               body="Dues are $20 a year and go through the Fort Bend ISD RevTrak store, under Travis High School, then Computer Science NHS. Officers do not take cash."
             />
-            <div className="mt-8">
+            <div className="mt-6">
               <Button href={links.dues} external size="lg">
                 Pay on RevTrak
               </Button>
             </div>
-          </Reveal>
-          <Reveal index={1}>
+          </div>
+          <div>
             <SectionIntro
               size="md"
               title="Where we meet"
               body="Meetings run in the computer lab at Travis High School during the school year. Days and times are posted on Instagram and Remind before each meeting."
             />
-            <div className="mt-8">
+            <div className="mt-6">
               <Button href={links.fbisd} external size="lg" variant="secondary">
                 Fort Bend ISD
               </Button>
             </div>
-          </Reveal>
+          </div>
         </div>
       </Section>
     </>

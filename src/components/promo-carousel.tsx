@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { slides } from "@/lib/content";
 import { cn } from "@/lib/cn";
@@ -10,7 +9,6 @@ import { cn } from "@/lib/cn";
 export function PromoCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const reduced = useReducedMotion();
   const slide = slides[index];
 
   const go = useCallback((n: number) => {
@@ -18,10 +16,11 @@ export function PromoCarousel() {
   }, []);
 
   useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced || paused) return;
-    const id = window.setInterval(() => go(index + 1), 6500);
+    const id = window.setInterval(() => go(index + 1), 7000);
     return () => window.clearInterval(id);
-  }, [index, paused, reduced, go]);
+  }, [index, paused, go]);
 
   return (
     <section
@@ -31,7 +30,7 @@ export function PromoCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative h-[min(78vw,22rem)] sm:h-[min(58vw,32rem)] lg:h-[min(48vw,38rem)]">
+      <div className="relative h-[min(72vw,20rem)] sm:h-[min(50vw,28rem)] lg:h-[min(42vw,32rem)]">
         {slides.map((s, i) => (
           <Image
             key={s.image}
@@ -41,7 +40,7 @@ export function PromoCarousel() {
             priority={i === 0}
             sizes="100vw"
             className={cn(
-              "object-cover object-center transition-opacity duration-500",
+              "object-cover object-center",
               i === index ? "opacity-100" : "opacity-0",
             )}
           />
@@ -49,16 +48,16 @@ export function PromoCarousel() {
       </div>
 
       <div className="pointer-events-none absolute inset-0 flex items-end">
-        <div className="pointer-events-auto m-3 w-full max-w-xl rounded-[22px] bg-ink p-5 sm:m-6 sm:rounded-[28px] sm:p-8 lg:m-10 lg:p-10">
+        <div className="pointer-events-auto m-3 w-full max-w-lg bg-ink p-5 sm:m-6 sm:p-8 lg:m-8">
           <p className="badge-dark badge">{slide.kicker}</p>
-          <h1 className="display mt-3 text-[clamp(1.8rem,5.2vw,3.6rem)] text-page">
+          <h1 className="display mt-3 text-[clamp(1.6rem,4.2vw,2.8rem)] text-page">
             {slide.title}
           </h1>
-          <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-cream-soft sm:text-lg">
+          <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-cream-soft sm:text-base">
             {slide.body}
           </p>
-          <div className="mt-6 flex flex-wrap items-center gap-5">
-            <Button href={slide.cta.href} external={slide.cta.external} variant="onDark" size="lg">
+          <div className="mt-5 flex flex-wrap items-center gap-5">
+            <Button href={slide.cta.href} external={slide.cta.external} variant="onDark">
               {slide.cta.label}
             </Button>
             <div className="flex gap-2" role="tablist" aria-label="Slides">
@@ -71,8 +70,8 @@ export function PromoCarousel() {
                   aria-label={`Show: ${s.title}`}
                   onClick={() => go(i)}
                   className={cn(
-                    "h-2.5 rounded-full transition-all duration-300",
-                    i === index ? "w-8 bg-orange" : "w-2.5 bg-ink-mid hover:bg-cream-soft",
+                    "h-2 w-2 rounded-full",
+                    i === index ? "bg-orange" : "bg-ink-mid hover:bg-cream-soft",
                   )}
                 />
               ))}
