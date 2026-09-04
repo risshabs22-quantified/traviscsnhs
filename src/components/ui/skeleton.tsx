@@ -8,34 +8,51 @@ export function Bar({
   className?: string;
   w?: string;
 }) {
-  // No default height: every caller supplies one, or an aspect ratio does.
-  // A base `h-4` here would collide with those and win or lose by stylesheet
-  // order rather than by intent.
   return <div className={cn("skeleton", className)} style={w ? { width: w } : undefined} />;
 }
 
-/** Stand-in for the rounded hero / page-header stage. */
-export function StageSkeleton({ lines = 3 }: { lines?: number }) {
+export function CarouselSkeleton() {
   return (
-    <div className="px-3 pt-24 sm:px-6 sm:pt-32 lg:pt-36">
-      <div className="overflow-hidden rounded-[24px] bg-sand px-6 py-20 sm:rounded-[32px] sm:px-12 sm:py-24 lg:px-16">
-        <Bar className="h-3 w-40 rounded-full" />
-        <div className="mt-9 space-y-4">
-          {Array.from({ length: lines }).map((_, i) => (
-            <Bar
-              key={i}
-              className="h-[clamp(2.4rem,7vw,4.4rem)] rounded-2xl"
-              w={["78%", "62%", "45%"][i % 3]}
-            />
-          ))}
-        </div>
-        <div className="mt-10 space-y-3">
-          <Bar className="h-4 rounded-full" w="52%" />
-          <Bar className="h-4 rounded-full" w="38%" />
-        </div>
-        <div className="mt-11 flex gap-4">
-          <Bar className="h-14 w-44 rounded-full" />
-          <Bar className="h-14 w-36 rounded-full" />
+    <div className="bg-sand">
+      <Bar className="h-[min(78vw,22rem)] w-full rounded-none sm:h-[min(58vw,32rem)] lg:h-[min(48vw,38rem)]" />
+      <div className="p-5 sm:p-8">
+        <Bar className="h-6 w-24 rounded-md" />
+        <Bar className="mt-4 h-12 w-[70%] rounded-xl sm:h-16" />
+        <Bar className="mt-4 h-4 w-[48%] rounded-full" />
+        <Bar className="mt-6 h-12 w-36 rounded-full" />
+      </div>
+    </div>
+  );
+}
+
+export function PageHeadSkeleton({ image }: { image?: boolean }) {
+  return (
+    <div>
+      {image && <Bar className="h-[min(58vw,20rem)] w-full rounded-none sm:h-[min(42vw,26rem)]" />}
+      <Container className="pt-10 sm:pt-14">
+        <Bar className="h-7 w-28 rounded-md" />
+        <Bar className="mt-5 h-14 w-[80%] rounded-2xl sm:h-20" />
+        <Bar className="mt-5 h-4 w-[52%] rounded-full" />
+      </Container>
+    </div>
+  );
+}
+
+export function SpotlightSkeleton({ flip }: { flip?: boolean }) {
+  return (
+    <div className={cn("flex items-center py-6 sm:py-10", flip && "flex-row-reverse")}>
+      <div
+        className={cn(
+          "flex min-h-[168px] w-full items-center gap-4 rounded-[22px] bg-sand p-4 sm:min-h-[240px] sm:rounded-[36px] sm:p-8",
+          flip && "flex-row-reverse",
+        )}
+      >
+        <Bar className="h-[132px] w-[132px] shrink-0 rounded-2xl sm:h-[220px] sm:w-[220px]" />
+        <div className="min-w-0 flex-1">
+          <Bar className="h-6 w-20 rounded-md" />
+          <Bar className="mt-4 h-10 w-[70%] rounded-xl" />
+          <Bar className="mt-4 h-4 w-[90%] rounded-full" />
+          <Bar className="mt-2 h-4 w-[55%] rounded-full" />
         </div>
       </div>
     </div>
@@ -45,15 +62,9 @@ export function StageSkeleton({ lines = 3 }: { lines?: number }) {
 export function HeadingSkeleton() {
   return (
     <div className="max-w-3xl">
-      <Bar className="h-3 w-32 rounded-full" />
-      <div className="mt-7 space-y-3.5">
-        <Bar className="h-11 rounded-2xl" w="88%" />
-        <Bar className="h-11 rounded-2xl" w="66%" />
-      </div>
-      <div className="mt-8 space-y-3">
-        <Bar className="h-4 rounded-full" w="74%" />
-        <Bar className="h-4 rounded-full" w="58%" />
-      </div>
+      <Bar className="h-7 w-28 rounded-md" />
+      <Bar className="mt-5 h-14 w-[88%] rounded-2xl" />
+      <Bar className="mt-4 h-4 w-[62%] rounded-full" />
     </div>
   );
 }
@@ -68,53 +79,30 @@ export function CardGridSkeleton({
   columns?: string;
 }) {
   return (
-    <div className={cn("mt-14 grid gap-5", columns)}>
+    <div className={cn("mt-10 grid gap-6", columns)}>
       {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          className="card rounded-[26px] p-8"
-          style={{ opacity: 1 - i * 0.06 }}
-        >
+        <div key={i}>
           {aspect ? (
-            <Bar className={cn("w-full rounded-[18px]", aspect)} />
+            <Bar className={cn("w-full rounded-[22px]", aspect)} />
           ) : (
-            <Bar className="h-12 w-12 rounded-full" />
+            <Bar className="h-24 w-full rounded-[22px]" />
           )}
-          <Bar className="mt-7 h-6 rounded-lg" w="58%" />
-          <div className="mt-4 space-y-2.5">
-            <Bar className="h-3.5 rounded-full" w="94%" />
-            <Bar className="h-3.5 rounded-full" w="80%" />
-            <Bar className="h-3.5 rounded-full" w="52%" />
-          </div>
+          <Bar className="mt-4 h-5 rounded-lg" w="58%" />
+          <Bar className="mt-2 h-3.5 rounded-full" w="40%" />
         </div>
       ))}
     </div>
   );
 }
 
-export function RowsSkeleton({ count = 4 }: { count?: number }) {
-  return (
-    <ul className="mt-14 divide-y divide-clay border-y border-clay">
-      {Array.from({ length: count }).map((_, i) => (
-        <li key={i} className="flex items-center justify-between gap-8 py-7">
-          <Bar className="h-5 rounded-lg" w="42%" />
-          <Bar className="h-3.5 w-28 rounded-full" />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Wraps skeleton content in the same container the real page uses. */
 export function SkeletonSection({ children }: { children: React.ReactNode }) {
   return (
-    <section className="py-24 sm:py-32" aria-hidden>
+    <section className="py-14 sm:py-20" aria-hidden>
       <Container>{children}</Container>
     </section>
   );
 }
 
-/** Announced once per navigation so screen readers know something is coming. */
 export function LoadingAnnouncer({ label }: { label: string }) {
   return (
     <p role="status" aria-live="polite" className="sr-only">

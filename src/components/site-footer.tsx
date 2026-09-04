@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { LogoMark } from "@/components/logo";
 import { Container } from "@/components/ui/section";
-import { ExternalIcon } from "@/components/ui/icons";
 import { competitions, links, site } from "@/lib/content";
 
 type Item = { label: string; href: string; external?: boolean };
@@ -18,21 +17,21 @@ const columns: { title: string; items: Item[] }[] = [
     ],
   },
   {
-    title: "Competitions",
-    items: competitions.map((c) => ({ label: c.name, href: `/events#${c.slug}` })),
+    title: "Contests",
+    items: competitions.map((c) => ({ label: c.name, href: `/events/${c.slug}` })),
   },
   {
-    title: "Pay & join",
+    title: "Join",
     items: [
-      { label: "CSNHS dues on RevTrak", href: links.dues, external: true },
-      { label: "Travis HS RevTrak store", href: links.revtrakSchool, external: true },
+      { label: "Pay dues", href: links.dues, external: true },
+      { label: "Travis HS store", href: links.revtrakSchool, external: true },
       { label: "Fort Bend ISD", href: links.fbisd, external: true },
     ],
   },
   {
     title: "Socials",
     items: [
-      { label: `Instagram ${links.instagramHandle}`, href: links.instagram, external: true },
+      { label: links.instagramHandle, href: links.instagram, external: true },
       { label: `Remind ${links.remindHandle}`, href: links.remindHowTo, external: true },
     ],
   },
@@ -40,20 +39,15 @@ const columns: { title: string; items: Item[] }[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-8 border-t border-clay bg-paper pt-20 pb-12">
+    <footer className="mt-8 border-t border-clay bg-paper pt-16 pb-10 sm:pt-20">
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[1.25fr_2.75fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_2.6fr]">
           <div>
             <div className="flex items-center gap-3">
-              <LogoMark className="h-10 w-10" />
-              <div className="leading-tight">
-                <p className="text-base font-bold tracking-[-0.02em]">{site.name}</p>
-                <p className="tag text-ink-soft">
-                  {site.chapter}
-                </p>
-              </div>
+              <LogoMark className="h-9 w-9" />
+              <p className="text-[1.2rem] font-extrabold tracking-[-0.04em]">{site.name}</p>
             </div>
-            <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
+            <p className="mt-5 max-w-xs text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
               {site.longName} at {site.chapter}. Student-run. We meet through the year to
               code, compete, and tutor.
             </p>
@@ -62,10 +56,8 @@ export function SiteFooter() {
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
             {columns.map((col) => (
               <nav key={col.title} aria-label={col.title}>
-                <h2 className="tag text-ink-soft">
-                  {col.title}
-                </h2>
-                <ul className="mt-5 space-y-3">
+                <h2 className="text-sm font-semibold text-ink">{col.title}</h2>
+                <ul className="mt-4 space-y-2.5">
                   {col.items.map((item) => (
                     <li key={item.label}>
                       {item.external ? (
@@ -73,10 +65,9 @@ export function SiteFooter() {
                           href={item.href}
                           target="_blank"
                           rel="noreferrer noopener"
-                          className="group inline-flex items-start gap-1.5 text-[0.9375rem] text-ink-soft transition-colors hover:text-crimson"
+                          className="text-[0.9375rem] text-ink-soft transition-colors hover:text-crimson"
                         >
-                          <span>{item.label}</span>
-                          <ExternalIcon className="mt-[3px] h-3.5 w-3.5 shrink-0 opacity-45 transition-opacity group-hover:opacity-90" />
+                          {item.label}
                         </a>
                       ) : (
                         <Link
@@ -94,12 +85,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-clay pt-7 text-[0.8125rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t border-clay pt-6 text-[0.8125rem] text-ink-soft sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. Built and run by students.
           </p>
-          <p className="tag">
-            {site.domain} / {site.year}
+          <p>
+            {site.domain} · {site.year}
           </p>
         </div>
       </Container>

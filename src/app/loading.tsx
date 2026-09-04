@@ -1,23 +1,20 @@
 import {
-  CardGridSkeleton,
+  CarouselSkeleton,
   HeadingSkeleton,
   LoadingAnnouncer,
   SkeletonSection,
-  StageSkeleton,
+  SpotlightSkeleton,
 } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
     <>
       <LoadingAnnouncer label="Loading the Travis CSNHS home page" />
-      <StageSkeleton />
+      <CarouselSkeleton />
       <SkeletonSection>
         <HeadingSkeleton />
-        <CardGridSkeleton count={3} />
-      </SkeletonSection>
-      <SkeletonSection>
-        <HeadingSkeleton />
-        <CardGridSkeleton count={4} columns="sm:grid-cols-2 xl:grid-cols-4" />
+        <SpotlightSkeleton />
+        <SpotlightSkeleton flip />
       </SkeletonSection>
     </>
   );

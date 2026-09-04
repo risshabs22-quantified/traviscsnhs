@@ -1,15 +1,15 @@
 import {
   CardGridSkeleton,
   LoadingAnnouncer,
+  PageHeadSkeleton,
   SkeletonSection,
-  StageSkeleton,
 } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
     <>
       <LoadingAnnouncer label="Loading the Officers page" />
-      <StageSkeleton lines={2} />
+      <PageHeadSkeleton />
       <SkeletonSection>
         <CardGridSkeleton
           count={8}

@@ -1,8 +1,7 @@
 /**
  * Single source of truth for every word on the site.
- * Everything here came out of the CSNHS Interest Meeting deck (2026-27).
- * If a fact is not in the deck it is marked with a TODO and kept vague on purpose.
- * Edit this file to change copy. You should not need to touch components.
+ * Facts come from the CSNHS Interest Meeting deck (2026-27).
+ * If a fact is not in the deck it is marked TODO and kept vague on purpose.
  */
 
 export const site = {
@@ -12,13 +11,12 @@ export const site = {
   year: "2026-27",
   domain: "traviscsnhs.com",
   url: "https://traviscsnhs.com",
-  tagline: "Build. Teach. Belong.",
+  tagline: "Build, teach, belong",
   description:
     "The Computer Science National Honor Society chapter at Travis High School. We meet through the year to code, compete, and tutor. No prerequisites, any grade level.",
 } as const;
 
 export const links = {
-  /** Fort Bend ISD RevTrak store — this is where members pay the $20 dues. */
   dues: "https://fortbendisd.revtrak.net/hs/THS/ths-computer-science-nhs/",
   revtrakSchool: "https://fortbendisd.revtrak.net/hs/THS/",
   fbisd: "https://www.fortbendisd.com/",
@@ -29,7 +27,7 @@ export const links = {
   usaco: "https://usaco.org/",
   uil: "https://www.uiltexas.org/academics/computer-science",
   appChallenge: "https://www.congressionalappchallenge.us/",
-  /* TODO: confirm with officers — chapter email address for the contact page. */
+  /* TODO: confirm with officers: chapter email address for the contact page. */
   email: "traviscsnhs@gmail.com",
 } as const;
 
@@ -41,45 +39,69 @@ export const nav = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export const hero = {
-  /* Sentence case, not a label. The headline does the shouting. */
-  eyebrow: "The computer science honor society at Travis High School",
-  headline: ["Code.", "Compete.", "Teach."],
-  sub: "No prerequisites. Any grade. Any background, including none.",
-  primaryCta: { label: "Pay dues & join", href: links.dues, external: true },
-  secondaryCta: { label: "See what we compete in", href: "/events" },
-} as const;
+export type Slide = {
+  image: string;
+  alt: string;
+  kicker: string;
+  title: string;
+  body: string;
+  cta: { label: string; href: string; external?: boolean };
+};
 
-/** Slide 03 — What is CSNHS? */
+export const slides: Slide[] = [
+  {
+    image: "/media/hero-join.jpg",
+    alt: "Students working at computers in a school lab",
+    kicker: "2026-27",
+    title: "Join the CS honor society",
+    body: "No prerequisites. Any grade. Twenty dollars a year.",
+    cta: { label: "Pay dues", href: links.dues, external: true },
+  },
+  {
+    image: "/media/hero-contest.jpg",
+    alt: "Students in the lab during a coding contest",
+    kicker: "This year",
+    title: "Four competitions",
+    body: "Solo, team, and in house. Every member enters at least one.",
+    cta: { label: "See events", href: "/events" },
+  },
+  {
+    image: "/media/hero-tutor.jpg",
+    alt: "Two students at one computer during a tutoring session",
+    kicker: "Student-run",
+    title: "Officers write the contests",
+    body: "They run practice sessions and keep the group chat moving.",
+    cta: { label: "Meet the officers", href: "/officers" },
+  },
+];
+
+/** Slide 03: What is CSNHS? */
 export const whatWeAre = {
-  eyebrow: "What is CSNHS",
+  kicker: "What is CSNHS",
   title: "The national honor society for computer science students.",
   body: "Our chapter meets through the year to code, compete, and tutor. Officers write the contests, run the practice sessions, and keep the group chat moving. Everything else is up to you.",
   pillars: [
     {
       key: "build",
       label: "Build",
-      tone: "orange",
       body: "Work on projects and enter competitions with other students who like coding.",
     },
     {
       key: "teach",
       label: "Teach",
-      tone: "ink",
       body: "Tutor classmates in CS classes and help run our events.",
     },
     {
       key: "belong",
       label: "Belong",
-      tone: "sand",
       body: "No prerequisite classes. Beginners and experienced coders are both welcome.",
     },
   ],
 } as const;
 
-/** Slide 04 — Why Join */
+/** Slide 04: Why Join */
 export const whyJoin = {
-  eyebrow: "Why join",
+  kicker: "Why join",
   title: "Four reasons to sign up.",
   reasons: [
     "National honor society membership on your college applications.",
@@ -88,13 +110,12 @@ export const whyJoin = {
     "Upperclassmen who have already taken the CS classes and contests you are signing up for.",
   ],
   callout: {
-    eyebrow: "College applications",
+    kicker: "College applications",
     title: "CS programs pay attention to what you have built and entered.",
     body: "A USACO division, a submitted app, or a UIL medal gives you something specific to write about.",
   },
 } as const;
 
-/** Slides 06-10 — Competitions */
 export type Competition = {
   slug: string;
   index: string;
@@ -103,13 +124,11 @@ export type Competition = {
   short: string;
   body: string[];
   href?: string;
-  /** Two-column detail rows shown on the events page. */
   rows: { label: string; value: string }[];
   timing: string;
-  /** Tile fill on the home page. */
-  tone: "ink" | "crimson" | "orange" | "ember" | "sand" | "paper";
-  /** The single figure that defines this competition, straight from the deck. */
   figure: { value: string; caption: string };
+  image: string;
+  imageAlt: string;
 };
 
 export const competitions: Competition[] = [
@@ -132,8 +151,9 @@ export const competitions: Competition[] = [
       { label: "Platinum", value: "Olympiad track" },
     ],
     timing: "Four contest windows across the year",
-    tone: "crimson",
     figure: { value: "4", caption: "contest windows a year. Solo, three problems, four hours." },
+    image: "/media/usaco.jpg",
+    imageAlt: "A laptop floating above a burnt-red square",
   },
   {
     slug: "uil",
@@ -151,8 +171,9 @@ export const competitions: Competition[] = [
       { label: "District to state", value: "Advance as a team or as an individual medalist" },
     ],
     timing: "Spring meet season, district first",
-    tone: "ink",
-    figure: { value: "3–4", caption: "students per team. Java only, district to state." },
+    figure: { value: "3 to 4", caption: "students per team. Java only, district to state." },
+    image: "/media/uil.jpg",
+    imageAlt: "Composition notebooks, a pencil, and a closed laptop on a dark square",
   },
   {
     slug: "app-challenge",
@@ -170,8 +191,9 @@ export const competitions: Competition[] = [
       { label: "Nov", value: "Submission deadline" },
     ],
     timing: "Submissions close in November",
-    tone: "orange",
     figure: { value: "Nov", caption: "submissions close. Teams of one to four, any platform." },
+    image: "/media/app-challenge.jpg",
+    imageAlt: "A phone floating above an orange square",
   },
   {
     slug: "code-jam",
@@ -189,12 +211,17 @@ export const competitions: Competition[] = [
       { label: "Prizes", value: "Snacks and shirt design credit." },
     ],
     timing: "Once in the fall, once in the spring",
-    tone: "sand",
     figure: { value: "2", caption: "divisions, beginner and open. Written by the officers." },
+    image: "/media/code-jam.jpg",
+    imageAlt: "A laptop, blank problem sheets, pretzels, and an orange soda on a tan square",
   },
 ];
 
-/** Slide 11 — Member Requirements */
+export function getCompetition(slug: string) {
+  return competitions.find((c) => c.slug === slug);
+}
+
+/** Slide 11: Member Requirements */
 export const requirements = [
   {
     label: "Prerequisites",
@@ -213,10 +240,12 @@ export const requirements = [
   },
 ] as const;
 
-/** Slide 12 — Dues & Membership */
+/** Slide 12: Dues & Membership */
 export const dues = {
   amount: "$20",
   cadence: "Per member, per year",
+  image: "/media/shirt.jpg",
+  imageAlt: "A folded cream t-shirt with a small tiger mark, floating above a burnt-red square",
   includes: [
     { label: "National membership fee", value: "Included" },
     { label: "Club t-shirt", value: "Included" },
@@ -231,12 +260,11 @@ export const dues = {
   ],
 } as const;
 
-/** Slide 05 — Meet the Officers */
+/** Slide 05: Meet the Officers */
 export type Officer = {
   name: string;
   role: string;
   photo?: string;
-  /** CSS object-position so faces stay in frame at any crop. */
   focus?: string;
 };
 
@@ -250,7 +278,7 @@ export const officers: Officer[] = [
   {
     name: "Raheeq Mobin",
     role: "Vice President",
-    // TODO: confirm with officers — no photo in the deck, monogram shown instead.
+    // TODO: confirm with officers: no photo in the deck.
   },
   {
     name: "Reyan Maredia",
@@ -284,7 +312,7 @@ export const officers: Officer[] = [
   },
 ];
 
-/** Slide 13 — Socials */
+/** Slide 13: Socials */
 export const socials = {
   title: "Socials",
   body: "Announcements, competition sign ups, and meeting reminders go out here first.",
@@ -297,25 +325,25 @@ export const socials = {
 /**
  * The deck lists what happens in a year but never puts calendar dates on it.
  * Dates stay as windows until officers confirm them.
- * TODO: confirm with officers — exact meeting days, room number, and contest dates.
+ * TODO: confirm with officers: exact meeting days, room number, and contest dates.
  */
 export const schedule = [
   {
     term: "Fall",
     items: [
-      { name: "Interest meeting", when: "Start of the year", note: "Where this deck came from." },
-      { name: "USACO practice sessions", when: "Weeks before each contest window", note: "In the lab." },
-      { name: "Congressional App Challenge", when: "Submissions close in November", note: "Teams of 1 to 4." },
-      { name: "Club Code Jam", when: "Once in the fall", note: "Beginner and open divisions." },
+      { name: "Interest meeting", when: "Start of the year" },
+      { name: "USACO practice sessions", when: "Weeks before each contest window" },
+      { name: "Congressional App Challenge", when: "Submissions close in November" },
+      { name: "Club Code Jam", when: "Once in the fall" },
     ],
   },
   {
     term: "Spring",
     items: [
-      { name: "UIL Computer Science", when: "Meet season, district first", note: "Teams of 3 to 4." },
-      { name: "USACO contest windows", when: "Through the spring", note: "Solo, four hours, three problems." },
-      { name: "Club Code Jam", when: "Once in the spring", note: "Second running of our own contest." },
-      { name: "Tutoring", when: "Ongoing", note: "Members tutor classmates in CS classes." },
+      { name: "UIL Computer Science", when: "Meet season, district first" },
+      { name: "USACO contest windows", when: "Through the spring" },
+      { name: "Club Code Jam", when: "Once in the spring" },
+      { name: "Tutoring", when: "Ongoing" },
     ],
   },
 ] as const;

@@ -23,7 +23,7 @@ export default function GlobalError({
           justifyContent: "center",
           padding: "24px",
           background: "#FBF2E8",
-          color: "#2A1710",
+          color: "#241611",
           fontFamily:
             "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
         }}
@@ -32,32 +32,42 @@ export default function GlobalError({
           style={{
             width: "100%",
             maxWidth: "40rem",
-            borderRadius: "32px",
-            border: "1px solid rgba(228,205,178,0.7)",
-            background: "rgba(255,253,248,0.85)",
-            boxShadow: "0 22px 44px -20px rgba(42,23,16,0.26)",
+            borderRadius: "28px",
+            background: "#F2E4D2",
             padding: "clamp(32px, 7vw, 64px)",
-            textAlign: "center",
           }}
         >
           <p
             style={{
               margin: 0,
-              fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-              fontSize: "11px",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "#8E2C1B",
+              display: "inline-block",
+              background: "#FFFBF5",
+              borderRadius: 8,
+              padding: "4px 12px",
+              fontSize: 14,
+              fontWeight: 600,
             }}
           >
             Travis CSNHS
           </p>
+          <p
+            style={{
+              margin: "20px 0 0",
+              fontSize: "clamp(3.5rem, 12vw, 6rem)",
+              lineHeight: 0.85,
+              letterSpacing: "-0.05em",
+              fontWeight: 800,
+              color: "#8E2C1B",
+            }}
+          >
+            500
+          </p>
           <h1
             style={{
-              margin: "24px 0 0",
-              fontSize: "clamp(2rem, 7vw, 3rem)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.035em",
+              margin: "20px 0 0",
+              fontSize: "clamp(1.7rem, 5vw, 2.4rem)",
+              lineHeight: 1.05,
+              letterSpacing: "-0.04em",
               fontWeight: 800,
             }}
           >
@@ -65,10 +75,10 @@ export default function GlobalError({
           </h1>
           <p
             style={{
-              margin: "20px auto 0",
+              margin: "16px 0 0",
               maxWidth: "28rem",
-              fontSize: "17px",
-              lineHeight: 1.65,
+              fontSize: 17,
+              lineHeight: 1.6,
               color: "#6B5142",
             }}
           >
@@ -76,24 +86,23 @@ export default function GlobalError({
           </p>
           <div
             style={{
-              marginTop: "36px",
+              marginTop: 32,
               display: "flex",
               flexWrap: "wrap",
-              gap: "12px",
-              justifyContent: "center",
+              gap: 12,
             }}
           >
             <button
               type="button"
               onClick={reset}
               style={{
-                height: "52px",
-                padding: "0 30px",
-                borderRadius: "999px",
+                height: 52,
+                padding: "0 28px",
+                borderRadius: 999,
                 border: "none",
                 background: "#8E2C1B",
-                color: "#FBF6EE",
-                fontSize: "16px",
+                color: "#FBF2E8",
+                fontSize: 16,
                 fontWeight: 600,
                 cursor: "pointer",
               }}
@@ -103,15 +112,14 @@ export default function GlobalError({
             <a
               href="/"
               style={{
-                height: "52px",
-                padding: "0 30px",
+                height: 52,
+                padding: "0 28px",
                 display: "inline-flex",
                 alignItems: "center",
-                borderRadius: "999px",
-                border: "1px solid rgba(228,205,178,0.9)",
-                background: "#F0E3D0",
-                color: "#2A1710",
-                fontSize: "16px",
+                borderRadius: 999,
+                background: "#FFFBF5",
+                color: "#241611",
+                fontSize: 16,
                 fontWeight: 600,
                 textDecoration: "none",
               }}
@@ -122,10 +130,10 @@ export default function GlobalError({
           {error.digest && (
             <p
               style={{
-                margin: "28px 0 0",
+                margin: "24px 0 0",
                 fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-                fontSize: "11px",
-                letterSpacing: "0.14em",
+                fontSize: 11,
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
                 color: "#6B5142",
               }}

@@ -1,26 +1,20 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------
-   Tokens. Full rationale in DESIGN.md.
+/* Tokens. Full rationale in DESIGN.md.
+   Every value is a flat colour. No gradients, blends, colour-mix, shadows,
+   or translucency. Depth is one flat surface sitting on another. */
 
-   Every value here is a flat colour. There are no gradients, no blends,
-   no colour-mix, no shadows, and no translucency anywhere in this file.
-   Depth comes from one flat surface sitting on another, nothing else.
-------------------------------------------------------------------- */
 @theme {
-  /* page and surfaces */
   --color-page: #fbf2e8;
   --color-paper: #fffbf5;
   --color-sand: #f2e4d2;
   --color-clay: #e5d3bc;
 
-  /* accents */
   --color-ember: #f2a03d;
   --color-orange: #e8752a;
   --color-rust: #b03a1e;
   --color-crimson: #8e2c1b;
 
-  /* ink */
   --color-ink: #241611;
   --color-ink-mid: #3a241b;
   --color-ink-soft: #6b5142;
@@ -33,16 +27,13 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ------------------------------------------------------------------
-   Base
-------------------------------------------------------------------- */
 * {
   border-color: var(--color-clay);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -66,31 +57,29 @@ body {
   border-radius: 4px;
 }
 
-/* ------------------------------------------------------------------
-   Type
-------------------------------------------------------------------- */
 .display {
-  font-weight: 700;
-  letter-spacing: -0.028em;
-  line-height: 1.03;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
   text-wrap: balance;
 }
 
-/* Small line above a headline. Plain sentence case in one muted colour,
-   not a letterspaced mono label. */
-.eyebrow {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-ink-soft);
+.badge {
+  display: inline-block;
+  border-radius: 8px;
+  background-color: var(--color-sand);
+  padding: 0.2rem 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-ink);
 }
 
-.eyebrow-dark {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-cream-soft);
+.badge-dark {
+  background-color: var(--color-orange);
+  color: var(--color-ink);
 }
 
-/* The one place mono earns its keep: index numbers and short data labels. */
 .tag {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -98,28 +87,6 @@ body {
   text-transform: uppercase;
 }
 
-/* ------------------------------------------------------------------
-   Surfaces. Flat fills, hairline borders, no shadow, no blur.
-------------------------------------------------------------------- */
-.card {
-  background-color: var(--color-paper);
-  border: 1px solid var(--color-clay);
-}
-
-.card-hover {
-  transition:
-    transform 0.28s var(--ease-out-soft),
-    background-color 0.28s var(--ease-out-soft),
-    border-color 0.28s var(--ease-out-soft);
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-orange);
-}
-
-/* ------------------------------------------------------------------
-   Motion
-------------------------------------------------------------------- */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
@@ -137,40 +104,10 @@ body {
   }
 }
 
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(var(--rise, 18px));
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes rise-mask {
-  from {
-    transform: translateY(110%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes float-y {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(calc(-1 * var(--float-dist, 18px)));
-  }
-}
-
 @keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -182,29 +119,10 @@ body {
   animation: caret 1.15s steps(1) infinite;
 }
 
-.float {
-  animation: float-y var(--float-dur, 10s) ease-in-out infinite;
-  animation-delay: var(--float-delay, 0s);
-}
-
-/* Hero entrance. `backwards` fill means the resting state is the final
-   frame, so this is safe even if the animation never runs. */
-.rise {
-  animation: rise-in 0.72s var(--ease-out-soft) backwards;
-  animation-delay: var(--rise-delay, 0s);
-}
-
-.rise-mask {
-  display: block;
-  animation: rise-mask 0.85s var(--ease-out-soft) backwards;
-  animation-delay: var(--rise-delay, 0s);
-}
-
 .page-in {
-  animation: page-in 0.42s var(--ease-out-soft) backwards;
+  animation: page-in 0.38s var(--ease-out-soft) backwards;
 }
 
-/* Skeleton. Flat fill plus one flat sweep, no gradient wash. */
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -220,14 +138,6 @@ body {
   animation: shimmer 1.5s infinite;
 }
 
-/* ------------------------------------------------------------------
-   Scroll reveal.
-
-   Gated on `.js`, which an inline script adds before first paint. With
-   JavaScript off, slow, or broken, none of this applies and every page
-   renders fully visible. Nothing here is ever hidden by a script that
-   might not arrive.
-------------------------------------------------------------------- */
 .js [data-reveal] {
   opacity: 0;
   transform: translateY(var(--reveal-y, 22px));
@@ -241,12 +151,6 @@ body {
     transform 0.46s var(--ease-out-soft) var(--reveal-delay, 0s);
 }
 
-/* Word-by-word headline reveal.
-
-   The wrapper is what gets observed, so it must never be hidden itself; only
-   its words move. Observing the words directly cannot work: each one is
-   translated fully below its own overflow-hidden box, so its intersection area
-   is always zero and it would never be revealed. */
 .js [data-reveal="words"] {
   opacity: 1;
   transform: none;
@@ -259,18 +163,6 @@ body {
   transition: transform 0.72s var(--ease-out-soft) var(--word-delay, 0s);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .js [data-reveal="words"] .rt-word {
-    transform: none;
-  }
-}
-
-/* ------------------------------------------------------------------
-   Utilities
-------------------------------------------------------------------- */
-/* ------------------------------------------------------------------
-   Reduced motion stops all of it.
-------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -285,13 +177,11 @@ body {
   .skeleton::after {
     display: none;
   }
-  .js [data-reveal] {
+  .js [data-reveal],
+  .js [data-reveal="words"] .rt-word {
     opacity: 1;
     transform: none;
   }
-  .rise,
-  .rise-mask,
-  .float,
   .page-in {
     animation: none;
   }

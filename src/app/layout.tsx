@@ -24,8 +24,8 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.longName}`,
-    template: `%s — ${site.name}`,
+    default: `${site.name} | ${site.longName}`,
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
@@ -43,16 +43,17 @@ export const metadata: Metadata = {
     type: "website",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.longName}`,
+    title: `${site.name} | ${site.longName}`,
     description: site.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.longName}`,
+    title: `${site.name} | ${site.longName}`,
     description: site.description,
   },
   robots: { index: true, follow: true },
+  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {
@@ -76,9 +77,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${mono.variable}`}>
       <body>
-        {/* Runs before first paint. Until this lands, `.js` is absent and the
-            scroll-reveal rules in globals.css do not apply — so the page is
-            fully readable with JavaScript off, broken, or still loading. */}
         <script
           dangerouslySetInnerHTML={{
             __html: "document.documentElement.classList.add('js')",

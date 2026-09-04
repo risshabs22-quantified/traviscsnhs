@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/page-header";
+import { SectionIntro } from "@/components/section-intro";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { SectionChip } from "@/components/ui/chip";
-import { Tile, TileFigure, type Tone } from "@/components/ui/tile";
-import { WhatWeAre } from "@/components/sections/what-we-are";
-import { WhyJoin } from "@/components/sections/why-join";
-import { JoinBand } from "@/components/sections/join-band";
-import { competitions, requirements, site } from "@/lib/content";
+import { competitions, requirements, site, whatWeAre, whyJoin } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -17,88 +13,105 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-const REQ_TONES: Tone[] = ["ink", "orange", "sand"];
-
 export default function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="About"
+        kicker="About"
         title="A chapter that meets to code, compete, and tutor."
         lead={`${site.longName} is the national honor society for computer science students. Our ${site.chapter} chapter is student-run and open to any grade level.`}
+        image="/media/hero-join.jpg"
+        imageAlt="Students working at computers in a school lab"
       >
-        <div className="flex flex-wrap gap-4">
-          <Button href="/membership">How to join</Button>
-          <Button href="/officers" variant="secondary">
+        <div className="flex flex-wrap gap-3">
+          <Button href="/membership" size="lg">
+            How to join
+          </Button>
+          <Button href="/officers" size="lg" variant="secondary">
             Meet the officers
           </Button>
         </div>
       </PageHeader>
 
-      <WhatWeAre />
-
-      {/* What a year actually looks like — the deck's own agenda. */}
-      <Section className="pt-0 sm:pt-0 lg:pt-0">
-        <Reveal>
-          <SectionChip>A year in the chapter</SectionChip>
-        </Reveal>
-        <Reveal index={1}>
-          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
-            Meetings, practice, then contests.
-          </h2>
-        </Reveal>
-        <Reveal index={2}>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty">
-            Meetings run in the lab. Officers put on practice sessions in the weeks before
-            each USACO window, write the Code Jam problems, and organise UIL teams. Members
-            tutor classmates in CS classes between all of it.
-          </p>
-        </Reveal>
-
-        <div className="mt-16 grid gap-x-16 gap-y-12 sm:grid-cols-2">
-          {competitions.map((comp, i) => (
-            <Reveal key={comp.slug} index={i}>
-              <p className="text-[1.5rem] font-bold tracking-[-0.025em] sm:text-[1.75rem]">
-                {comp.name}
+      <Section>
+        <SectionIntro kicker={whatWeAre.kicker} title={whatWeAre.title} body={whatWeAre.body} />
+        <div className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+          {whatWeAre.pillars.map((pillar, i) => (
+            <Reveal key={pillar.key} index={i}>
+              <p className="display text-[2rem] sm:text-[2.4rem]">{pillar.label}</p>
+              <p className="mt-3 text-base leading-relaxed text-ink-soft sm:text-lg">
+                {pillar.body}
               </p>
-              <p className="mt-3 text-lg text-ink-soft">{comp.timing}</p>
             </Reveal>
           ))}
         </div>
+      </Section>
 
+      <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <SectionIntro
+          kicker="A year in the chapter"
+          title="Meetings, practice, then contests."
+          body="Meetings run in the lab. Officers put on practice sessions in the weeks before each USACO window, write the Code Jam problems, and organise UIL teams. Members tutor classmates in CS classes between all of it."
+        />
+        <ul className="mt-12 grid gap-8 sm:grid-cols-2">
+          {competitions.map((comp, i) => (
+            <Reveal key={comp.slug} index={i} as="li">
+              <p className="text-[1.4rem] font-extrabold tracking-[-0.03em] sm:text-[1.7rem]">
+                {comp.name}
+              </p>
+              <p className="mt-2 text-base text-ink-soft sm:text-lg">{comp.timing}</p>
+            </Reveal>
+          ))}
+        </ul>
         <Reveal>
-          <div className="mt-14">
+          <div className="mt-10">
             <Button href="/events" size="lg" variant="secondary">
-              See the full calendar
+              See the contests
             </Button>
           </div>
         </Reveal>
       </Section>
 
-      <WhyJoin />
-
-      {/* Requirements, stated plainly so nobody has to guess. */}
       <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <SectionIntro kicker={whyJoin.kicker} title={whyJoin.title} />
+        <ol className="mt-12 grid gap-8 sm:grid-cols-2">
+          {whyJoin.reasons.map((reason, i) => (
+            <Reveal key={reason} index={i} as="li">
+              <p className="text-sm font-semibold text-crimson">{String(i + 1).padStart(2, "0")}</p>
+              <p className="mt-3 text-[1.15rem] leading-snug text-pretty sm:text-[1.3rem]">
+                {reason}
+              </p>
+            </Reveal>
+          ))}
+        </ol>
         <Reveal>
-          <SectionChip>Who it is for</SectionChip>
+          <div className="mt-14 max-w-2xl rounded-[28px] bg-ink px-7 py-10 sm:px-10 sm:py-12">
+            <p className="badge-dark badge">{whyJoin.callout.kicker}</p>
+            <p className="display mt-4 text-[clamp(1.6rem,3.4vw,2.4rem)] text-page">
+              {whyJoin.callout.title}
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-cream-soft sm:text-lg">
+              {whyJoin.callout.body}
+            </p>
+          </div>
         </Reveal>
-        <Reveal index={1}>
-          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
-            Beginners and experienced coders, in the same room.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+      </Section>
+
+      <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <SectionIntro
+          kicker="Who it is for"
+          title="Beginners and experienced coders, in the same room."
+        />
+        <div className="mt-12 grid gap-10 sm:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <Tile tone={REQ_TONES[i]} title={req.body}>
-                <TileFigure value={req.value} caption={req.label} />
-              </Tile>
+              <p className="display text-[clamp(2.6rem,6vw,4rem)] text-crimson">{req.value}</p>
+              <p className="mt-2 text-lg font-semibold">{req.label}</p>
+              <p className="mt-2 text-base leading-relaxed text-ink-soft">{req.body}</p>
             </Reveal>
           ))}
         </div>
       </Section>
-
-      <JoinBand />
     </>
   );
 }
