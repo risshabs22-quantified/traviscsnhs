@@ -1,46 +1,47 @@
 import { Section } from "@/components/ui/section";
 import { Reveal, RevealText } from "@/components/ui/reveal";
+import { SectionChip } from "@/components/ui/chip";
 import { whyJoin } from "@/lib/content";
 
-/** Two-column split: numbered reasons on the left, one callout card on the right. */
+/**
+ * Big numbered statements, then one full-width panel for the payoff.
+ * The old version put a bordered callout card beside a hairline list; both
+ * read as filler boxes rather than as anything worth reading.
+ */
 export function WhyJoin() {
   return (
     <Section id="why-join">
-      <div className="grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-        <div>
-          <Reveal>
-            <p className="eyebrow">{whyJoin.eyebrow}</p>
-          </Reveal>
-          <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
-            <RevealText text={whyJoin.title} delay={0.05} />
-          </h2>
+      <Reveal>
+        <SectionChip>{whyJoin.eyebrow}</SectionChip>
+      </Reveal>
+      <h2 className="display mt-8 max-w-3xl text-[clamp(2.2rem,6vw,4.2rem)]">
+        <RevealText text={whyJoin.title} delay={0.05} />
+      </h2>
 
-          <ol className="mt-12 divide-y divide-clay border-t border-clay">
-            {whyJoin.reasons.map((reason, i) => (
-              <Reveal key={reason} index={i} as="li">
-                <div className="group flex gap-6 py-7 transition-colors duration-300">
-                  <span className="mt-1 tag text-crimson tabular-nums transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-lg leading-relaxed text-pretty sm:text-xl">{reason}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-
-        <Reveal index={2} y={30}>
-          <aside className="card sticky top-32 overflow-hidden rounded-[26px] p-9">
-            <p className="eyebrow">{whyJoin.callout.eyebrow}</p>
-            <h3 className="mt-7 text-[1.75rem] leading-[1.15] font-bold tracking-[-0.03em] text-balance sm:text-[2rem]">
-              {whyJoin.callout.title}
-            </h3>
-            <p className="mt-6 leading-relaxed text-ink-soft text-pretty">
-              {whyJoin.callout.body}
+      <ol className="mt-16 grid gap-x-16 gap-y-12 sm:grid-cols-2">
+        {whyJoin.reasons.map((reason, i) => (
+          <Reveal key={reason} index={i} as="li">
+            <p className="tag text-crimson">{String(i + 1).padStart(2, "0")}</p>
+            <p className="mt-4 text-[1.35rem] leading-[1.35] text-pretty sm:text-[1.6rem]">
+              {reason}
             </p>
-          </aside>
-        </Reveal>
-      </div>
+          </Reveal>
+        ))}
+      </ol>
+
+      <Reveal y={30}>
+        <aside className="mt-20 rounded-[22px] bg-ink px-7 py-16 sm:px-14 sm:py-20">
+          <p className="text-cream-soft text-[0.9375rem] font-medium">
+            {whyJoin.callout.eyebrow}
+          </p>
+          <p className="display mt-6 max-w-4xl text-[clamp(1.9rem,5vw,3.4rem)] text-page">
+            {whyJoin.callout.title}
+          </p>
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-cream-soft text-pretty">
+            {whyJoin.callout.body}
+          </p>
+        </aside>
+      </Reveal>
     </Section>
   );
 }

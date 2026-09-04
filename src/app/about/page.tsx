@@ -3,6 +3,8 @@ import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { SectionChip } from "@/components/ui/chip";
+import { Tile, TileFigure, type Tone } from "@/components/ui/tile";
 import { WhatWeAre } from "@/components/sections/what-we-are";
 import { WhyJoin } from "@/components/sections/why-join";
 import { JoinBand } from "@/components/sections/join-band";
@@ -14,6 +16,8 @@ export const metadata: Metadata = {
     "What the Computer Science National Honor Society is, what our Travis High School chapter does through the year, and who it is for.",
   alternates: { canonical: "/about" },
 };
+
+const REQ_TONES: Tone[] = ["ink", "orange", "sand"];
 
 export default function AboutPage() {
   return (
@@ -33,56 +37,42 @@ export default function AboutPage() {
 
       <WhatWeAre />
 
-      {/* What a year actually looks like — the deck's own agenda, as sections. */}
+      {/* What a year actually looks like — the deck's own agenda. */}
       <Section className="pt-0 sm:pt-0 lg:pt-0">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <div>
-            <Reveal>
-              <p className="eyebrow">A year in the chapter</p>
-            </Reveal>
-            <Reveal index={1}>
-              <h2 className="display mt-6 text-[clamp(2.1rem,5.6vw,3.6rem)]">
-                Meetings, practice, then contests.
-              </h2>
-            </Reveal>
-            <Reveal index={2}>
-              <p className="mt-7 text-lg leading-relaxed text-ink-soft text-pretty">
-                Meetings run in the lab. Officers put on practice sessions in the weeks
-                before each USACO window, write the Code Jam problems, and organise UIL
-                teams. Members tutor classmates in CS classes between all of it.
-              </p>
-            </Reveal>
-            <Reveal index={3}>
-              <div className="mt-10">
-                <Button href="/events" variant="secondary">
-                  See the full calendar
-                </Button>
-              </div>
-            </Reveal>
-          </div>
+        <Reveal>
+          <SectionChip>A year in the chapter</SectionChip>
+        </Reveal>
+        <Reveal index={1}>
+          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
+            Meetings, practice, then contests.
+          </h2>
+        </Reveal>
+        <Reveal index={2}>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty">
+            Meetings run in the lab. Officers put on practice sessions in the weeks before
+            each USACO window, write the Code Jam problems, and organise UIL teams. Members
+            tutor classmates in CS classes between all of it.
+          </p>
+        </Reveal>
 
-          <div>
-            <ul className="divide-y divide-clay border-y border-clay">
-              {competitions.map((comp, i) => (
-                <Reveal key={comp.slug} index={i} as="li">
-                  <div className="flex items-baseline justify-between gap-6 py-7">
-                    <div>
-                      <p className="text-lg font-bold tracking-[-0.02em] sm:text-xl">
-                        {comp.name}
-                      </p>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                        {comp.timing}
-                      </p>
-                    </div>
-                    <span className="shrink-0 rounded-full bg-sand px-3 py-1 tag text-ink-soft">
-                      {comp.format}
-                    </span>
-                  </div>
-                </Reveal>
-              ))}
-            </ul>
-          </div>
+        <div className="mt-16 grid gap-x-16 gap-y-12 sm:grid-cols-2">
+          {competitions.map((comp, i) => (
+            <Reveal key={comp.slug} index={i}>
+              <p className="text-[1.5rem] font-bold tracking-[-0.025em] sm:text-[1.75rem]">
+                {comp.name}
+              </p>
+              <p className="mt-3 text-lg text-ink-soft">{comp.timing}</p>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal>
+          <div className="mt-14">
+            <Button href="/events" size="lg" variant="secondary">
+              See the full calendar
+            </Button>
+          </div>
+        </Reveal>
       </Section>
 
       <WhyJoin />
@@ -90,23 +80,19 @@ export default function AboutPage() {
       {/* Requirements, stated plainly so nobody has to guess. */}
       <Section className="pt-0 sm:pt-0 lg:pt-0">
         <Reveal>
-          <p className="eyebrow">Who it is for</p>
+          <SectionChip>Who it is for</SectionChip>
         </Reveal>
         <Reveal index={1}>
-          <h2 className="display mt-6 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
+          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
             Beginners and experienced coders, in the same room.
           </h2>
         </Reveal>
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <div className="card h-full rounded-[26px] p-8">
-                <p className="tag text-crimson">
-                  {req.label}
-                </p>
-                <p className="display mt-6 text-6xl">{req.value}</p>
-                <p className="mt-6 leading-relaxed text-ink-soft text-pretty">{req.body}</p>
-              </div>
+              <Tile tone={REQ_TONES[i]} title={req.body}>
+                <TileFigure value={req.value} caption={req.label} />
+              </Tile>
             </Reveal>
           ))}
         </div>

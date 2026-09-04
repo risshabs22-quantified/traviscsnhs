@@ -42,11 +42,15 @@ export function Reveal({
 
 /**
  * Headline reveal, one word at a time, each rising from behind a clipped edge.
- * Same progressive-enhancement contract as Reveal: with no script running the
- * words are simply words.
  *
- * Splitting on spaces keeps normal wrapping and `text-wrap: balance` working,
- * because every word is still its own inline box with real spaces between.
+ * The observer watches the wrapper, never the individual words. The words are
+ * translated fully below their own `overflow-hidden` box, so their intersection
+ * area with the viewport is always zero — observing them directly deadlocks:
+ * they can never be seen, so they are never revealed, so they stay hidden.
+ * Watching the wrapper also reads better, since the whole line starts together.
+ *
+ * Same progressive-enhancement contract as Reveal: with no script running, the
+ * words are simply words.
  */
 export function RevealText({
   text,
@@ -63,19 +67,13 @@ export function RevealText({
   const words = text.split(" ");
 
   return (
-    <span className={className}>
+    <span data-reveal="words" className={className}>
       {words.map((word, i) => (
         <span key={`${word}-${i}`}>
           <span className="inline-block overflow-hidden pb-[0.09em] align-bottom">
             <span
-              data-reveal="mask"
-              className="inline-block"
-              style={
-                {
-                  "--reveal-delay": `${delay + i * step}s`,
-                  "--reveal-y": "110%",
-                } as CSSProperties
-              }
+              className="rt-word inline-block"
+              style={{ "--word-delay": `${delay + i * step}s` } as CSSProperties}
             >
               {word}
             </span>

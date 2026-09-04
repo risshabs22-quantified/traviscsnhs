@@ -1,65 +1,53 @@
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
+import { SectionChip, ChipOnDark } from "@/components/ui/chip";
 import { Button } from "@/components/ui/button";
-import { CardIcon, ExternalIcon } from "@/components/ui/icons";
+import { CardIcon } from "@/components/ui/icons";
 import { dues, links } from "@/lib/content";
 
-/** Two-column split: the number on the left, what it buys on the right. */
-export function DuesSplit({ heading = "Dues & membership" }: { heading?: string }) {
+/**
+ * One crimson panel: the number, what it buys, and the button. The old
+ * version was a hairline table of label-on-the-left, value-on-the-right
+ * rows, which is exactly the pattern that reads as filler.
+ */
+export function DuesSplit({ heading = "Dues" }: { heading?: string }) {
   return (
-    <Section id="dues">
-      <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
-        <div>
-          <Reveal>
-            <p className="eyebrow">{heading}</p>
-          </Reveal>
-          <Reveal index={1}>
-            <p className="display mt-6 text-[clamp(6rem,20vw,12rem)] leading-[0.8] text-crimson">
+    <Section id="dues" className="pt-0 sm:pt-0 lg:pt-0">
+      <Reveal>
+        <SectionChip icon={<CardIcon className="h-[18px] w-[18px]" />}>{heading}</SectionChip>
+      </Reveal>
+
+      <Reveal index={1} y={30}>
+        <div className="mt-10 grid gap-12 rounded-[22px] bg-crimson px-7 py-14 sm:px-12 sm:py-16 lg:grid-cols-2 lg:gap-20 lg:px-16">
+          <div>
+            <p className="text-[clamp(6rem,18vw,11rem)] leading-[0.8] font-bold tracking-[-0.05em] text-page">
               {dues.amount}
             </p>
-          </Reveal>
-          <Reveal index={2}>
-            <p className="mt-6 tag text-ink-soft">
-              {dues.cadence}
-            </p>
-          </Reveal>
-          <Reveal index={3}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href={links.dues} external size="lg">
-                <CardIcon className="h-[18px] w-[18px]" />
+            <p className="mt-8 text-lg font-medium text-cream-soft">{dues.cadence}</p>
+            <div className="mt-10">
+              <Button href={links.dues} external size="lg" variant="onDark">
                 Pay on RevTrak
-                <ExternalIcon className="h-4 w-4 opacity-70" />
               </Button>
             </div>
-          </Reveal>
-          <Reveal index={4}>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-soft">
-              Payments run through the Fort Bend ISD RevTrak store, under Travis High
-              School → Computer Science NHS.
-            </p>
-          </Reveal>
-        </div>
+          </div>
 
-        <div className="lg:pt-6">
-          <ul className="divide-y divide-clay border-y border-clay">
-            {dues.includes.map((row, i) => (
-              <Reveal key={row.label} index={i} as="li">
-                <div className="flex items-baseline justify-between gap-6 py-6">
-                  <span className="text-lg font-semibold sm:text-xl">{row.label}</span>
-                  <span className="tag text-ink-soft">
-                    {row.value}
-                  </span>
-                </div>
-              </Reveal>
+          <ul className="space-y-9 lg:pt-4">
+            {dues.includes.map((row) => (
+              <li key={row.label}>
+                <p className="text-[1.4rem] leading-snug font-semibold text-page sm:text-[1.6rem]">
+                  {row.label}
+                </p>
+                <p className="mt-3">
+                  <ChipOnDark>{row.value}</ChipOnDark>
+                </p>
+              </li>
             ))}
-          </ul>
-          <Reveal index={3}>
-            <p className="mt-7 rounded-[20px] bg-sand p-6 text-[0.9375rem] leading-relaxed text-ink text-pretty">
+            <li className="max-w-sm pt-2 text-[0.9375rem] leading-relaxed text-cream-soft">
               {dues.note}
-            </p>
-          </Reveal>
+            </li>
+          </ul>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }

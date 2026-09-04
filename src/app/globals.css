@@ -126,15 +126,6 @@ body {
   }
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes caret {
   0%,
   45% {
@@ -187,12 +178,6 @@ body {
   }
 }
 
-.animate-marquee {
-  animation: marquee 42s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
 .animate-caret {
   animation: caret 1.15s steps(1) infinite;
 }
@@ -256,22 +241,33 @@ body {
     transform 0.46s var(--ease-out-soft) var(--reveal-delay, 0s);
 }
 
-/* Masked word reveal: the clip does the hiding, so these stay opaque and
-   only travel. */
-.js [data-reveal="mask"] {
+/* Word-by-word headline reveal.
+
+   The wrapper is what gets observed, so it must never be hidden itself; only
+   its words move. Observing the words directly cannot work: each one is
+   translated fully below its own overflow-hidden box, so its intersection area
+   is always zero and it would never be revealed. */
+.js [data-reveal="words"] {
   opacity: 1;
+  transform: none;
 }
-.js [data-reveal="mask"][data-revealed] {
-  transition-duration: 0.72s;
+.js [data-reveal="words"] .rt-word {
+  transform: translateY(110%);
+}
+.js [data-reveal="words"][data-revealed] .rt-word {
+  transform: none;
+  transition: transform 0.72s var(--ease-out-soft) var(--word-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal="words"] .rt-word {
+    transform: none;
+  }
 }
 
 /* ------------------------------------------------------------------
    Utilities
 ------------------------------------------------------------------- */
-.mask-fade-x {
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
 /* ------------------------------------------------------------------
    Reduced motion stops all of it.
 ------------------------------------------------------------------- */

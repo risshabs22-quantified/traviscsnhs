@@ -2,6 +2,11 @@ import Image from "next/image";
 import type { Officer } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
+/**
+ * Photo, then name. No card box around it — the portrait is the object, and
+ * wrapping it in a bordered panel was the thing that made the grid read as
+ * a template.
+ */
 export function OfficerCard({
   officer,
   priority,
@@ -12,13 +17,7 @@ export function OfficerCard({
   className?: string;
 }) {
   return (
-    <article
-     
-      className={cn(
-        "group card relative overflow-hidden rounded-[26px] p-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:",
-        className,
-      )}
-    >
+    <article className={cn("group", className)}>
       <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-sand">
         {officer.photo ? (
           <Image
@@ -27,7 +26,7 @@ export function OfficerCard({
             fill
             sizes="(min-width: 1280px) 22vw, (min-width: 768px) 30vw, 80vw"
             priority={priority}
-            className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.045]"
+            className="object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
             style={{ objectPosition: officer.focus ?? "50% 25%" }}
           />
         ) : (
@@ -37,14 +36,8 @@ export function OfficerCard({
         )}
       </div>
 
-      <div className="px-3 pt-5 pb-3">
-        <p className="tag text-crimson">
-          {officer.role}
-        </p>
-        <h3 className="mt-2 text-lg font-bold tracking-[-0.02em] text-balance">
-          {officer.name}
-        </h3>
-      </div>
+      <p className="mt-5 text-[1.15rem] font-semibold tracking-[-0.02em]">{officer.name}</p>
+      <p className="mt-1 text-[0.9375rem] text-ink-soft">{officer.role}</p>
     </article>
   );
 }
