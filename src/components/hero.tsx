@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowIcon } from "@/components/ui/icons";
 import { hero, links } from "@/lib/content";
@@ -19,6 +25,17 @@ export function Hero() {
   const py = useMotionValue(0);
   const sx = useSpring(px, { stiffness: 60, damping: 22, mass: 0.6 });
   const sy = useSpring(py, { stiffness: 60, damping: 22, mass: 0.6 });
+
+  // Scroll-linked depth: the headline drifts up and dims a little as the stage
+  // leaves, and the ambient layer moves slower than the text behind it.
+  const { scrollYProgress } = useScroll({
+    target: stage,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0.15]);
+  const ambientY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const ambientScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
 
   useEffect(() => {
     const el = stage.current;
@@ -73,10 +90,19 @@ export function Hero() {
           }}
         />
 
-        <FloatingShapes sx={sx} sy={sy} />
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 z-0"
+          style={{ y: ambientY, scale: ambientScale }}
+        >
+          <FloatingShapes sx={sx} sy={sy} />
+        </motion.div>
 
         {/* --- content --------------------------------------------------- */}
-        <div className="relative z-10 flex flex-col items-center px-5 py-24 text-center sm:px-8 sm:py-28 lg:py-32">
+        <motion.div
+          className="relative z-10 flex flex-col items-center px-5 py-24 text-center sm:px-8 sm:py-28 lg:py-32"
+          style={{ y: contentY, opacity: contentOpacity }}
+        >
           <p className="eyebrow rise" style={rise(0)}>
             {hero.eyebrow}
           </p>
@@ -113,7 +139,7 @@ export function Hero() {
               {hero.secondaryCta.label}
             </Button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

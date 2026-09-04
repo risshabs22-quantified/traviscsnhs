@@ -324,3 +324,63 @@ body {
     animation: none;
   }
 }
+
+/* Masked word reveal. The clip does the hiding, so these stay fully opaque
+   and only travel — a slide up from behind an edge, not a fade. */
+.js [data-reveal="mask"] {
+  opacity: 1;
+}
+.js [data-reveal="mask"][data-revealed] {
+  transition-duration: 0.72s;
+}
+
+/* Pointer glow. A warm highlight that tracks the cursor inside a card.
+   Coordinates come from one document-level listener in PointerGlow. */
+[data-glow]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Negative z-index paints above the card's own background but below all of
+     its content, so the glow never covers text and the rule does not have to
+     touch the children (which would break absolutely positioned accents). */
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+  background: radial-gradient(
+    16rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    color-mix(in oklab, var(--color-ember) 30%, transparent),
+    transparent 62%
+  );
+}
+[data-glow][data-glow-on]::after {
+  opacity: 1;
+}
+/* Route change. The template remounts on navigation, so this replays. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-in {
+  animation: page-in 0.42s var(--ease-out-soft) backwards;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-glow]::after {
+    display: none;
+  }
+  .page-in {
+    animation: none;
+  }
+}

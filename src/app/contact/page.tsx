@@ -63,7 +63,7 @@ export default function ContactPage() {
             const external = !channel.href.startsWith("mailto:");
             return (
               <Reveal key={channel.label} index={i}>
-                <article className="group card-surface relative flex h-full flex-col overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
+                <article data-glow className="group card-surface relative flex h-full flex-col overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
                   <span
                     aria-hidden
                     className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.35),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"

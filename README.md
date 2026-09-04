@@ -60,7 +60,7 @@ Officers, competitions, dues, requirements, the schedule, social handles, and ev
 1. Put the image in `public/officers/` as a `.jpg`.
 2. Point the officer's `photo` at it, for example `/officers/name.jpg`.
 3. If the face sits high or low in the frame, set `focus` (a CSS `object-position`, e.g. `"50% 20%"`).
-4. An officer with no `photo` gets a monogram card instead. That is deliberate. Do not substitute a stock avatar.
+4. An officer with no `photo` gets an empty frame. That is deliberate: if the deck had no photo, the site invents nothing. Do not substitute initials or a stock avatar.
 
 ---
 

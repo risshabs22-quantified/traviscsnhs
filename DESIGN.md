@@ -87,13 +87,24 @@ Headlines are sized with `clamp()` against the viewport, so there are no font-si
 | What | How long | Curve |
 | --- | --- | --- |
 | Hero words rising | 850ms, staggered 90ms | `cubic-bezier(0.22, 1, 0.36, 1)` |
-| Scroll reveal | 460ms, staggered 60ms | same |
+| Section headlines, word by word | 720ms, staggered 45ms | same |
+| Scroll reveal (blocks) | 460ms, staggered 60ms | same |
+| Route change | 420ms fade and rise | same |
 | Card hover lift | 300ms | same |
+| Card pointer glow fade | 400ms | same |
 | Button press | 200ms | same |
 | Hero gradient drift | 18-24s loop | ease-in-out |
 | Floating shapes | 9-13s loop, each offset | ease-in-out |
+| Hero scroll parallax | scroll-linked, no duration | linear in scroll |
 
-One easing curve for everything that responds to you, long slow loops for everything ambient. That is the whole system.
+One easing curve for everything that responds to you, long slow loops for everything ambient, and one scroll-linked layer. That is the whole system.
+
+Four pieces do most of the work:
+
+- **Headlines arrive word by word.** Each word sits in its own clipped box and slides up from behind the edge, 45ms apart. The clip does the hiding, so the words never fade, they just appear from nowhere.
+- **The hero has depth on scroll.** As the stage leaves, the headline drifts up and dims while the ambient layer behind it moves the other way and scales up slightly. Two speeds, so the card reads as having a front and a back.
+- **Cards light up under the cursor.** One document-level pointer listener sets two CSS variables on whichever card you are over, and a warm radial highlight tracks the pointer inside it. It paints at `z-index: -1`, above the card background and below every bit of content, so it can never sit on top of text.
+- **Route changes are one gesture.** The loader bar fills across the top while the next page resolves, then the new page rises in over 420ms.
 
 Two rules hold it together:
 

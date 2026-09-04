@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { ArrowIcon } from "@/components/ui/icons";
 import { competitions } from "@/lib/content";
@@ -13,11 +13,12 @@ export function Competitions() {
           <Reveal>
             <p className="eyebrow">What members do</p>
           </Reveal>
-          <Reveal index={1}>
-            <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
-              Four competitions this year: solo, team, and in house.
-            </h2>
-          </Reveal>
+          <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
+            <RevealText
+              text="Four competitions this year: solo, team, and in house."
+              delay={0.05}
+            />
+          </h2>
         </div>
         <Reveal index={2}>
           <Button href="/events" variant="quiet" className="pb-2">
@@ -31,6 +32,7 @@ export function Competitions() {
           <Reveal key={comp.slug} index={i}>
             <Link
               href={`/events#${comp.slug}`}
+              data-glow
               className="group card-surface relative flex h-full flex-col overflow-hidden rounded-[26px] p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-orange/50 hover:shadow-[var(--shadow-lift)]"
             >
               <span

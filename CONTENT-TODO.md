@@ -10,7 +10,7 @@ Each item says where to fix it. The matching `<!-- TODO: confirm with officers -
 
 **Where** `officers` in `src/lib/content.ts`, and a note in `src/app/officers/page.tsx`
 
-Slide 5 had a grey placeholder avatar for Raheeq Mobin instead of a photo. The site shows an `RM` monogram card instead, styled to match the other cards.
+Slide 5 had a grey placeholder avatar for Raheeq Mobin instead of a photo. The site leaves that frame empty. No initials, no stock avatar, nothing invented.
 
 **To fix:** drop a photo in `public/officers/raheeq-mobin.jpg` and add `photo: "/officers/raheeq-mobin.jpg"` to that officer.
 

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 
 /**
  * Inner-page version of the hero stage: same rounded card and warm wash,
@@ -32,9 +32,9 @@ export function PageHeader({
           <Reveal>
             <p className="eyebrow">{eyebrow}</p>
           </Reveal>
-          <Reveal index={1}>
-            <h1 className="display mt-6 text-[clamp(2.6rem,9vw,6rem)]">{title}</h1>
-          </Reveal>
+          <h1 className="display mt-6 text-[clamp(2.6rem,9vw,6rem)]">
+            <RevealText text={title} delay={0.06} />
+          </h1>
           {lead && (
             <Reveal index={2}>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl">

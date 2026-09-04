@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { Reveal } from "@/components/ui/reveal";
+import { Reveal, RevealText } from "@/components/ui/reveal";
 import { whyJoin } from "@/lib/content";
 
 /** Two-column split: numbered reasons on the left, one callout card on the right. */
@@ -11,11 +11,9 @@ export function WhyJoin() {
           <Reveal>
             <p className="eyebrow">{whyJoin.eyebrow}</p>
           </Reveal>
-          <Reveal index={1}>
-            <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
-              {whyJoin.title}
-            </h2>
-          </Reveal>
+          <h2 className="display mt-6 text-[clamp(2.2rem,6vw,4.2rem)]">
+            <RevealText text={whyJoin.title} delay={0.05} />
+          </h2>
 
           <ol className="mt-12 divide-y divide-clay/60 border-t border-clay/60">
             {whyJoin.reasons.map((reason, i) => (
@@ -32,7 +30,7 @@ export function WhyJoin() {
         </div>
 
         <Reveal index={2} y={30}>
-          <aside className="card-surface sticky top-32 overflow-hidden rounded-[26px] p-9">
+          <aside data-glow className="card-surface sticky top-32 overflow-hidden rounded-[26px] p-9">
             <span
               aria-hidden
               className="absolute -top-20 -left-16 h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.28),transparent_70%)]"

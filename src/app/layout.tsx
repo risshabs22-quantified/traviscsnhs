@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { RouteProgress } from "@/components/route-progress";
 import { RevealObserver } from "@/components/reveal-observer";
+import { PointerGlow } from "@/components/pointer-glow";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -88,6 +89,7 @@ export default function RootLayout({
         <div className="grain" aria-hidden />
         <RouteProgress />
         <RevealObserver />
+        <PointerGlow />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />

@@ -44,7 +44,7 @@ export default function MembershipPage() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <div className="group card-surface relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
+              <div data-glow className="group card-surface relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
                 <span
                   aria-hidden
                   className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.38),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"

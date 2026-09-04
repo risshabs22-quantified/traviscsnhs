@@ -8,7 +8,10 @@ export function Bar({
   className?: string;
   w?: string;
 }) {
-  return <div className={cn("skeleton h-4", className)} style={w ? { width: w } : undefined} />;
+  // No default height: every caller supplies one, or an aspect ratio does.
+  // A base `h-4` here would collide with those and win or lose by stylesheet
+  // order rather than by intent.
+  return <div className={cn("skeleton", className)} style={w ? { width: w } : undefined} />;
 }
 
 /** Stand-in for the rounded hero / page-header stage. */
