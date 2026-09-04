@@ -59,14 +59,14 @@ export function ErrorStage({
 
 function TigerTerminal({ code }: { code: string }) {
   return (
-    <div className="mx-auto w-full max-w-sm bg-sand p-4">
+    <div className="mx-auto w-full max-w-sm rounded-xl bg-sand p-4">
       <div className="flex items-center gap-1.5 px-2 pb-3">
         <span className="h-2.5 w-2.5 rounded-full bg-crimson" />
         <span className="h-2.5 w-2.5 rounded-full bg-orange" />
         <span className="h-2.5 w-2.5 rounded-full bg-clay" />
         <span className="tag ml-3 text-ink-soft">traviscsnhs</span>
       </div>
-      <div className="bg-ink px-6 py-8">
+      <div className="rounded-xl bg-ink px-6 py-8">
         <TigerFace asleep className="mx-auto max-w-[13rem]" />
         <p className="tag mt-7 text-center text-cream-soft">
           exit code {code}

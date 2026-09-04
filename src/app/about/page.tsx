@@ -77,7 +77,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ol>
-        <div className="mt-10 max-w-2xl bg-ink px-6 py-8 sm:px-8 sm:py-10">
+        <div className="mt-10 max-w-2xl rounded-xl bg-ink px-6 py-8 sm:px-8 sm:py-10">
           <p className="badge-dark badge">{whyJoin.callout.kicker}</p>
           <p className="display mt-3 text-[clamp(1.4rem,2.8vw,2rem)] text-page">
             {whyJoin.callout.title}
