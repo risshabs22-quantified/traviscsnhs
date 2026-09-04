@@ -38,7 +38,7 @@ The deck never says when or where meetings happen. The site says meetings run in
 
 ## 4. Actual contest dates
 
-**Where** `schedule` in `src/lib/content.ts`, plus notes in `src/app/events/page.tsx` and `src/components/sections/events-strip.tsx`
+**Where** `schedule` in `src/lib/content.ts`, plus the calendar on `src/app/events/page.tsx`
 
 The deck gives shapes, not dates: USACO has "four contest windows a year", the App Challenge closes "Nov", Code Jam runs "once in the fall and once in the spring", UIL goes "district to state". The site repeats exactly those windows. **No date was made up.**
 
@@ -90,7 +90,7 @@ Slide 13 had a QR code labelled "Attendance". QR codes go stale and this one poi
 
 **Where** `src/app/opengraph-image.tsx`
 
-The card that shows up when someone pastes the link into a group chat is generated from text and the site gradient. It works and it is on brand.
+The card that shows up when someone pastes the link into a group chat is generated from type on a flat ink field. It works and it is on brand.
 
 **To fix (optional):** replace it with a real photo of the chapter once there is a good one. See `IMAGE-BRIEFS.md`.
 

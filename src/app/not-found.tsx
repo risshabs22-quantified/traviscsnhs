@@ -14,16 +14,18 @@ export default function NotFound() {
   return (
     <ErrorStage
       code="404"
-      eyebrow="Page not found"
-      title="This one did not compile."
-      body="The link is broken, or the page moved. Everything the chapter publishes is one of these five."
+      kicker="Page not found"
+      title="Nothing at this address."
+      body="The link is broken, or the page moved. Everything the chapter publishes is listed below."
+      image="/media/lab.jpg"
+      imageAlt="An empty computer lab"
       detail={
         <nav aria-label="Site sections" className="flex flex-wrap gap-2">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full border border-clay bg-paper px-4 py-2 text-sm font-semibold text-ink-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-paper hover:text-crimson"
+              className="rounded-full bg-sand px-4 py-2 text-sm font-semibold text-ink-soft transition-colors hover:bg-clay hover:text-ink"
             >
               {item.label}
             </Link>

@@ -1,24 +1,19 @@
 import {
-  CardGridSkeleton,
   HeadingSkeleton,
   LoadingAnnouncer,
-  RowsSkeleton,
+  PageHeadSkeleton,
   SkeletonSection,
-  StageSkeleton,
+  SpotlightSkeleton,
 } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
     <>
       <LoadingAnnouncer label="Loading the Membership page" />
-      <StageSkeleton lines={2} />
+      <PageHeadSkeleton />
       <SkeletonSection>
         <HeadingSkeleton />
-        <CardGridSkeleton count={3} />
-      </SkeletonSection>
-      <SkeletonSection>
-        <HeadingSkeleton />
-        <RowsSkeleton count={3} />
+        <SpotlightSkeleton />
       </SkeletonSection>
     </>
   );

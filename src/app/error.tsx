@@ -13,22 +13,17 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // No analytics on this site, so the console is where a broken page shows up.
     console.error(error);
   }, [error]);
 
   return (
     <ErrorStage
       code="500"
-      eyebrow="Something went wrong"
-      title="Our end, not yours."
-      body="This page hit an error while it was rendering. Try it again, and if it keeps happening let an officer know on Instagram."
+      kicker="Something went wrong"
+      title="This page failed to render."
+      body="Try it again. If it keeps happening, let an officer know on Instagram."
       detail={
-        error.digest ? (
-          <p className="tag text-ink-soft">
-            Reference {error.digest}
-          </p>
-        ) : null
+        error.digest ? <p className="tag text-ink-soft">Reference {error.digest}</p> : null
       }
     >
       <button

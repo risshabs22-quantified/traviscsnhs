@@ -1,18 +1,20 @@
 import {
-  CardGridSkeleton,
   LoadingAnnouncer,
+  PageHeadSkeleton,
   SkeletonSection,
-  StageSkeleton,
 } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
     <>
       <LoadingAnnouncer label="Loading the Contact page" />
-      <StageSkeleton lines={2} />
+      <PageHeadSkeleton />
       <SkeletonSection>
-        <CardGridSkeleton count={3} />
-        <CardGridSkeleton count={2} columns="lg:grid-cols-2" />
+        <div className="grid gap-10 md:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="skeleton h-40 rounded-[22px]" />
+          ))}
+        </div>
       </SkeletonSection>
     </>
   );

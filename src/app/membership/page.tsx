@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/page-header";
+import { SectionIntro } from "@/components/section-intro";
+import { Spotlight } from "@/components/spotlight";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { SectionChip } from "@/components/ui/chip";
-import { Tile, TileFigure, type Tone } from "@/components/ui/tile";
-import { DuesSplit } from "@/components/sections/dues-split";
-import { JoinBand } from "@/components/sections/join-band";
-import { CardIcon } from "@/components/ui/icons";
 import { dues, links, requirements } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -17,76 +14,79 @@ export const metadata: Metadata = {
   alternates: { canonical: "/membership" },
 };
 
-const REQ_TONES: Tone[] = ["ink", "orange", "sand"];
-
 export default function MembershipPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Membership"
+        kicker="Membership"
         title="No prerequisites. Any grade. Any background."
         lead="Three things keep you in good standing: show up, enter one competition, and pay your dues. That is the whole list."
       >
         <Button href={links.dues} external size="lg">
-          <CardIcon className="h-[18px] w-[18px]" />
           Pay dues on RevTrak
         </Button>
       </PageHeader>
 
-      {/* Requirements — slide 11, as three big panels. */}
       <Section>
-        <Reveal>
-          <SectionChip>Requirements</SectionChip>
-        </Reveal>
-        <Reveal index={1}>
-          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
-            What we ask of members.
-          </h2>
-        </Reveal>
-
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+        <SectionIntro kicker="Requirements" title="What we ask of members." />
+        <div className="mt-12 grid gap-10 sm:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <Tile tone={REQ_TONES[i]} title={req.body}>
-                <TileFigure value={req.value} caption={req.label} />
-              </Tile>
+              <p className="display text-[clamp(2.6rem,6vw,4rem)] text-crimson">{req.value}</p>
+              <p className="mt-2 text-lg font-semibold">{req.label}</p>
+              <p className="mt-2 text-base leading-relaxed text-ink-soft">{req.body}</p>
             </Reveal>
           ))}
         </div>
       </Section>
 
-      <DuesSplit />
-
-      {/* Paying, step by step. Numbered statements, not stacked boxes. */}
       <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <SectionIntro kicker="Dues" title={`${dues.amount} covers the year.`} />
+        <div className="mt-6 sm:mt-8">
+          <Spotlight
+            image={dues.image}
+            alt={dues.imageAlt}
+            kicker={dues.cadence}
+            title={dues.amount}
+            body="National membership fee, club t-shirt, and competition entry fees. Officers do not take cash."
+            href={links.dues}
+            cta="Pay on RevTrak"
+            external
+          />
+        </div>
+        <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+          {dues.includes.map((row, i) => (
+            <Reveal key={row.label} index={i} as="li">
+              <p className="text-lg font-semibold">{row.label}</p>
+              <p className="mt-1 text-ink-soft">{row.value}</p>
+            </Reveal>
+          ))}
+        </ul>
         <Reveal>
-          <SectionChip>How to pay</SectionChip>
+          <p className="mt-8 max-w-2xl text-base leading-relaxed text-ink-soft">{dues.note}</p>
         </Reveal>
-        <Reveal index={1}>
-          <h2 className="display mt-8 max-w-3xl text-[clamp(2.1rem,5.6vw,3.6rem)]">
-            Dues go through RevTrak.
-          </h2>
-        </Reveal>
-        <Reveal index={2}>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty">
-            RevTrak is the Fort Bend ISD online payment store. Travis CSNHS has its own
-            page there. Officers do not take cash.
-          </p>
-        </Reveal>
+      </Section>
 
-        <ol className="mt-16 grid gap-x-16 gap-y-12 sm:grid-cols-2">
+      <Section className="pt-0 sm:pt-0 lg:pt-0">
+        <SectionIntro
+          kicker="How to pay"
+          title="Dues go through RevTrak."
+          body="RevTrak is the Fort Bend ISD online payment store. Travis CSNHS has its own page there."
+        />
+        <ol className="mt-12 grid gap-x-16 gap-y-10 sm:grid-cols-2">
           {dues.howTo.map((step, i) => (
             <Reveal key={step} index={i} as="li">
-              <p className="tag text-crimson">{String(i + 1).padStart(2, "0")}</p>
-              <p className="mt-4 text-[1.35rem] leading-[1.35] text-pretty sm:text-[1.5rem]">
+              <p className="text-sm font-semibold text-crimson">
+                {String(i + 1).padStart(2, "0")}
+              </p>
+              <p className="mt-3 text-[1.2rem] leading-snug text-pretty sm:text-[1.35rem]">
                 {step}
               </p>
             </Reveal>
           ))}
         </ol>
-
         <Reveal>
-          <div className="mt-14 flex flex-wrap gap-4">
+          <div className="mt-12 flex flex-wrap gap-3">
             <Button href={links.dues} external size="lg">
               Open the CSNHS page
             </Button>
@@ -96,8 +96,6 @@ export default function MembershipPage() {
           </div>
         </Reveal>
       </Section>
-
-      <JoinBand />
     </>
   );
 }

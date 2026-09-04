@@ -1,8 +1,22 @@
 # Picture ideas
 
-Nine pictures we could add to the site. Each one says where it goes, what size to make it, and a prompt you can paste straight into an image generator.
+Catalog stills and lab photos already on the site live in `public/media/`:
 
-None of these are on the site yet. The site looks finished without them. Add them one at a time.
+| File | Used on |
+| --- | --- |
+| `hero-join.jpg` | Home carousel, About |
+| `hero-contest.jpg` | Home carousel, Events |
+| `hero-tutor.jpg` | Home carousel |
+| `usaco.jpg` | USACO spotlight and profile |
+| `uil.jpg` | UIL spotlight and profile |
+| `app-challenge.jpg` | App Challenge spotlight and profile |
+| `code-jam.jpg` | Code Jam spotlight and profile |
+| `shirt.jpg` | Membership |
+| `lab.jpg` | 404 |
+
+Officer portraits stay in `public/officers/` and are real photos. Do not generate named officers.
+
+The briefs below are leftovers if you want replacements. Each one says where it goes, what size to make it, and a prompt you can paste into an image generator.
 
 ## The colors to use in every prompt
 

@@ -1,46 +1,57 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
-import { Reveal, RevealText } from "@/components/ui/reveal";
+import { Container } from "@/components/ui/section";
+import { Reveal } from "@/components/ui/reveal";
 
-/**
- * Inner-page version of the hero stage. Same rounded card, one flat sand
- * fill instead of the home page's dark one, so the two read as a set
- * without competing.
- */
 export function PageHeader({
-  eyebrow,
+  kicker,
   title,
   lead,
   children,
+  image,
+  imageAlt,
 }: {
-  eyebrow: string;
+  kicker: string;
   title: string;
   lead?: string;
   children?: ReactNode;
+  image?: string;
+  imageAlt?: string;
 }) {
   return (
-    <section className="px-3 pt-24 sm:px-6 sm:pt-28">
-      <div className="overflow-hidden rounded-[24px] bg-sand px-6 py-20 sm:rounded-[32px] sm:px-12 sm:py-24 lg:px-16">
-        <div className="max-w-4xl">
-          <Reveal>
-            <p className="eyebrow">{eyebrow}</p>
-          </Reveal>
-          <h1 className="display mt-5 text-[clamp(2.5rem,8vw,5.5rem)]">
-            <RevealText text={title} delay={0.06} />
-          </h1>
-          {lead && (
-            <Reveal index={2}>
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl">
-                {lead}
-              </p>
-            </Reveal>
-          )}
-          {children && (
-            <Reveal index={3}>
-              <div className="mt-10">{children}</div>
-            </Reveal>
-          )}
+    <section>
+      {image && (
+        <div className="relative h-[min(58vw,20rem)] sm:h-[min(42vw,26rem)]">
+          <Image
+            src={image}
+            alt={imageAlt ?? ""}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
-      </div>
+      )}
+      <Container className={image ? "pt-8 pb-2 sm:pt-12" : "pt-10 pb-2 sm:pt-14"}>
+        <Reveal>
+          <p className="badge">{kicker}</p>
+        </Reveal>
+        <Reveal index={1}>
+          <h1 className="display mt-4 max-w-5xl text-[clamp(2.3rem,7.5vw,5.2rem)]">{title}</h1>
+        </Reveal>
+        {lead && (
+          <Reveal index={2}>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft text-pretty sm:text-xl">
+              {lead}
+            </p>
+          </Reveal>
+        )}
+        {children && (
+          <Reveal index={3}>
+            <div className="mt-8">{children}</div>
+          </Reveal>
+        )}
+      </Container>
     </section>
   );
 }

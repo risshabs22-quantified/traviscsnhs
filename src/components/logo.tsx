@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-/**
- * The mark is the favicon boiled down until it still reads at 22px:
- * a screen, two tiger ears, one prompt chevron.
- */
+/** Favicon boiled down to a screen, two tiger ears, one prompt chevron. */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg
@@ -28,7 +25,6 @@ export function LogoMark({ className }: { className?: string }) {
         strokeLinejoin="round"
       />
       <rect x="17" y="15.4" width="5.4" height="1.9" rx="0.95" fill="var(--color-orange)" />
-      {/* ears */}
       <path d="M9.4 7.6c-.6-2.1.2-3.5 1.6-3.9 1.4-.4 2.6.5 3 2.3z" fill="var(--color-ember)" />
       <path d="M22.6 7.6c.6-2.1-.2-3.5-1.6-3.9-1.4-.4-2.6.5-3 2.3z" fill="var(--color-ember)" />
     </svg>
@@ -38,27 +34,26 @@ export function LogoMark({ className }: { className?: string }) {
 export function Logo({
   className,
   href = "/",
+  compact = false,
 }: {
   className?: string;
   href?: string;
+  compact?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className={cn(
-        "group inline-flex items-center gap-2.5 rounded-full transition-opacity hover:opacity-85",
-        className,
-      )}
-      aria-label="Travis CSNHS — home"
+      className={cn("inline-flex items-center gap-2.5", className)}
+      aria-label="Travis CSNHS home"
     >
-      <LogoMark className="h-8 w-8 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-3 group-hover:scale-105" />
-      <span className="flex flex-col leading-none">
-        <span className="text-[0.95rem] font-bold tracking-[-0.02em] text-ink">
-          Travis CSNHS
-        </span>
-        <span className="mt-1 tag text-ink-soft">
-          Travis High School
-        </span>
+      <LogoMark className="h-8 w-8" />
+      <span
+        className={cn(
+          "font-extrabold tracking-[-0.04em] text-ink",
+          compact ? "hidden text-lg sm:inline" : "text-[1.35rem] leading-none",
+        )}
+      >
+        travis csnhs
       </span>
     </Link>
   );
