@@ -104,11 +104,10 @@ export function RouteProgress() {
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(value)}
-        className="h-full origin-left rounded-r-full bg-[linear-gradient(90deg,var(--color-crimson),var(--color-orange),var(--color-ember))]"
+        className="h-full origin-left rounded-r-full bg-orange"
         style={{
           width: `${value}%`,
           transition: phase === "done" ? "width 200ms ease-out" : "width 180ms linear",
-          boxShadow: "0 0 12px color-mix(in oklab, var(--color-orange) 60%, transparent)",
         }}
       />
     </div>

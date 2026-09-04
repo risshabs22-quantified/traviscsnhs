@@ -42,9 +42,10 @@ export const nav = [
 ] as const;
 
 export const hero = {
-  eyebrow: `Travis HS CSNHS / ${site.year}`,
+  /* Sentence case, not a label. The headline does the shouting. */
+  eyebrow: "The computer science honor society at Travis High School",
   headline: ["Code.", "Compete.", "Teach."],
-  sub: "The Computer Science National Honor Society at Travis High School. No prerequisites. Any grade. Any background, including none.",
+  sub: "No prerequisites. Any grade. Any background, including none.",
   primaryCta: { label: "Pay dues & join", href: links.dues, external: true },
   secondaryCta: { label: "See what we compete in", href: "/events" },
 } as const;

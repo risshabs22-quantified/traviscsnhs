@@ -44,16 +44,12 @@ export default function MembershipPage() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <div data-glow className="group card-surface relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
-                <span
-                  aria-hidden
-                  className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.38),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                />
-                <p className="relative font-mono text-[0.625rem] tracking-[0.2em] text-crimson uppercase">
+              <div className="group card relative h-full overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:">
+                <p className="tag text-crimson">
                   {req.label}
                 </p>
-                <p className="display relative mt-8 text-7xl">{req.value}</p>
-                <p className="relative mt-8 leading-relaxed text-ink-soft text-pretty">
+                <p className="display mt-8 text-7xl">{req.value}</p>
+                <p className="mt-8 leading-relaxed text-ink-soft text-pretty">
                   {req.body}
                 </p>
               </div>
@@ -98,8 +94,8 @@ export default function MembershipPage() {
           <ol className="space-y-4">
             {dues.howTo.map((step, i) => (
               <Reveal key={step} index={i} as="li">
-                <div className="card-surface flex gap-5 rounded-[22px] p-6">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-crimson font-mono text-xs font-bold text-cream">
+                <div className="card flex gap-5 rounded-[22px] p-6">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-crimson font-mono text-xs font-bold text-page">
                     {i + 1}
                   </span>
                   <p className="pt-1.5 leading-relaxed text-pretty">{step}</p>

@@ -29,7 +29,7 @@ Node 20 or newer.
 | Thing | What |
 | --- | --- |
 | Framework | Next.js 15, App Router, TypeScript |
-| Styling | Tailwind CSS v4, tokens defined in `src/app/globals.css` |
+| Styling | Tailwind CSS v4, tokens defined in `src/app/globals.css`. Flat colour only: no gradients, shadows, or blur anywhere. |
 | Motion | CSS animations for anything that affects content, Framer Motion for the nav pill, the mobile sheet, and the hero parallax |
 | Fonts | Plus Jakarta Sans and JetBrains Mono, self hosted through `next/font` |
 | Data | None. Every page is a static file. |

@@ -32,22 +32,22 @@ export function Competitions() {
           <Reveal key={comp.slug} index={i}>
             <Link
               href={`/events#${comp.slug}`}
-              data-glow
-              className="group card-surface relative flex h-full flex-col overflow-hidden rounded-[26px] p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-orange/50 hover:shadow-[var(--shadow-lift)]"
+             
+              className="group card relative flex h-full flex-col overflow-hidden rounded-[26px] p-7 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-orange hover:"
             >
               <span
                 aria-hidden
-                className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-[linear-gradient(90deg,var(--color-crimson),var(--color-orange))] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-orange transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
               />
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[0.6875rem] tracking-[0.2em] text-crimson">
+                <span className="tag text-crimson">
                   {comp.index}
                 </span>
-                <span className="rounded-full bg-sand/80 px-3 py-1 font-mono text-[0.625rem] tracking-[0.14em] text-ink-soft uppercase">
+                <span className="rounded-full bg-sand px-3 py-1 tag text-ink-soft">
                   {comp.format}
                 </span>
               </div>
-              <h3 className="mt-8 text-[1.4rem] leading-tight font-extrabold tracking-[-0.025em] text-balance">
+              <h3 className="mt-8 text-[1.4rem] leading-tight font-bold tracking-[-0.025em] text-balance">
                 {comp.name}
               </h3>
               <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">

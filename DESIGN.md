@@ -1,84 +1,81 @@
 # Design notes
 
-Brand direction: orange, red, tan, cream. Warm paper, not a white screen.
+Brand direction: orange, red, tan, cream. Structure and motion follow phantom.com.
 
-All tokens are defined once, in the `@theme` block at the top of `src/app/globals.css`. Tailwind generates the utilities from them, so `bg-crimson` and `text-ink-soft` are always the values below and nothing else.
+**The rule that governs everything here: every colour is flat.** No gradients, no blends, no `color-mix`, no shadows, no translucency, no grain, no backdrop blur. Depth comes from one solid surface sitting on another, and nothing else. If a value in this codebase is not a single hex, it is a bug.
+
+All tokens are defined once, in the `@theme` block at the top of `src/app/globals.css`.
 
 ---
 
 ## Colour tokens
 
-| Token | Hex | Used for | Contrast on cream |
-| --- | --- | --- | --- |
-| `cream` | `#FBF6EE` | Page background, text on dark surfaces | — |
-| `paper` | `#FFFDF8` | Cards, the nav pill once you scroll | — |
-| `sand` | `#F0E3D0` | Secondary surfaces, tags, icon circles | — |
-| `clay` | `#E4CDB2` | Hairlines and card borders | — |
-| `ember` | `#F2A03D` | Gradient blooms, hero orb, never text | 1.9:1 |
-| `orange` | `#E8752A` | Highlights, small accents, large numerals | 2.8:1 |
-| `rust` | `#B03A1E` | Button hover, the CTA band gradient | 5.7:1 |
-| `crimson` | `#8E2C1B` | Primary buttons, links, eyebrows, active nav | **7.7:1** |
-| `ink` | `#2A1710` | Body text and headlines | **13.2:1** |
-| `ink-soft` | `#6B5142` | Supporting paragraphs and labels | **6.7:1** |
+| Token | Hex | Used for |
+| --- | --- | --- |
+| `page` | `#FBF2E8` | The page. One flat warm tint, edge to edge. |
+| `paper` | `#FFFBF5` | Cards |
+| `sand` | `#F2E4D2` | Inner page headers, tags, icon circles, nav pill |
+| `clay` | `#E5D3BC` | Hairline borders |
+| `ember` | `#F2A03D` | Discs, the caret. Never text. |
+| `orange` | `#E8752A` | Discs, accent bars, the loader bar. Never text. |
+| `rust` | `#B03A1E` | Button hover, hairlines on crimson |
+| `crimson` | `#8E2C1B` | Primary buttons, links, the CTA band |
+| `ink` | `#241611` | Body text, and the hero stage fill |
+| `ink-mid` | `#3A241B` | The watermark inside the hero, one step off `ink` |
+| `ink-soft` | `#6B5142` | Supporting paragraphs and eyebrows |
+| `cream-soft` | `#D9C6B4` | Muted text on `ink` or `crimson` |
 
 ### Why the palette splits the way it does
 
-The obvious move with an orange brand is to make the buttons orange. That fails WCAG AA: cream text on `#E8752A` is only 3.0:1, and orange text on cream is 2.8:1. Both are below the 4.5:1 floor for normal text.
+The obvious move with an orange brand is orange buttons. That fails WCAG AA: `page` on `#E8752A` is 3.0:1 and orange on `page` is 2.8:1, both under the 4.5:1 floor.
 
-So the palette has a rule:
+So: **orange and ember never carry text.** They are discs in the hero, a 3px accent bar, the loader bar, a blinking caret. Anything you have to *read* sits on `crimson` or darker.
 
-**Orange and ember are never allowed to carry text.** They exist as light — gradient blooms, the hero orb, hover glows, the caret in the terminal chip, a 6px accent bar. Anything that has to be *read* uses `crimson` or darker.
-
-That keeps the site unmistakably orange while every string on it clears AA:
-
-- `ink` on `cream` — 13.2:1
-- `ink-soft` on `cream` — 6.7:1 (and 5.3:1 at the warmest point of the hero gradient, still AA)
-- `crimson` on `cream` — 7.7:1
-- `cream` on `crimson` — 7.7:1
-- `cream` on `rust` — 5.7:1, which is why the closing CTA band's gradient runs crimson → rust and stops there. The orange in that band is a blurred bloom behind the text, not underneath it.
-
-Body text is `#2A1710`, a warm brown-black, not `#000`. Pure black against a cream page reads as a printing error.
-
----
-
-## Surfaces
-
-The page background is not flat. It is a cream base with three soft radial washes layered on it: an ember bloom at the top right, a sand pool at the left, and a faint orange glow at the bottom. It is fixed, so it does not slide around while you scroll.
-
-On top of that sits a 5% SVG turbulence grain, multiplied. It is there to stop the large flat gradients from banding on cheap screens, and to make the whole thing read as paper.
-
-Cards are `paper` at 88% opacity with an 8px backdrop blur, so the page wash shows through faintly rather than being covered up.
-
----
-
-## Shape and depth
+Measured, and all passing:
 
 | | |
 | --- | --- |
-| Hero and page-header stage | 28px on mobile, up to 44px on desktop |
-| Cards | 26px |
-| Small cards and inner frames | 18-22px |
-| Buttons, tags, nav | fully rounded pills |
-| Icon buttons | circles |
+| `ink` on `page` | 15.8:1 |
+| `ink-soft` on `page` | 6.6:1 |
+| `crimson` on `page` | 7.5:1 |
+| `ink-soft` on `paper` | 7.1:1 |
+| `ink-soft` on `sand` | 5.8:1 |
+| `crimson` on `sand` | 6.7:1 |
+| `paper` on `ink` (hero headline) | 17.0:1 |
+| `cream-soft` on `ink` (hero eyebrow) | 10.6:1 |
+| `page` on `crimson` (band headline) | 7.5:1 |
+| `cream-soft` on `crimson` (band body) | 5.0:1 |
 
-Three shadow tokens, all warm-tinted (`rgb(42 23 16)`, never neutral grey) and all soft:
+Because every fill is flat, each of these numbers holds across the whole surface. That is the practical argument for dropping the gradients: a gradient only guarantees its contrast at one point along the ramp, so you end up designing for its worst end anyway.
 
-- `--shadow-soft` — resting cards
-- `--shadow-lift` — hover, and the hero stage
-- `--shadow-pill` — buttons
+Body text is `#241611`, a warm brown-black, not `#000`. Pure black on a warm page reads as a printing error.
 
-Borders are hairlines in `clay` at 55-70% opacity, and only where surface contrast alone is not enough.
+---
+
+## Layout
+
+Straight from Phantom's structure:
+
+- **Page**: one flat tint, full bleed, nothing layered on it.
+- **Hero**: a large rounded card inset from the page edges, filled with one flat dark colour, the type centred inside it. Eyebrow, headline, one pill button. No paragraph, no secondary link, no clutter.
+- **Sections below**: generous vertical padding, big left-aligned headline, an optional "see more" link pushed to the right of it.
+- **Rhythm**: full-width statement → 3-card row → 2-column split → 4-card row → officer grid → data strip → closing band.
+- **Closing band**: a rounded card filled flat crimson.
+- **Footer**: four low-contrast columns with a lot of space.
+
+Radii: 24px on mobile and 32px on desktop for the big stages, 26px for cards, pills for anything clickable, circles for icon buttons.
+
+Borders are 1px `clay` hairlines, used only where two surfaces are too close in value to separate on their own.
 
 ---
 
 ## Type
 
-- **Display and body:** Plus Jakarta Sans. Headlines run at weight 800 with `-0.035em` tracking and `0.94` line-height, which is what makes them read as a poster rather than a paragraph.
-- **Labels:** JetBrains Mono, uppercase, `0.22em` tracking, 11px. This is lifted straight from the interest-meeting deck, which used mono for every section label and slide number. It ties the site to the source material.
+- **Display and body:** Plus Jakarta Sans. Headlines at weight 700 with `-0.028em` tracking and `1.03` line-height. Weight 700, not 800 — Phantom's headlines are bold, not black, and the extra weight was part of what made the old version look overdone.
+- **Eyebrows:** plain sentence case, 16px, weight 500, `ink-soft`. Not mono, not uppercase, not letterspaced. A page covered in tracked-out mono labels is a tell, and Phantom uses none.
+- **Mono (JetBrains Mono):** kept for exactly one job, the `.tag` utility — index numbers, format tags, and short data labels. Nowhere else.
 
-Headlines are sized with `clamp()` against the viewport, so there are no font-size breakpoints to maintain. The hero is `clamp(3.1rem, 13vw, 8.5rem)`.
-
-`text-wrap: balance` on headlines, `text-wrap: pretty` on paragraphs.
+Headlines are sized with `clamp()` against the viewport, so there are no font-size breakpoints to maintain. The hero is `clamp(3rem, 11.5vw, 7.5rem)`.
 
 ---
 
@@ -90,33 +87,32 @@ Headlines are sized with `clamp()` against the viewport, so there are no font-si
 | Section headlines, word by word | 720ms, staggered 45ms | same |
 | Scroll reveal (blocks) | 460ms, staggered 60ms | same |
 | Route change | 420ms fade and rise | same |
-| Card hover lift | 300ms | same |
-| Card pointer glow fade | 400ms | same |
-| Button press | 200ms | same |
-| Hero gradient drift | 18-24s loop | ease-in-out |
-| Floating shapes | 9-13s loop, each offset | ease-in-out |
-| Hero scroll parallax | scroll-linked, no duration | linear in scroll |
+| Card hover lift | 280ms | same |
+| Button colour swap | 200ms | same |
+| Hero discs floating | 9-14s loops, each offset | ease-in-out |
+| Hero pointer parallax | spring, two depths | — |
 
-One easing curve for everything that responds to you, long slow loops for everything ambient, and one scroll-linked layer. That is the whole system.
+One easing curve for everything that responds to you, long slow loops for the ambient layer.
 
-Four pieces do most of the work:
+Three pieces do most of the work:
 
-- **Headlines arrive word by word.** Each word sits in its own clipped box and slides up from behind the edge, 45ms apart. The clip does the hiding, so the words never fade, they just appear from nowhere.
-- **The hero has depth on scroll.** As the stage leaves, the headline drifts up and dims while the ambient layer behind it moves the other way and scales up slightly. Two speeds, so the card reads as having a front and a back.
-- **Cards light up under the cursor.** One document-level pointer listener sets two CSS variables on whichever card you are over, and a warm radial highlight tracks the pointer inside it. It paints at `z-index: -1`, above the card background and below every bit of content, so it can never sit on top of text.
+- **Headlines arrive word by word.** Each word sits in its own clipped box and slides up from behind the edge, 45ms apart. The clip does the hiding, so words appear from nowhere rather than fading.
+- **The hero has a moving field.** Eight solid discs drift on their own timers, and under a mouse they split into two parallax depths against the watermark behind them. Flat circles, like Phantom's tokens — no glow, no blur, no shadow.
 - **Route changes are one gesture.** The loader bar fills across the top while the next page resolves, then the new page rises in over 420ms.
 
 Two rules hold it together:
 
-1. **Motion never hides content.** Reveals are gated behind a `js` class set by an inline script before first paint, and the hero uses `animation-fill-mode: backwards`. If the JavaScript never runs, the page is simply there.
-2. **`prefers-reduced-motion` stops all of it.** Gradient drift, floating shapes, parallax, reveals, and the skeleton shimmer all switch off, and nothing moves.
+1. **Motion never hides content.** Reveals are gated behind a `js` class set by an inline script before first paint, and the hero entrance uses `animation-fill-mode: backwards`. If the JavaScript never runs, the page is simply there.
+2. **`prefers-reduced-motion` stops all of it.** Floating discs, parallax, reveals, page transitions, and the skeleton sweep all switch off.
 
 ---
 
 ## The tiger
 
-The chapter mark is a tiger looking over a laptop, drawn as SVG at `src/app/icon.svg` (favicon) and `src/components/tiger.tsx` (the 404 and error screens).
+The chapter mark is a tiger looking over a laptop: `src/app/icon.svg` (favicon) and `src/components/tiger.tsx` (the 404 and error screens). Every fill is one flat palette colour.
 
-It is built from the palette: `ember → orange` fur, `crimson` inner ears and nose, `ink` stripes, `cream` muzzle, on a `rust → crimson` tile. The laptop screen is `ink` so the orange head has something dark to sit against, and the prompt chevron sits low enough to stay clear of the tiger's chin. Pointed ears, forehead stripes, cheek stripes, and whiskers are what keep it reading as a tiger and not a bear at 32px.
+`orange` fur, `crimson` inner ears and nose, `ink` stripes, `page` muzzle and whiskers, on a flat `crimson` tile. The laptop screen is `ink` so the orange head has something dark to sit against, and the prompt chevron sits low enough to clear the tiger's chin. Pointed ears, forehead stripes, cheek stripes, and whiskers are what keep it reading as a tiger rather than a bear at 32px.
 
-The header wordmark uses a reduced version of the same drawing: a screen, two ears, one chevron. Anything more detail than that turns to mush at 22px.
+An oversized, ear-and-head-only version of the same silhouette sits behind the hero headline in `ink-mid`, one step off the stage colour. That is the equivalent of Phantom's ghost watermark.
+
+The header wordmark uses a reduced version: a screen, two ears, one chevron. More detail than that turns to mush at 22px.

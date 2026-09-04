@@ -62,19 +62,19 @@ export default function AboutPage() {
           </div>
 
           <div>
-            <ul className="divide-y divide-clay/60 border-y border-clay/60">
+            <ul className="divide-y divide-clay border-y border-clay">
               {competitions.map((comp, i) => (
                 <Reveal key={comp.slug} index={i} as="li">
                   <div className="flex items-baseline justify-between gap-6 py-7">
                     <div>
-                      <p className="text-lg font-extrabold tracking-[-0.02em] sm:text-xl">
+                      <p className="text-lg font-bold tracking-[-0.02em] sm:text-xl">
                         {comp.name}
                       </p>
                       <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                         {comp.timing}
                       </p>
                     </div>
-                    <span className="shrink-0 rounded-full bg-sand/80 px-3 py-1 font-mono text-[0.625rem] tracking-[0.14em] text-ink-soft uppercase">
+                    <span className="shrink-0 rounded-full bg-sand px-3 py-1 tag text-ink-soft">
                       {comp.format}
                     </span>
                   </div>
@@ -100,8 +100,8 @@ export default function AboutPage() {
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {requirements.map((req, i) => (
             <Reveal key={req.label} index={i}>
-              <div className="card-surface h-full rounded-[26px] p-8">
-                <p className="font-mono text-[0.625rem] tracking-[0.2em] text-crimson uppercase">
+              <div className="card h-full rounded-[26px] p-8">
+                <p className="tag text-crimson">
                   {req.label}
                 </p>
                 <p className="display mt-6 text-6xl">{req.value}</p>

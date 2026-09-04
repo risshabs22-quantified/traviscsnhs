@@ -2,9 +2,8 @@ import { cn } from "@/lib/cn";
 
 /**
  * The chapter mascot. Pointed ears, forehead and cheek stripes, whiskers —
- * the things that actually make a cat read as a tiger rather than a bear.
- * Drawn once here and reused by the 404 and error screens; the favicon at
- * src/app/icon.svg is the same face, simplified for 16px.
+ * the things that make a cat read as a tiger rather than a bear. Every fill
+ * is one flat colour from the palette; there is no gradient in the drawing.
  */
 export function TigerFace({
   className,
@@ -22,32 +21,19 @@ export function TigerFace({
       aria-hidden="true"
       focusable="false"
     >
-      <defs>
-        <linearGradient id="tiger-fur" x1="0.2" y1="0" x2="0.8" y2="1">
-          <stop offset="0" stopColor="#F2A03D" />
-          <stop offset="1" stopColor="#E8752A" />
-        </linearGradient>
-      </defs>
-
       {/* ears */}
       <g strokeLinejoin="round" strokeWidth="6">
-        <path d="M34 50 26 18 58 34Z" fill="url(#tiger-fur)" stroke="#F2A03D" />
-        <path d="M94 50 102 18 70 34Z" fill="url(#tiger-fur)" stroke="#F2A03D" />
+        <path d="M34 50 26 18 58 34Z" fill="#E8752A" stroke="#E8752A" />
+        <path d="M94 50 102 18 70 34Z" fill="#E8752A" stroke="#E8752A" />
         <path d="M37 44 32 27 50 36Z" fill="#8E2C1B" stroke="#8E2C1B" strokeWidth="3" />
         <path d="M91 44 96 27 78 36Z" fill="#8E2C1B" stroke="#8E2C1B" strokeWidth="3" />
       </g>
 
       {/* head */}
-      <ellipse cx="64" cy="62" rx="36" ry="33" fill="url(#tiger-fur)" />
+      <ellipse cx="64" cy="62" rx="36" ry="33" fill="#E8752A" />
 
       {/* stripes */}
-      <g
-        stroke="#2A1710"
-        strokeWidth="4.2"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.92"
-      >
+      <g stroke="#241611" strokeWidth="4.2" strokeLinecap="round" fill="none">
         <path d="M55 31 53 45" />
         <path d="M64 28v15" />
         <path d="M73 31 75 45" />
@@ -58,21 +44,21 @@ export function TigerFace({
       </g>
 
       {/* muzzle */}
-      <ellipse cx="55" cy="80" rx="13" ry="9.5" fill="#FBF6EE" />
-      <ellipse cx="73" cy="80" rx="13" ry="9.5" fill="#FBF6EE" />
+      <ellipse cx="55" cy="80" rx="13" ry="9.5" fill="#FBF2E8" />
+      <ellipse cx="73" cy="80" rx="13" ry="9.5" fill="#FBF2E8" />
 
       {/* eyes */}
       {asleep ? (
-        <g stroke="#2A1710" strokeWidth="4.4" strokeLinecap="round" fill="none">
+        <g stroke="#241611" strokeWidth="4.4" strokeLinecap="round" fill="none">
           <path d="M46 58h11" />
           <path d="M71 58h11" />
         </g>
       ) : (
         <>
-          <ellipse cx="51.5" cy="58" rx="5" ry="5.6" fill="#2A1710" />
-          <ellipse cx="76.5" cy="58" rx="5" ry="5.6" fill="#2A1710" />
-          <circle cx="53.2" cy="56.1" r="1.8" fill="#FBF6EE" />
-          <circle cx="78.2" cy="56.1" r="1.8" fill="#FBF6EE" />
+          <ellipse cx="51.5" cy="58" rx="5" ry="5.6" fill="#241611" />
+          <ellipse cx="76.5" cy="58" rx="5" ry="5.6" fill="#241611" />
+          <circle cx="53.2" cy="56.1" r="1.8" fill="#FBF2E8" />
+          <circle cx="78.2" cy="56.1" r="1.8" fill="#FBF2E8" />
         </>
       )}
 
@@ -85,7 +71,7 @@ export function TigerFace({
       </g>
 
       {/* whiskers */}
-      <g stroke="#FBF6EE" strokeWidth="2.4" strokeLinecap="round" opacity="0.85">
+      <g stroke="#FBF2E8" strokeWidth="2.4" strokeLinecap="round">
         <path d="M40 76 20 71" />
         <path d="M40 81 19 82" />
         <path d="M88 76 108 71" />

@@ -63,24 +63,20 @@ export default function ContactPage() {
             const external = !channel.href.startsWith("mailto:");
             return (
               <Reveal key={channel.label} index={i}>
-                <article data-glow className="group card-surface relative flex h-full flex-col overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-lift)]">
-                  <span
-                    aria-hidden
-                    className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(242,160,61,0.35),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  />
-                  <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson transition-colors duration-300 group-hover:bg-crimson group-hover:text-cream">
+                <article className="group card relative flex h-full flex-col overflow-hidden rounded-[26px] p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson transition-colors duration-300 group-hover:bg-crimson group-hover:text-page">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <p className="relative mt-8 font-mono text-[0.625rem] tracking-[0.2em] text-ink-soft uppercase">
+                  <p className="mt-8 tag text-ink-soft">
                     {channel.label}
                   </p>
-                  <p className="relative mt-2 text-xl font-extrabold tracking-[-0.025em] break-words">
+                  <p className="mt-2 text-xl font-bold tracking-[-0.025em] break-words">
                     {channel.value}
                   </p>
-                  <p className="relative mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
+                  <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-ink-soft text-pretty">
                     {channel.body}
                   </p>
-                  <div className="relative mt-8">
+                  <div className="mt-8">
                     <Button href={channel.href} external={external} variant="secondary">
                       {channel.cta}
                       {external && <ExternalIcon className="h-4 w-4 opacity-70" />}
@@ -95,11 +91,11 @@ export default function ContactPage() {
         {/* TODO: confirm with officers — chapter email, sponsor name, meeting room and day. */}
         <Reveal>
           <div className="mt-16 grid gap-5 lg:grid-cols-2">
-            <div className="card-surface rounded-[26px] p-9">
+            <div className="card rounded-[26px] p-9">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sand text-crimson">
                 <CardIcon className="h-5 w-5" />
               </span>
-              <h2 className="mt-7 text-2xl font-extrabold tracking-[-0.025em]">
+              <h2 className="mt-7 text-2xl font-bold tracking-[-0.025em]">
                 Paying dues
               </h2>
               <p className="mt-4 leading-relaxed text-ink-soft text-pretty">
@@ -114,8 +110,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="rounded-[26px] bg-sand/60 p-9">
-              <h2 className="text-2xl font-extrabold tracking-[-0.025em]">
+            <div className="rounded-[26px] bg-sand p-9">
+              <h2 className="text-2xl font-bold tracking-[-0.025em]">
                 Where we meet
               </h2>
               <p className="mt-4 leading-relaxed text-ink-soft text-pretty">
@@ -123,7 +119,7 @@ export default function ContactPage() {
                 year. Days and times are posted on Instagram and Remind before each
                 meeting.
               </p>
-              <p className="mt-6 font-mono text-[0.6875rem] tracking-[0.16em] text-ink-soft uppercase">
+              <p className="mt-6 tag text-ink-soft">
                 Travis High School / Fort Bend ISD
               </p>
               <div className="mt-8">

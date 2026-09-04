@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { RouteProgress } from "@/components/route-progress";
 import { RevealObserver } from "@/components/reveal-observer";
-import { PointerGlow } from "@/components/pointer-glow";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -57,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FBF6EE",
+  themeColor: "#FBF2E8",
   colorScheme: "light",
 };
 
@@ -85,11 +84,8 @@ export default function RootLayout({
             __html: "document.documentElement.classList.add('js')",
           }}
         />
-        <div className="page-wash" aria-hidden />
-        <div className="grain" aria-hidden />
         <RouteProgress />
         <RevealObserver />
-        <PointerGlow />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
