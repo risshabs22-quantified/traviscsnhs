@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Crumbs } from "@/components/crumbs";
 import { Box, BoxGrid } from "@/components/box";
 import { competitions, nav } from "@/lib/content";
-import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, seoPages, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/site");
 
@@ -28,11 +28,11 @@ export default function SiteMapPage() {
 
       <BoxGrid>
         <Box href="/" title="Home">
-          <p>Welcome, contests, membership, officers.</p>
+          <p>{seoPages.find((page) => page.path === "/")?.description}</p>
         </Box>
         {nav.map((item) => (
           <Box key={item.href} href={item.href} title={item.label}>
-            <p>{item.href}</p>
+            <p>{seoPages.find((page) => page.path === item.href)?.description ?? item.href}</p>
           </Box>
         ))}
         {competitions.map((comp) => (

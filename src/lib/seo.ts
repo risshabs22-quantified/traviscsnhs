@@ -21,6 +21,8 @@ export function absoluteUrl(path: string) {
   return `${site.url}${path}`;
 }
 
+export type SeoImage = { src: string; alt: string };
+
 export type SeoPage = {
   path: string;
   title: string;
@@ -29,7 +31,7 @@ export type SeoPage = {
   absoluteTitle?: boolean;
   changeFrequency: NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
   priority: number;
-  images?: string[];
+  images?: SeoImage[];
 };
 
 export const seoPages: SeoPage[] = [
@@ -40,7 +42,12 @@ export const seoPages: SeoPage[] = [
     absoluteTitle: true,
     changeFrequency: "weekly",
     priority: 1,
-    images: ["/media/lab-night.jpg", "/media/code-jam.jpg", "/media/shirt.jpg"],
+    images: [
+      { src: "/media/lab-night.jpg", alt: "A darkened computer lab with monitors glowing warm orange" },
+      { src: "/media/code-jam.jpg", alt: "Students in the lab during a coding contest, seen from the back of the room" },
+      { src: "/media/shirt.jpg", alt: "Blue CSNHS 2025-2026 club t-shirt with a computer drawing" },
+      { src: "/media/ths-tiger.png", alt: "Official Travis High School Tigers logo" },
+    ],
   },
   {
     path: "/about",
@@ -49,7 +56,9 @@ export const seoPages: SeoPage[] = [
       "The Computer Science National Honor Society chapter at Travis High School in Richmond, Texas. Student-run. Open to any grade, no prerequisites.",
     changeFrequency: "monthly",
     priority: 0.8,
-    images: ["/media/tutor.jpg"],
+    images: [
+      { src: "/media/tutor.jpg", alt: "Two students at one computer during a tutoring session" },
+    ],
   },
   {
     path: "/membership",
@@ -58,16 +67,21 @@ export const seoPages: SeoPage[] = [
       "Join Travis CSNHS for $20 a year. No prerequisites, three meetings a semester, one competition. Dues go through the Fort Bend ISD RevTrak store.",
     changeFrequency: "monthly",
     priority: 0.9,
-    images: ["/media/shirt.jpg"],
+    images: [
+      { src: "/media/shirt.jpg", alt: "Blue CSNHS 2025-2026 club t-shirt with a computer drawing" },
+      { src: "/media/ths-tiger.png", alt: "Official Travis High School Tigers logo" },
+    ],
   },
   {
     path: "/events",
     title: "Events",
     description:
-      "USACO, UIL Computer Science, the Congressional App Challenge, and Club Code Jam at Travis CSNHS. What each one is and when it runs.",
+      "USACO, UIL Computer Science, the Congressional App Challenge, and Club Code Jam at Travis CSNHS. More incoming soon. Computer science EC directory incoming.",
     changeFrequency: "weekly",
     priority: 0.8,
-    images: ["/media/code-jam.jpg"],
+    images: [
+      { src: "/media/code-jam.jpg", alt: "Students in the lab during a coding contest, seen from the back of the room" },
+    ],
   },
   {
     path: "/officers",
@@ -102,6 +116,10 @@ export function pageMetadata(path: string): Metadata {
   if (!page) return {};
   const url = absoluteUrl(page.path);
   const ogTitle = page.absoluteTitle ? page.title : `${page.title} | ${site.name}`;
+  const images = page.images?.map((img) => ({
+    url: absoluteUrl(img.src),
+    alt: img.alt,
+  }));
   return {
     title: page.absoluteTitle ? { absolute: page.title } : page.title,
     description: page.description,
@@ -113,11 +131,13 @@ export function pageMetadata(path: string): Metadata {
       locale: "en_US",
       title: ogTitle,
       description: page.description,
+      ...(images ? { images } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description: page.description,
+      ...(images ? { images: images.map((img) => img.url) } : {}),
     },
   };
 }
@@ -158,7 +178,7 @@ export function sitemapEntries(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
-    images: page.images?.map((src) => absoluteUrl(src)),
+    images: page.images?.map((img) => absoluteUrl(img.src)),
   }));
 
   const contests: MetadataRoute.Sitemap = competitions.map((comp) => ({
@@ -186,7 +206,8 @@ export function organizationJsonLd() {
     description: site.description,
     email: links.email,
     sameAs: [links.instagram],
-    image: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl("/media/ths-tiger.png"),
+    image: [absoluteUrl("/icon.svg"), absoluteUrl("/media/ths-tiger.png")],
     address: {
       "@type": "PostalAddress",
       streetAddress: school.street,
@@ -235,6 +256,7 @@ export function webPageJsonLd(path: string) {
   const page = seoPages.find((p) => p.path === path);
   if (!page) return null;
   const url = absoluteUrl(page.path);
+  const primary = page.images?.[0];
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -245,6 +267,33 @@ export function webPageJsonLd(path: string) {
     inLanguage: "en-US",
     isPartOf: { "@id": siteId },
     about: { "@id": orgId },
+    ...(primary
+      ? {
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: absoluteUrl(primary.src),
+            caption: primary.alt,
+          },
+        }
+      : {}),
+  };
+}
+
+export function eventsListJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Travis CSNHS competitions",
+    description:
+      "USACO, UIL Computer Science, the Congressional App Challenge, and Club Code Jam. More incoming soon. Computer science EC directory incoming.",
+    numberOfItems: competitions.length,
+    itemListElement: competitions.map((comp, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: comp.name,
+      url: absoluteUrl(`/events/${comp.slug}`),
+      image: absoluteUrl(comp.image),
+    })),
   };
 }
 
