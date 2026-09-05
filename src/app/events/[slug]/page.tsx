@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
+import { Crumbs } from "@/components/crumbs";
+import { Box, BoxGrid } from "@/components/box";
 import { competitions, getCompetition, links } from "@/lib/content";
 import { breadcrumbJsonLd, contestJsonLd, contestMetadata } from "@/lib/seo";
 
@@ -31,7 +31,7 @@ export default async function ContestPage({ params }: { params: Promise<Params> 
   if (!comp) notFound();
 
   return (
-    <section className="main-content">
+    <div className="main-content">
       <JsonLd data={contestJsonLd(comp)} />
       <JsonLd
         data={breadcrumbJsonLd([
@@ -40,47 +40,41 @@ export default async function ContestPage({ params }: { params: Promise<Params> 
           { name: comp.name, path: `/events/${comp.slug}` },
         ])}
       />
-
-      <p>
-        <Link href="/events">All contests</Link>
-      </p>
-
-      <h3>{comp.name}</h3>
-      <p>
-        {comp.format}. {comp.timing}.
-      </p>
-      <Image
-        src={comp.image}
-        alt={comp.imageAlt}
-        width={1600}
-        height={900}
-        className="prose-img"
-        priority
+      <Crumbs
+        items={[
+          { href: "/", label: "Home" },
+          { href: "/events", label: "Events" },
+          { href: `/events/${comp.slug}`, label: comp.name },
+        ]}
       />
-      {comp.body.map((para) => (
-        <p key={para}>{para}</p>
-      ))}
 
-      <h4>Details</h4>
-      <ul>
+      <BoxGrid cols={2}>
+        <Box image={comp.image} alt={comp.imageAlt} title={comp.name} priority>
+          <p>
+            {comp.format}. {comp.timing}.
+          </p>
+        </Box>
+        <Box title="About">
+          <p>{comp.body.join(" ")}</p>
+        </Box>
+      </BoxGrid>
+
+      <h2 className="section-label">Details</h2>
+      <BoxGrid>
         {comp.rows.map((row) => (
-          <li key={row.label}>
-            <strong>{row.label}.</strong> {row.value}
-          </li>
+          <Box key={row.label} title={row.label}>
+            <p>{row.value}</p>
+          </Box>
         ))}
-      </ul>
-      {comp.href && (
-        <p>
-          <a href={comp.href} target="_blank" rel="noreferrer noopener">
-            Official site
-          </a>
-        </p>
-      )}
-      <p>
-        <a href={links.dues} target="_blank" rel="noreferrer noopener">
-          Pay dues
-        </a>
-      </p>
-    </section>
+        {comp.href && (
+          <Box href={comp.href} external title="Official site">
+            <p>Open the contest site.</p>
+          </Box>
+        )}
+        <Box href={links.dues} external title="Pay dues">
+          <p>RevTrak, Travis High School, Computer Science NHS.</p>
+        </Box>
+      </BoxGrid>
+    </div>
   );
 }

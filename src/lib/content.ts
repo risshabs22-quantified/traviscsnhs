@@ -245,7 +245,7 @@ export const dues = {
   amount: "$20",
   cadence: "Per member, per year",
   image: "/media/shirt.jpg",
-  imageAlt: "A folded cream t-shirt with a small orange tiger mark",
+  imageAlt: "Blue CSNHS 2025-2026 club t-shirt with a computer drawing",
   includes: [
     { label: "National membership fee", value: "Included" },
     { label: "Club t-shirt", value: "Included" },

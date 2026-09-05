@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${openSans.variable} ${mono.variable}`}>
       <body>
-        <a href="#main" className="sr-only focus:not-sr-only">
+        <a href="#main" className="skip">
           Skip to content
         </a>
         <PageBanner />

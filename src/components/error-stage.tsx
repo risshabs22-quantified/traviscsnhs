@@ -15,42 +15,40 @@ export function ErrorStage({
   body: string;
   children?: ReactNode;
   detail?: ReactNode;
-  image?: string;
-  imageAlt?: string;
 }) {
   return (
-    <section className="main-content">
-      <h3>{kicker}</h3>
+    <div>
+      <h2 className="section-label">{kicker}</h2>
       <p
         style={{
-          fontSize: "clamp(3rem, 10vw, 5.5rem)",
+          fontSize: "clamp(2.4rem, 8vw, 4.2rem)",
           lineHeight: 1,
           fontWeight: 700,
           color: "var(--color-crimson)",
-          margin: "0 0 0.5rem",
+          margin: "0 0 0.4rem",
         }}
       >
         {code}
       </p>
-      <h4>{title}</h4>
-      <p>{body}</p>
+      <p style={{ fontWeight: 700, color: "var(--color-ink)", margin: "0 0 0.4rem" }}>{title}</p>
+      <p className="lead">{body}</p>
       {children}
       {detail}
       <div
-        style={{
-          maxWidth: "16rem",
-          marginTop: "2rem",
-          background: "var(--color-ink)",
-          padding: "1.5rem",
-          borderRadius: "0.75rem",
-        }}
+        className="box"
+        style={{ maxWidth: "14rem", background: "var(--color-ink)", marginBottom: "1rem" }}
       >
-        <TigerFace asleep className="mx-auto max-w-[11rem]" />
-        <p className="tag" style={{ textAlign: "center", color: "var(--color-cream-soft)", margin: "1rem 0 0" }}>
-          exit code {code}
-          <span className="animate-caret ml-1 inline-block h-[0.9em] w-[0.42em] translate-y-[0.1em] bg-ember align-middle" />
-        </p>
+        <div style={{ padding: "1rem" }}>
+          <TigerFace asleep className="mx-auto max-w-[9rem]" />
+          <p
+            className="tag"
+            style={{ textAlign: "center", color: "var(--color-cream-soft)", margin: "0.75rem 0 0" }}
+          >
+            exit code {code}
+            <span className="animate-caret ml-1 inline-block h-[0.9em] w-[0.42em] translate-y-[0.1em] bg-ember align-middle" />
+          </p>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ErrorStage } from "@/components/error-stage";
+import { Box, BoxGrid } from "@/components/box";
 import { nav } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -11,27 +11,23 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <ErrorStage
-      code="404"
-      kicker="Page not found"
-      title="Nothing at this address."
-      body="The link is broken, or the page moved. Everything the chapter publishes is listed below."
-      detail={
-        <p>
-          {nav.map((item, i) => (
-            <span key={item.href}>
-              {i > 0 ? " · " : null}
-              <Link href={item.href}>{item.label}</Link>
-            </span>
-          ))}
-        </p>
-      }
-    >
-      <p>
-        <Link href="/">Back to home</Link>
-        {" · "}
-        <Link href="/membership">How to join</Link>
-      </p>
-    </ErrorStage>
+    <div className="main-content">
+      <ErrorStage
+        code="404"
+        kicker="Page not found"
+        title="Nothing at this address."
+        body="The link is broken, or the page moved."
+      />
+      <BoxGrid>
+        <Box href="/" title="Home">
+          <p>Start here.</p>
+        </Box>
+        {nav.map((item) => (
+          <Box key={item.href} href={item.href} title={item.label}>
+            <p>{item.href}</p>
+          </Box>
+        ))}
+      </BoxGrid>
+    </div>
   );
 }
