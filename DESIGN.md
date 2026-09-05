@@ -1,8 +1,8 @@
 # Design notes
 
-Brand direction: orange, red, tan, cream. Page structure follows crumblcookies.com (centered logo, promo carousel, oversized alternating rows). Content and colour stay Travis CSNHS.
+Brand direction: orange, red, tan, cream. Page structure follows tjmachinelearning.com (dark banner, centered underline nav, single reading column). Content and colour stay Travis CSNHS.
 
-**The rule that governs everything here: every colour is flat.** No gradients, no blends, no `color-mix`, no shadows, no translucency, no grain overlays, no backdrop blur. Depth comes from one solid surface sitting on another. If a value in this codebase is not a single hex, it is a bug.
+**The rule that governs everything here: every colour is flat.** No gradients, no blends, no `color-mix`, no shadows, no translucency. If a value in this codebase is not a single hex, it is a bug.
 
 All tokens are defined once, in the `@theme` block at the top of `src/app/globals.css`.
 
@@ -10,67 +10,29 @@ All tokens are defined once, in the `@theme` block at the top of `src/app/global
 
 | Token | Hex | Used for |
 | --- | --- | --- |
-| `page` | `#FBF2E8` | The page. One flat warm tint, edge to edge. |
-| `paper` | `#FFFBF5` | Footer, quiet surfaces |
-| `sand` | `#F2E4D2` | Badges, photo wells, quiet fills |
+| `page` | `#FBF2E8` | The page |
+| `paper` | `#FFFBF5` | Quiet surfaces |
+| `sand` | `#F2E4D2` | Empty officer frames |
 | `clay` | `#E5D3BC` | Hairline borders |
-| `ember` | `#F2A03D` | Badge fill on dark, caret. Never text. |
-| `orange` | `#E8752A` | Active carousel dot. Never text. |
-| `rust` | `#B03A1E` | Button hover |
-| `crimson` | `#8E2C1B` | Primary buttons, links |
-| `ink` | `#241611` | Body text, carousel band |
-| `ink-mid` | `#3A241B` | Inactive carousel dots |
-| `ink-soft` | `#6B5142` | Supporting paragraphs |
-| `cream-soft` | `#D9C6B4` | Muted text on `ink` |
-
-Orange and ember never carry text. Anything you have to read sits on crimson or darker, or ink on a pale fill.
-
-Measured, and all passing:
-
-| Pair | Contrast |
-| --- | --- |
-| `ink` on `page` | 15.8:1 |
-| `ink-soft` on `page` | 6.6:1 |
-| `crimson` on `page` | 7.5:1 |
-| `page` on `ink` | 17.0:1 |
-| `cream-soft` on `ink` | 10.6:1 |
-| `page` on `crimson` | 7.5:1 |
-
-Body text is `#241611`, a warm brown-black, not `#000`.
+| `ember` | `#F2A03D` | Caret. Never text. |
+| `orange` | `#E8752A` | Accents in photos. Never text. |
+| `rust` | `#B03A1E` | Hover on filled controls |
+| `crimson` | `#8E2C1B` | Links, section headings, current nav |
+| `ink` | `#241611` | Banner, footer, strong text |
+| `ink-mid` | `#3A241B` | Banner button fill |
+| `ink-soft` | `#6B5142` | Body text |
+| `cream-soft` | `#D9C6B4` | Tagline on ink |
 
 ## Layout
 
-Straight from Crumbl's structure, restated in this palette:
+Straight from TJ Machine Learning's structure:
 
-- **Header:** sticky, full width, cream. Menu on the left, wordmark centered, Join on the right. Links live in a left drawer, not a pill nav.
-- **Home hero:** full-bleed photo carousel. Copy sits in a solid ink card on the image, not in a translucent overlay.
-- **Section intro:** a small sand badge, then a very large left-aligned headline, then one sentence.
-- **Spotlight rows:** a catalog photo beside the name, one paragraph, and a link. Rows alternate left and right, separated by a hairline.
-- **Inner pages:** optional full-width photo, then badge + huge title + one lead sentence.
-- **Contest profiles:** `/events/[slug]`. Photo on one side, facts on the other, the way Crumbl does a flavor page.
-- **Footer:** four link columns plus the mark.
-- **404 / 500:** empty-lab photo on 404, tiger in a terminal, huge status code.
-
-Buttons are pills. Contest rows are a photo plus type, divided by a clay hairline. No drop shadows.
+- **Banner:** full-width ink block, centered club name, tagline, one outline button.
+- **Nav:** centered row of links under the banner. Current page is crimson with a 2px underline. Hamburger overlay on small screens.
+- **Main:** one reading column, max 64rem, GitHub-pages style headings and paragraphs.
+- **Officers:** small round photo, then name and role on one row.
+- **Footer:** ink bar, mark, school address, socials.
 
 ## Type
 
-- **Display and body:** Plus Jakarta Sans. Headlines at weight 700 with `-0.03em` tracking and `1.05` line-height.
-- **Badges:** sentence case, 13px, weight 600, sand fill. Not mono, not uppercase, not letterspaced.
-- **Mono (JetBrains Mono):** kept for the `.tag` utility on the 404 terminal and nowhere else.
-
-Headlines are sized with `clamp()` against the viewport.
-
-## Motion
-
-Pages swap with no entrance animation. Menu links are already on screen when the drawer opens. The home carousel is the only moving piece, and it pauses when `prefers-reduced-motion` is set.
-
-## The tiger
-
-The chapter mark is a tiger looking over a laptop: `src/app/icon.svg` (favicon) and `src/components/tiger.tsx` (the 404 and error screens). Every fill is one flat palette colour.
-
-The header wordmark uses a reduced version: a screen, two ears, one chevron.
-
-## Photos
-
-Catalog stills and lab photos live in `public/media/`. Officer portraits live in `public/officers/`. Generated people are never used as named officers. An officer with no photo gets an empty sand frame.
+Open Sans, weight 400 for body and 700 for the banner name and nav. Section headings are crimson and regular weight, the way TJ does it.

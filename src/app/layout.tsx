@@ -1,17 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
+import { JetBrains_Mono, Open_Sans } from "next/font/google";
+import { PageBanner } from "@/components/page-banner";
+import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { JsonLd } from "@/components/json-ld";
 import { site } from "@/lib/content";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
+const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-open",
+  weight: ["400", "700"],
 });
 
 const mono = JetBrains_Mono({
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FBF2E8",
+  themeColor: "#241611",
   colorScheme: "light",
 };
 
@@ -74,9 +75,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${mono.variable}`}>
+    <html lang="en" className={`${openSans.variable} ${mono.variable}`}>
       <body>
-        <SiteHeader />
+        <a href="#main" className="sr-only focus:not-sr-only">
+          Skip to content
+        </a>
+        <PageBanner />
+        <SiteNav />
         <main id="main">{children}</main>
         <SiteFooter />
         <JsonLd data={organizationJsonLd()} />

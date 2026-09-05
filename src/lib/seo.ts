@@ -40,7 +40,7 @@ export const seoPages: SeoPage[] = [
     absoluteTitle: true,
     changeFrequency: "weekly",
     priority: 1,
-    images: ["/media/hero-join.jpg", "/media/hero-contest.jpg", "/media/shirt.jpg"],
+    images: ["/media/lab-night.jpg", "/media/code-jam.jpg", "/media/shirt.jpg"],
   },
   {
     path: "/about",
@@ -49,7 +49,7 @@ export const seoPages: SeoPage[] = [
       "The Computer Science National Honor Society chapter at Travis High School in Richmond, Texas. Student-run. Open to any grade, no prerequisites.",
     changeFrequency: "monthly",
     priority: 0.8,
-    images: ["/media/hero-join.jpg"],
+    images: ["/media/tutor.jpg"],
   },
   {
     path: "/membership",
@@ -67,7 +67,7 @@ export const seoPages: SeoPage[] = [
       "USACO, UIL Computer Science, the Congressional App Challenge, and Club Code Jam at Travis CSNHS. What each one is and when it runs.",
     changeFrequency: "weekly",
     priority: 0.8,
-    images: ["/media/hero-contest.jpg"],
+    images: ["/media/code-jam.jpg"],
   },
   {
     path: "/officers",
