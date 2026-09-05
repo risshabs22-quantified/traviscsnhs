@@ -1,46 +1,75 @@
 @import "tailwindcss";
 
-/* Tokens. Full rationale in DESIGN.md.
-   Every value is a flat colour. No gradients, blends, colour-mix, shadows,
-   or translucency. Depth is one flat surface sitting on another. */
-
 @theme {
   --color-page: #fbf2e8;
   --color-paper: #fffbf5;
   --color-sand: #f2e4d2;
   --color-clay: #e5d3bc;
-
   --color-ember: #f2a03d;
   --color-orange: #e8752a;
   --color-rust: #b03a1e;
   --color-crimson: #8e2c1b;
-
   --color-ink: #241611;
   --color-ink-mid: #3a241b;
   --color-ink-soft: #6b5142;
   --color-cream: #fbf2e8;
   --color-cream-soft: #d9c6b4;
-
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-open), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 * {
+  box-sizing: border-box;
   border-color: var(--color-clay);
 }
 
 html {
-  scroll-padding-top: 5.5rem;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: var(--color-page);
-  color: var(--color-ink);
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-ink-soft);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+}
+
+a {
+  color: var(--color-crimson);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only:focus,
+.sr-only:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }
 
 ::selection {
@@ -48,33 +77,216 @@ body {
   color: var(--color-ink);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-crimson);
-  outline-offset: 3px;
-  border-radius: 4px;
+.page-header {
+  text-align: center;
+  color: var(--color-page);
+  background-color: var(--color-ink);
+  padding: 2rem 1rem;
+}
+@media (min-width: 42em) {
+  .page-header {
+    padding: 3rem 4rem;
+  }
+}
+@media (min-width: 64em) {
+  .page-header {
+    padding: 5rem 6rem;
+  }
 }
 
-.display {
+.project-name {
+  margin: 0;
   font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  text-wrap: balance;
+  letter-spacing: -0.02em;
+  color: var(--color-page);
+  font-size: 1.75rem;
+}
+@media (min-width: 42em) {
+  .project-name {
+    font-size: 2.25rem;
+  }
+}
+@media (min-width: 64em) {
+  .project-name {
+    font-size: 3.25rem;
+  }
 }
 
-.badge {
+.project-tagline {
+  margin: 0.35rem 0 2rem;
+  font-weight: 400;
+  color: var(--color-cream-soft);
+  font-size: 1rem;
+}
+@media (min-width: 42em) {
+  .project-tagline {
+    font-size: 1.15rem;
+  }
+}
+@media (min-width: 64em) {
+  .project-tagline {
+    font-size: 1.25rem;
+  }
+}
+
+.btn {
   display: inline-block;
-  border-radius: 6px;
-  background-color: var(--color-sand);
-  padding: 0.15rem 0.6rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--color-ink);
+  margin-bottom: 0;
+  padding: 0.75rem 1rem;
+  color: var(--color-page);
+  background: var(--color-ink-mid);
+  border: 1px solid var(--color-cream-soft);
+  border-radius: 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.btn:hover {
+  color: var(--color-page);
+  background: var(--color-ink);
+  text-decoration: none;
 }
 
-.badge-dark {
-  background-color: var(--color-orange);
+.site-nav {
+  border-bottom: 1px solid var(--color-clay);
+  background: var(--color-page);
+}
+
+.menu-list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  max-width: 64rem;
+}
+
+.menu-link {
+  display: block;
+  min-width: 6.5rem;
+  padding: 1em 0.75em;
+  text-align: center;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+}
+.menu-link:hover {
   color: var(--color-ink);
+  text-decoration: none;
+}
+.menu-link[aria-current="page"] {
+  color: var(--color-crimson);
+  border-bottom: 2px solid var(--color-crimson);
+}
+
+.main-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-size: 1rem;
+}
+@media (min-width: 42em) {
+  .main-content {
+    padding: 2rem 4rem;
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 64em) {
+  .main-content {
+    padding: 2rem 6rem;
+  }
+}
+
+.main-content h3 {
+  margin: 2rem 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--color-crimson);
+}
+.main-content h3:first-child {
+  margin-top: 0;
+}
+.main-content h4 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.main-content p,
+.main-content ul,
+.main-content ol {
+  margin: 0 0 1em;
+}
+.main-content li {
+  margin-bottom: 0.35em;
+}
+
+.prose-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.officer-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0 0 1.25rem;
+}
+.officer-row img,
+.officer-fallback {
+  width: 5em;
+  height: 5em;
+  border-radius: 999px;
+  object-fit: cover;
+  background: var(--color-sand);
+  flex-shrink: 0;
+}
+
+.site-footer {
+  margin-top: 2rem;
+  padding: 2rem 1rem 1.3rem;
+  background: var(--color-ink);
+  color: var(--color-cream-soft);
+}
+.site-footer a {
+  color: var(--color-page);
+}
+.site-footer .main-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--color-page);
+  text-align: center;
+}
+.overlay nav {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+}
+.overlay ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.overlay a {
+  display: block;
+  padding: 0.55rem 1rem;
+  font-weight: 400;
+  color: var(--color-ink);
+}
+.overlay a[aria-current="page"] {
+  color: var(--color-crimson);
 }
 
 .tag {
@@ -94,7 +306,6 @@ body {
     opacity: 0;
   }
 }
-
 .animate-caret {
   animation: caret 1.15s steps(1) infinite;
 }

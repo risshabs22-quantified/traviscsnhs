@@ -153,7 +153,7 @@ export const competitions: Competition[] = [
     timing: "Four contest windows across the year",
     figure: { value: "4", caption: "contest windows a year. Solo, three problems, four hours." },
     image: "/media/usaco.jpg",
-    imageAlt: "A laptop floating above a burnt-red square",
+    imageAlt: "A laptop on a wooden desk with a warm cream editor on the screen",
   },
   {
     slug: "uil",
@@ -173,7 +173,7 @@ export const competitions: Competition[] = [
     timing: "Spring meet season, district first",
     figure: { value: "3 to 4", caption: "students per team. Java only, district to state." },
     image: "/media/uil.jpg",
-    imageAlt: "Composition notebooks, a pencil, and a closed laptop on a dark square",
+    imageAlt: "Four students working a programming problem around one table",
   },
   {
     slug: "app-challenge",
@@ -193,7 +193,7 @@ export const competitions: Competition[] = [
     timing: "Submissions close in November",
     figure: { value: "Nov", caption: "submissions close. Teams of one to four, any platform." },
     image: "/media/app-challenge.jpg",
-    imageAlt: "A phone floating above an orange square",
+    imageAlt: "A hand holding a phone with a simple cream and red app on the screen",
   },
   {
     slug: "code-jam",
@@ -213,7 +213,7 @@ export const competitions: Competition[] = [
     timing: "Once in the fall, once in the spring",
     figure: { value: "2", caption: "divisions, beginner and open. Written by the officers." },
     image: "/media/code-jam.jpg",
-    imageAlt: "A laptop, blank problem sheets, pretzels, and an orange soda on a tan square",
+    imageAlt: "Students in the lab during a coding contest, seen from the back of the room",
   },
 ];
 
@@ -245,7 +245,7 @@ export const dues = {
   amount: "$20",
   cadence: "Per member, per year",
   image: "/media/shirt.jpg",
-  imageAlt: "A folded cream t-shirt with a small tiger mark, floating above a burnt-red square",
+  imageAlt: "A folded cream t-shirt with a small orange tiger mark",
   includes: [
     { label: "National membership fee", value: "Included" },
     { label: "Club t-shirt", value: "Included" },
