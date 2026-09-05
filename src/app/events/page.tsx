@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import { Crumbs } from "@/components/crumbs";
 import { Box, BoxGrid } from "@/components/box";
-import { competitions, schedule } from "@/lib/content";
+import { competitions, eventsIncoming, schedule } from "@/lib/content";
 import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/events");
@@ -25,7 +25,8 @@ export default function EventsPage() {
       />
 
       <p className="lead">
-        Four competitions. Solo, team, and in house. Every member enters at least one.
+        Four competitions. Solo, team, and in house. Every member enters at least one. More
+        incoming soon. Computer science EC directory incoming.
       </p>
 
       <h2 className="section-label">Contests</h2>
@@ -42,6 +43,9 @@ export default function EventsPage() {
               {comp.format}. {comp.timing}.
             </p>
           </Box>
+        ))}
+        {eventsIncoming.map((note) => (
+          <Box key={note.title} title={note.title} />
         ))}
       </BoxGrid>
 

@@ -14,7 +14,7 @@ export function OfficerRow({ officer }: { officer: Officer }) {
           style={{ objectPosition: officer.focus ?? "50% 25%" }}
         />
       ) : (
-        <div className="officer-fallback" aria-hidden />
+        <div className="officer-fallback">no picture</div>
       )}
       <div>
         <strong style={{ color: "var(--color-ink)" }}>{officer.name}</strong>

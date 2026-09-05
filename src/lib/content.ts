@@ -246,6 +246,8 @@ export const dues = {
   cadence: "Per member, per year",
   image: "/media/shirt.jpg",
   imageAlt: "Blue CSNHS 2025-2026 club t-shirt with a computer drawing",
+  logo: "/media/ths-tiger.png",
+  logoAlt: "Official Travis High School Tigers logo",
   includes: [
     { label: "National membership fee", value: "Included" },
     { label: "Club t-shirt", value: "Included" },
@@ -311,6 +313,12 @@ export const officers: Officer[] = [
     focus: "50% 25%",
   },
 ];
+
+/** Shown on the events page with the current contest list. */
+export const eventsIncoming = [
+  { title: "More incoming soon" },
+  { title: "Computer science EC directory incoming" },
+] as const;
 
 /** Slide 13: Socials */
 export const socials = {

@@ -22,6 +22,8 @@ export function Box({
   external,
   media,
   focus,
+  contain,
+  emptyLabel,
 }: {
   href?: string;
   image?: string;
@@ -32,11 +34,13 @@ export function Box({
   external?: boolean;
   media?: boolean;
   focus?: string;
+  contain?: boolean;
+  emptyLabel?: string;
 }) {
   const inner = (
     <>
-      {(image || media) && (
-        <div className="box-media">
+      {(image || media || emptyLabel) && (
+        <div className={contain ? "box-media contain" : "box-media"}>
           {image ? (
             <Image
               src={image}
@@ -44,9 +48,17 @@ export function Box({
               fill
               sizes="(min-width: 64em) 18vw, (min-width: 42em) 30vw, 50vw"
               priority={priority}
-              className="object-cover"
-              style={focus ? { objectPosition: focus } : undefined}
+              className={contain ? "object-contain" : "object-cover"}
+              style={
+                contain
+                  ? { objectFit: "contain", padding: "10%" }
+                  : focus
+                    ? { objectPosition: focus }
+                    : undefined
+              }
             />
+          ) : emptyLabel ? (
+            <span className="box-media-empty">{emptyLabel}</span>
           ) : null}
         </div>
       )}

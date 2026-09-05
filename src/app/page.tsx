@@ -55,7 +55,14 @@ export default function HomePage() {
         >
           <p>National membership, a club t-shirt, and every competition entry. Pay on RevTrak.</p>
         </Box>
-        <Box href={links.dues} external title="Pay dues">
+        <Box
+          href={links.dues}
+          external
+          image={dues.logo}
+          alt={dues.logoAlt}
+          contain
+          title="Pay dues"
+        >
           <p>
             Open the Fort Bend ISD RevTrak store for Travis High School, then Computer Science NHS.
             Officers do not take cash.
@@ -72,6 +79,7 @@ export default function HomePage() {
             image={officer.photo}
             media
             focus={officer.focus}
+            emptyLabel={officer.photo ? undefined : "no picture"}
             alt={officer.photo ? `${officer.name}, ${officer.role}` : ""}
             title={officer.name}
           >
