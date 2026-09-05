@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Open_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { PageBanner } from "@/components/page-banner";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
@@ -88,6 +89,7 @@ export default function RootLayout({
         <SiteFooter />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
+        <Analytics />
       </body>
     </html>
   );
