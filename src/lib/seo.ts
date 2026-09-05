@@ -84,6 +84,13 @@ export const seoPages: SeoPage[] = [
     changeFrequency: "monthly",
     priority: 0.6,
   },
+  {
+    path: "/site",
+    title: "Site map",
+    description: "Every public page on traviscsnhs.com.",
+    changeFrequency: "monthly",
+    priority: 0.3,
+  },
 ];
 
 export function contestDescription(comp: Competition) {

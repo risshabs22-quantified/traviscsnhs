@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
+import { Crumbs } from "@/components/crumbs";
+import { Box, BoxGrid } from "@/components/box";
 import { competitions, requirements, site, whatWeAre, whyJoin } from "@/lib/content";
 import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = pageMetadata("/about");
 
 export default function AboutPage() {
   return (
-    <section className="main-content">
+    <div className="main-content">
       <JsonLd data={webPageJsonLd("/about")} />
       <JsonLd
         data={breadcrumbJsonLd([
@@ -17,69 +17,52 @@ export default function AboutPage() {
           { name: "About", path: "/about" },
         ])}
       />
-
-      <h3>What is CSNHS?</h3>
-      <p>
-        {site.longName} is the national honor society for computer science students. Our{" "}
-        {site.chapter} chapter is student-run and open to any grade level.
-      </p>
-      <p>{whatWeAre.body}</p>
-      <Image
-        src="/media/tutor.jpg"
-        alt="Two students at one computer during a tutoring session"
-        width={1600}
-        height={900}
-        className="prose-img"
-        priority
+      <Crumbs
+        items={[
+          { href: "/", label: "Home" },
+          { href: "/about", label: "About" },
+        ]}
       />
-      <ul>
+
+      <p className="lead">
+        {site.longName} at {site.chapter}. Student-run. Open to any grade.
+      </p>
+
+      <h2 className="section-label">What we do</h2>
+      <BoxGrid>
         {whatWeAre.pillars.map((pillar) => (
-          <li key={pillar.key}>
-            <strong>{pillar.label}.</strong> {pillar.body}
-          </li>
+          <Box key={pillar.key} title={pillar.label}>
+            <p>{pillar.body}</p>
+          </Box>
         ))}
-      </ul>
+      </BoxGrid>
 
-      <h3>A year in the chapter</h3>
-      <p>
-        Meetings run in the lab. Officers put on practice sessions in the weeks before each USACO
-        window, write the Code Jam problems, and organise UIL teams. Members tutor classmates in CS
-        classes between all of it.
-      </p>
-      <ul>
+      <h2 className="section-label">This year</h2>
+      <BoxGrid>
         {competitions.map((comp) => (
-          <li key={comp.slug}>
-            <Link href={`/events/${comp.slug}`}>{comp.name}</Link>
-            {" · "}
-            {comp.timing}
-          </li>
+          <Box key={comp.slug} href={`/events/${comp.slug}`} image={comp.image} alt={comp.imageAlt} title={comp.name}>
+            <p>{comp.timing}</p>
+          </Box>
         ))}
-      </ul>
+      </BoxGrid>
 
-      <h3>Why join</h3>
-      <ol>
-        {whyJoin.reasons.map((reason) => (
-          <li key={reason}>{reason}</li>
+      <h2 className="section-label">Why join</h2>
+      <BoxGrid>
+        {whyJoin.reasons.map((reason, i) => (
+          <Box key={reason} title={String(i + 1).padStart(2, "0")}>
+            <p>{reason}</p>
+          </Box>
         ))}
-      </ol>
-      <p>
-        <strong>{whyJoin.callout.title}</strong> {whyJoin.callout.body}
-      </p>
+      </BoxGrid>
 
-      <h3>Who it is for</h3>
-      <ul>
+      <h2 className="section-label">Who it is for</h2>
+      <BoxGrid>
         {requirements.map((req) => (
-          <li key={req.label}>
-            <strong>
-              {req.label}: {req.value}.
-            </strong>{" "}
-            {req.body}
-          </li>
+          <Box key={req.label} title={`${req.label}: ${req.value}`}>
+            <p>{req.body}</p>
+          </Box>
         ))}
-      </ul>
-      <p>
-        <Link href="/membership">How to join</Link>
-      </p>
-    </section>
+      </BoxGrid>
+    </div>
   );
 }
