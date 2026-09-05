@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Crumbs } from "@/components/crumbs";
 import { Box, BoxGrid } from "@/components/box";
 import { competitions, eventsIncoming, schedule } from "@/lib/content";
-import { breadcrumbJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, eventsListJsonLd, pageMetadata, webPageJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata("/events");
 
@@ -11,6 +11,7 @@ export default function EventsPage() {
   return (
     <div className="main-content">
       <JsonLd data={webPageJsonLd("/events")} />
+      <JsonLd data={eventsListJsonLd()} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
