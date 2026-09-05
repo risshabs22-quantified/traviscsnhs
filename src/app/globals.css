@@ -208,6 +208,38 @@ a.box:hover {
 .box-media img {
   object-fit: cover;
 }
+.box-media.contain {
+  background: var(--color-paper);
+}
+.box-media.contain img {
+  object-fit: contain;
+}
+.box-media-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-align: center;
+}
+.officer-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: var(--color-sand);
+  border-radius: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-align: center;
+}
 .box-body {
   padding: 0.65rem 0.7rem 0.75rem;
 }

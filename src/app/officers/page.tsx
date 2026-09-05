@@ -36,6 +36,7 @@ export default function OfficersPage() {
             image={officer.photo}
             media
             focus={officer.focus}
+            emptyLabel={officer.photo ? undefined : "no picture"}
             alt={officer.photo ? `${officer.name}, ${officer.role}` : ""}
             title={officer.name}
           >
