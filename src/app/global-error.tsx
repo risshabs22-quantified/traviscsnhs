@@ -1,10 +1,6 @@
 "use client";
 
-/**
- * Last-resort screen: this renders when the root layout itself fails, so it
- * cannot use the layout's fonts, header, or Tailwind variables. Everything
- * here is inline and self-contained on purpose.
- */
+// Shown if the root layout itself fails, so the styles have to be inline.
 export default function GlobalError({
   error,
   reset,

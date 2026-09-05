@@ -1,16 +1,12 @@
 import { cn } from "@/lib/cn";
 
-/**
- * The chapter mascot. Pointed ears, forehead and cheek stripes, whiskers —
- * the things that make a cat read as a tiger rather than a bear. Every fill
- * is one flat colour from the palette; there is no gradient in the drawing.
- */
+// Club mascot, drawn with flat palette colors.
 export function TigerFace({
   className,
   asleep = false,
 }: {
   className?: string;
-  /** Flat closed eyes, for the "something went wrong" screens. */
+  /** Closed eyes, used on the error pages. */
   asleep?: boolean;
 }) {
   return (

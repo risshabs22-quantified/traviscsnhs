@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-/** Favicon boiled down to a screen, two tiger ears, one prompt chevron. */
+/** Small mark: a screen with tiger ears and a chevron. */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg

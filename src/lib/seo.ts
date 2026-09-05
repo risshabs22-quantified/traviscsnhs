@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { MetadataRoute } from "next";
 import { competitions, links, site, type Competition } from "@/lib/content";
 
-/** William B. Travis High School, Fort Bend ISD. */
 export const school = {
   name: "Travis High School",
   legalName: "William B. Travis High School",

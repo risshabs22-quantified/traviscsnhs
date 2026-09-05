@@ -1,8 +1,4 @@
-/**
- * Single source of truth for every word on the site.
- * Facts come from the CSNHS Interest Meeting deck (2026-27).
- * If a fact is not in the deck it is marked TODO and kept vague on purpose.
- */
+// All the text on the site lives here.
 
 export const site = {
   name: "Travis CSNHS",
@@ -27,7 +23,7 @@ export const links = {
   usaco: "https://usaco.org/",
   uil: "https://www.uiltexas.org/academics/computer-science",
   appChallenge: "https://www.congressionalappchallenge.us/",
-  /* TODO: confirm with officers: chapter email address for the contact page. */
+  // TODO: check this is the right address
   email: "traviscsnhs@gmail.com",
 } as const;
 
@@ -75,7 +71,6 @@ export const slides: Slide[] = [
   },
 ];
 
-/** Slide 03: What is CSNHS? */
 export const whatWeAre = {
   kicker: "What is CSNHS",
   title: "The national honor society for computer science students.",
@@ -99,7 +94,6 @@ export const whatWeAre = {
   ],
 } as const;
 
-/** Slide 04: Why Join */
 export const whyJoin = {
   kicker: "Why join",
   title: "Four reasons to sign up.",
@@ -221,7 +215,6 @@ export function getCompetition(slug: string) {
   return competitions.find((c) => c.slug === slug);
 }
 
-/** Slide 11: Member Requirements */
 export const requirements = [
   {
     label: "Prerequisites",
@@ -240,7 +233,6 @@ export const requirements = [
   },
 ] as const;
 
-/** Slide 12: Dues & Membership */
 export const dues = {
   amount: "$20",
   cadence: "Per member, per year",
@@ -262,7 +254,6 @@ export const dues = {
   ],
 } as const;
 
-/** Slide 05: Meet the Officers */
 export type Officer = {
   name: string;
   role: string;
@@ -280,7 +271,7 @@ export const officers: Officer[] = [
   {
     name: "Raheeq Mobin",
     role: "Vice President",
-    // TODO: confirm with officers: no photo in the deck.
+    // TODO: add a photo
   },
   {
     name: "Reyan Maredia",
@@ -314,13 +305,12 @@ export const officers: Officer[] = [
   },
 ];
 
-/** Shown on the events page with the current contest list. */
+// Shown on the events page under the contest list.
 export const eventsIncoming = [
   { title: "More incoming soon" },
   { title: "Computer science EC directory incoming" },
 ] as const;
 
-/** Slide 13: Socials */
 export const socials = {
   title: "Socials",
   body: "Announcements, competition sign ups, and meeting reminders go out here first.",
@@ -330,11 +320,7 @@ export const socials = {
   ],
 } as const;
 
-/**
- * The deck lists what happens in a year but never puts calendar dates on it.
- * Dates stay as windows until officers confirm them.
- * TODO: confirm with officers: exact meeting days, room number, and contest dates.
- */
+// TODO: swap these for real dates once officers set them.
 export const schedule = [
   {
     term: "Fall",
